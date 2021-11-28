@@ -63,6 +63,10 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
 
       if (e == null) continue;
 
+
+      if (e.getShowHide() == true)
+        continue;
+
       final double xPos = e.x;
 
       final double open = e.open;
@@ -317,6 +321,7 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
       if (set == null || !set.isHighlightEnabled()) continue;
 
       CandleEntry e = set.getEntryForXValue2(high.x, high.y);
+      if(e.getShowHide()) continue;
 
       if (!isInBoundsX(e, set)) continue;
 

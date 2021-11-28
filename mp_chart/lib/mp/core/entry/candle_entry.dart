@@ -14,6 +14,10 @@ class CandleEntry extends Entry {
   /// open value
   double _open = 0;
 
+  bool _hide = false;
+
+  bool _rectangle = true;
+
   CandleEntry(
       {double x,
       double shadowH,
@@ -21,12 +25,16 @@ class CandleEntry extends Entry {
       double open,
       double close,
       ui.Image icon,
+      bool hide,
+      bool rectangle,
       Object data})
       : super(x: x, y: (shadowH + shadowL) / 2, icon: icon, data: data) {
     this._shadowHigh = shadowH;
     this._shadowLow = shadowL;
     this._open = open;
     this._close = close;
+    this._hide = hide;
+    this._rectangle = rectangle;
   }
 
   /// Returns the overall range (difference) between shadow-high and
@@ -44,6 +52,14 @@ class CandleEntry extends Entry {
     return (_open - _close).abs();
   }
 
+  bool getShowHide(){
+    return _hide == null ? false : _hide;
+  }
+
+  bool getRectangle(){
+    return _rectangle == null ? true : _rectangle;
+  }
+
   CandleEntry copy() {
     CandleEntry c = CandleEntry(
         x: x,
@@ -51,6 +67,8 @@ class CandleEntry extends Entry {
         shadowL: _shadowLow,
         open: _open,
         close: _close,
+        rectangle: _rectangle,
+        hide: _hide,
         data: mData);
     return c;
   }
@@ -86,4 +104,6 @@ class CandleEntry extends Entry {
   set shadowHigh(double value) {
     _shadowHigh = value;
   }
+
+
 }
