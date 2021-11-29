@@ -151,10 +151,18 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
 
           renderPaint.style = PaintingStyle.fill;
 
-          c.drawRect(
-              Rect.fromLTRB(_bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2],
-                  _bodyBuffers[1]),
-              renderPaint);
+          if(e.getRectangle()) {
+             c.drawRect(
+               Rect.fromLTRB(_bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2],
+                   _bodyBuffers[1]),
+               renderPaint);
+          }else {
+            c.drawRRect(RRect.fromLTRBXY(
+                _bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2],
+                _bodyBuffers[1], (_bodyBuffers[2] - _bodyBuffers[0]) / 2,
+                (_bodyBuffers[2] - _bodyBuffers[0]) / 2),
+                renderPaint);
+          }
         } else if (open < close) {
           if (dataSet.getIncreasingColor() == ColorUtils.COLOR_NONE) {
             renderPaint.color = dataSet.getColor2(j);
@@ -164,10 +172,18 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
 
           renderPaint.style = PaintingStyle.fill;
 
-          c.drawRect(
+          if(e.getRectangle()) {
+             c.drawRect(
               Rect.fromLTRB(_bodyBuffers[0], _bodyBuffers[1], _bodyBuffers[2],
                   _bodyBuffers[3]),
               renderPaint);
+          }else {
+            c.drawRRect(RRect.fromLTRBXY(
+                _bodyBuffers[0], _bodyBuffers[1], _bodyBuffers[2],
+                _bodyBuffers[3], (_bodyBuffers[2] - _bodyBuffers[0]) / 2,
+                (_bodyBuffers[2] - _bodyBuffers[0]) / 2),
+                renderPaint);
+          }
         } else {
           // equal values
 
