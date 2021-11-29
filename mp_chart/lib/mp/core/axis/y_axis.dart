@@ -56,6 +56,11 @@ class YAxis extends AxisBase {
   /// default: Float.POSITIVE_INFINITY (no maximum specified)
   double _maxWidth = double.infinity;
 
+  bool _mDrawFilled = false;
+
+  double _filledTopY = 0.0;
+  double _filledBottomY = 0.0;
+
   YAxis({AxisDependency position = AxisDependency.LEFT}) : super() {
     this._axisDependency = position;
     yOffset = 0;
@@ -220,6 +225,23 @@ class YAxis extends AxisBase {
   // ignore: unnecessary_getters_setters
   set useAutoScaleRestrictionMax(bool value) {
     _useAutoScaleRestrictionMax = value;
+  }
+
+  bool get mDrawFilled => _mDrawFilled == null ? false : _mDrawFilled;
+
+  set mDrawFilled(bool value){
+    _mDrawFilled = value;
+  }
+
+  double get filledTopY => _filledTopY;
+
+  void setFilledTopY(double value) {
+    _filledTopY  = value;
+  }
+
+  double get filledBottomY => _filledBottomY;
+  void setFilledBottomY(double value) {
+    _filledBottomY = value;
   }
 
   @override

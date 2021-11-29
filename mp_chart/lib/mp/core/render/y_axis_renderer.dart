@@ -167,6 +167,25 @@ class YAxisRenderer extends AxisRenderer {
   void renderGridLines(Canvas c) {
     if (!_yAxis.enabled) return;
 
+    //首先画背景
+    if(_yAxis.mDrawFilled){
+      if(_yAxis.filledTopY > _yAxis.filledBottomY){
+        if(_yAxis.filledTopY <= _yAxis.axisMaximum && _yAxis.filledBottomY >= _yAxis.axisMinimum){
+          List<double> positions = getFillPosPositions(_yAxis.filledTopY, _yAxis.filledBottomY);
+          Path path = new Path();
+          path.moveTo(viewPortHandler.contentLeft(), positions[1]);
+          path.lineTo(viewPortHandler.contentLeft(), positions[3]);
+          path.lineTo(viewPortHandler.contentRight(), positions[3]);
+          path.lineTo(viewPortHandler.contentRight(), positions[1]);
+          path.close();
+          Paint paint =  Paint();
+          paint.color =  Color.fromARGB(32, 0x80, 0xba, 0xff) ;
+          c.drawPath(path, paint);
+      //    c.restore();
+        }
+      }
+    }
+
     if (_yAxis.drawGridLines) {
       c.save();
       c.clipRect(getGridClippingRect());
@@ -294,6 +313,17 @@ class YAxisRenderer extends AxisRenderer {
     _limitLineClippingRect = value;
   }
 
+  List<double> getFillPosPositions(double topy,double bottomy) {
+    List<double> positions = List(4);
+    positions[0] = 0.0;
+    positions[1] = topy;
+    positions[2] = 0.0;
+    positions[3] = bottomy;
+    trans.pointValuesToPixel(positions);
+    return positions;
+
+  }
+
   /// Draws the LimitLines associated with this axis to the screen.
   ///
   /// @param c
@@ -393,6 +423,8 @@ class YAxisRenderer extends AxisRenderer {
       c.restore();
     }
   }
+
+
 
   // ignore: unnecessary_getters_setters
   Rect get gridClippingRect => _gridClippingRect;

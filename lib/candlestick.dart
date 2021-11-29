@@ -66,6 +66,9 @@ class OtherChartCandlestickState
             ..setGranularity(2.0)
             ..drawGridLines = (false)  //Y轴的线条
             ..enableGridDashedLine(10, 10, 0) //Y轴虚线
+            ..mDrawFilled=(true)
+            ..setFilledTopY(38.0)
+            ..setFilledBottomY(36.0)
             ..setValueFormatter(MyValueFormatter(""))
             ..drawAxisLine = (false);
         },
