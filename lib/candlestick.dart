@@ -64,7 +64,7 @@ class OtherChartCandlestickState
             ..setAxisMaximum(42.0)
             ..setAxisMinimum(32.0)
             ..setGranularity(2.0)
-            ..drawGridLines = (true)  //Y轴的线条
+            ..drawGridLines = (false)  //Y轴的线条
             ..enableGridDashedLine(10, 10, 0) //Y轴虚线
             ..setValueFormatter(MyValueFormatter(""))
             ..drawAxisLine = (false);
@@ -79,6 +79,7 @@ class OtherChartCandlestickState
           xAxis
             ..drawAxisLine = (false)  //不画X线
             ..drawGridLines = (false) //不画网格线
+            ..drawScale = (true)
             ..drawLabels = (true)  //画标签 X轴上对应的数值
             ..textSize = 10  //字体大小
             ..setLabelCount1(48) //总共48个点
@@ -157,7 +158,7 @@ class OtherChartCandlestickState
     set1.setDrawIcons(false);   //不绘制图标
     set1.setDrawValues(false);  //不显示文字
     set1.setAxisDependency(AxisDependency.LEFT); //
-    set1.setBarSpace(0.3);      //设置柱的间隔0.3
+    set1.setBarSpace(0.27);      //设置柱的间隔0.3
     set1.setDecreasingColor(Color(0xFFFF3B30));  //open > close的颜色
     set1.setDecreasingPaintStyle(PaintingStyle.fill);  //阴影部分
     set1.setIncreasingColor(Color(0xFF007AFF));  //open <= close颜色

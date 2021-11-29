@@ -261,6 +261,8 @@ abstract class BarLineChartBasePainter<
     _xAxisRenderer.renderAxisLine(canvas);
     _axisRendererLeft.renderAxisLine(canvas);
     _axisRendererRight.renderAxisLine(canvas);
+    //画刻度线
+    _xAxisRenderer.renderScaleLines(canvas);
 
     if (xAxis.drawGridLinesBehindData) _xAxisRenderer.renderGridLines(canvas);
 

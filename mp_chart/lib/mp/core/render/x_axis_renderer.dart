@@ -227,7 +227,7 @@ class XAxisRenderer extends AxisRenderer {
             c,
             label,
             x,
-            pos,
+            pos + 5,
             anchor,
             labelRotationAngleDegrees,
             position);
@@ -462,5 +462,76 @@ class XAxisRenderer extends AxisRenderer {
         painter.paint(c, offset);
       }
     }
+  }
+
+/**
+ * 绘X轴刻度线
+ */
+  void renderScaleLines(Canvas c){
+      if (!_xAxis.enabled || !_xAxis.drawScale)
+        return;
+
+      if (mRenderGridLinesBuffer.length != axis.entryCount * 2) {
+        mRenderGridLinesBuffer = List(_xAxis.entryCount * 2);
+      }
+
+      List<double> positions = mRenderGridLinesBuffer;
+
+      for (int i = 0; i < positions.length; i += 2) {
+        positions[i] = _xAxis.entries[i ~/ 2];
+        positions[i + 1] = _xAxis.entries[i ~/ 2];
+      }
+      trans.pointValuesToPixel(positions);
+
+      for(int i = 0; i < positions.length -2 ; i += 2){
+        if(i % 3 == 0){
+          double offset = (positions[2] - positions[0]) / 5;
+          drawScale(c, positions[i], offset);
+        }
+      }
+
+  }
+
+  void drawScale(Canvas canvas,double startX,double offset){
+      double topY = viewPortHandler.contentTop();
+      double bottmY = viewPortHandler.contentBottom();
+      canvas.save();
+      if(_xAxis.position == XAxisPosition.BOTTOM){
+        for(int i =0; i < 5; i++){
+          canvas.save();
+          canvas.translate(offset * i, 0);
+          if( i % 5 == 0) {
+            canvas.drawLine(Offset(startX, bottmY - 5), Offset(startX,bottmY),axisLinePaint);
+          }else{
+
+          }
+          canvas.restore();
+        }
+      }else if(_xAxis.position == XAxisPosition.TOP){
+        for( int i = 0 ; i<= 5; i++){
+          canvas.save();
+          canvas.translate(offset * i, 0);
+          if( i % 5 == 0){
+            canvas.drawLine(Offset(startX, bottmY + 20), Offset(startX,topY),axisLinePaint);
+          }else{
+            canvas.drawLine(Offset(startX, bottmY + 10), Offset(startX,topY),axisLinePaint);
+          }
+          canvas.restore();
+        }
+      }else if(_xAxis.position == XAxisPosition.BOTH_SIDED){
+        for( int i = 0 ; i<= 5; i++){
+          canvas.save();
+          canvas.translate(offset * i , 0);
+          if(i % 5 == 0){
+            canvas.drawLine(Offset(startX, topY + 20), Offset(startX,topY),axisLinePaint);
+            canvas.drawLine(Offset(startX, bottmY - 20), Offset(startX,bottmY),axisLinePaint);
+          }else{
+            canvas.drawLine(Offset(startX, topY + 10), Offset(startX,topY),axisLinePaint);
+            canvas.drawLine(Offset(startX, bottmY - 10), Offset(startX,bottmY),axisLinePaint);
+          }
+          canvas.restore();
+        }
+      }
+      canvas.restore();
   }
 }

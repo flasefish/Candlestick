@@ -91,6 +91,11 @@ abstract class AxisBase extends ComponentBase {
   /// the total range of values this axis covers
   double _axisRange = 0;
 
+  /*
+   * 默认不绘制X Y 刻度
+   */
+  bool _mIsDrawScale = false;
+
   AxisBase() {
     textSize = 10;
     xOffset = 5;
@@ -557,5 +562,11 @@ abstract class AxisBase extends ComponentBase {
   // ignore: unnecessary_getters_setters
   set limitLines(List<LimitLine> value) {
     _limitLines = value;
+  }
+
+  bool get drawScale => _mIsDrawScale == null ? false : _mIsDrawScale;
+
+  set drawScale(bool value){
+    _mIsDrawScale = value;
   }
 }
