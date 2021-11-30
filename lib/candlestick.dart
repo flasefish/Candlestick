@@ -16,10 +16,7 @@ import 'package:mp_chart/mp/core/enums/axis_dependency.dart';
 import 'package:mp_chart/mp/core/enums/x_axis_position.dart';
 import 'package:mp_chart/mp/core/highlight/highlight.dart';
 import 'package:mp_chart/mp/core/marker/bar_chart_marker.dart';
-import 'package:mp_chart/mp/core/marker/horizontal_bar_chart_marker.dart';
 import 'package:mp_chart/mp/core/marker/i_marker.dart';
-import 'package:mp_chart/mp/core/marker/line_chart_marker.dart';
-import 'package:mp_chart/mp/core/marker/radar_chart_marker.dart';
 import 'package:mp_chart/mp/core/poolable/point.dart';
 import 'package:mp_chart/mp/core/utils/color_utils.dart';
 import 'package:mp_chart/mp/core/utils/painter_utils.dart';
@@ -253,7 +250,7 @@ class MyChartMarker implements IMarker {
     _formatter = DefaultValueFormatter(0);
     this._textColor ??= ColorUtils.PURPLE;
     this._backColor ??= ColorUtils.GRAY;
-    this._fontSize ??= Utils.convertDpToPixel(15);
+    this._fontSize ??= Utils.convertDpToPixel(12);
   }
 
   @override
@@ -264,15 +261,15 @@ class MyChartMarker implements IMarker {
       int index = _entry.x.toInt();
       String timeStrin = "";
       if(index % 2 == 0) {
-        timeStrin = (index/2).truncate().toString() + ":00" + " ~ "  +  (index/2).truncate().toString() + ":30";
+        timeStrin = (index/2).truncate().toString() + ":00" + "~"  +  (index/2).truncate().toString() + ":30";
       }else{
-        timeStrin = (index/2).truncate().toString() + ":30" + " ~ "  +  ((index + 1)/2).truncate().toString() + ":00";
+        timeStrin = (index/2).truncate().toString() + ":30" + "~"  +  ((index + 1)/2).truncate().toString() + ":00";
       }
 
       TextPainter painter = PainterUtils.create(
           null,
-          "$timeStrin\n${_formatter.getFormattedValue1(openvalue)}-${_formatter
-              .getFormattedValue1(closevalue)}",
+          "$timeStrin\n${_formatter.getFormattedValue1(openvalue)}°-${_formatter
+              .getFormattedValue1(closevalue)}°",
           _textColor,
           _fontSize);
       Paint paint = Paint()
