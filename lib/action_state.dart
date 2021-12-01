@@ -769,6 +769,7 @@ abstract class CandlestickActionState<T extends StatefulWidget>
     extends ActionState<T> {
   CandlestickChartController controller;
 
+
   @override
   getBuilder() {
     return (BuildContext context) => <PopupMenuItem<String>>[

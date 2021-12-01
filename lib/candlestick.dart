@@ -59,6 +59,12 @@ class OtherChartCandlestickState
             top: 50,
             bottom: 550,
             child: CandlestickChart(controller)),
+        Positioned(
+            right: 0,
+            left: 0,
+            top: 200,
+            bottom: 380,
+            child: CandlestickChart(controller)),
       ],
     );
   }
