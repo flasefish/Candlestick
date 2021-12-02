@@ -196,7 +196,151 @@ class LineChartRenderer extends LineRadarRenderer {
     double intensity = dataSet.getCubicIntensity();
 
     List<double> list = List();
+    print("----------------drawCubicBezier call---------------------");
 
+    //计算有多少条线
+    List<int> listLine = [];
+    bool preNoN = false;
+    for(int i = 0; i <= xBounds.range; i ++){
+      Entry tmp = dataSet.getEntryForIndex(i);
+      if(tmp.y.isNaN){
+        if(preNoN == true){
+           listLine.add(i - 1); //增加结束点
+           listLine.add( i - listLine[listLine.length - 2]); //增加这条线点的数量
+        }
+        preNoN = false;
+      }else{
+        if(preNoN == false) {  //第一个需要增加的点
+          listLine.add(i); //增加第一个开始点
+        }
+        preNoN = true;
+      }
+    }
+    //如果最后一个点还没有闭合，闭合最后一个点
+    if(preNoN == true){
+      listLine.add(xBounds.range); //增加结束点
+      listLine.add( xBounds.range - listLine[listLine.length - 2] +1); //增加这条线点的数量
+    }
+    print("lineLine size = ${listLine.length}, listLine = ${listLine}");
+    if(listLine.length %3 != 0) { //线的数量
+        return;
+    }
+
+
+    for(int i = 0 ; i < (listLine.length~/3) ; i ++){
+        //画第一条线
+        int startPoint = listLine[i * 3 ];
+        int endPoint   = listLine[i * 3  + 1];
+        int linecount  = listLine[i * 3  + 2 ];
+
+        list.clear();
+        print("i = $i ,startpoint = $startPoint,endpoint = ${endPoint},linecount = $linecount");
+
+        if(listLine[i * 3 + 2 ] >= 1){  //当前线的范围 >= 1
+          double prevDx = 0;
+          double prevDy = 0;
+          double curDx = 0;
+          double curDy = 0;
+
+          final int firstIndex = startPoint + 1;
+          print("firstIndex = $firstIndex");
+
+          Entry prevPrev;
+           Entry prev;
+         if(dataSet.getEntryForIndex(max(firstIndex - 2, 0)).y.isNaN){
+           prev = dataSet.getEntryForIndex(max(firstIndex , 0));
+          }else{
+           prev = dataSet.getEntryForIndex(max(firstIndex -2, 0));
+          }
+        //  Entry prev = dataSet.getEntryForIndex(max(firstIndex , 0));
+          Entry cur = dataSet.getEntryForIndex(max(firstIndex - 1, 0));
+          Entry next = cur;
+          int nextIndex = -1;
+
+          if (cur == null) return;
+
+          // let the spline start
+          list.add(cur.x);
+          list.add(cur.y * phaseY);
+
+          print(" start add list startPoint = ${startPoint},endPoint = ${endPoint}");
+          for (int j = startPoint + 1; j <= endPoint; j++) {
+            prevPrev = prev;
+            prev = cur;
+            cur = nextIndex == j ? next : dataSet.getEntryForIndex(j);
+            print("-------------j = $j====================================");
+            print("cur.x = ${cur.x},cur.y = ${cur.y},intensity = $intensity}");
+            print("next.x = ${next.x},next.y = ${next.y},intensity = $intensity}");
+            print("prevPrev.x = ${prevPrev.x},prevPrev.y = ${prevPrev.y},intensity = $intensity}");
+
+            prevDx = (cur.x - prevPrev.x) * intensity;
+            prevDy = (cur.y - prevPrev.y) * intensity;
+            curDx = (next.x - prev.x) * intensity;
+            curDy = (next.y - prev.y) * intensity;
+
+            nextIndex = j + 1 < dataSet.getEntryCount() ? j + 1 : j;
+            next = dataSet.getEntryForIndex(nextIndex);
+
+            print("-------------next Index = ${nextIndex}=======");
+            print("-------------next  = ${next.x}=======");
+
+
+            list.add(prev.x + prevDx);
+            list.add((prev.y + prevDy) * phaseY);
+            list.add(cur.x - curDx);
+            list.add((cur.y - curDy) * phaseY);
+            list.add(cur.x);
+            list.add(cur.y * phaseY);
+          }
+        }
+
+        if (list.length <= 0) {
+          return;
+        }
+
+        print("list.lenth = ${list.length}, list = ${list}");
+
+        renderPaint
+          ..color = dataSet.getColor1()
+          ..style = PaintingStyle.stroke;
+
+        trans.pointValuesToPixel(list);
+
+        _cubicPath.reset();
+        if (dataSet.isDrawFilledEnabled()) {
+          _cubicFillPath.reset();
+        }
+        _cubicPath.moveTo(list[0], list[1]);
+        if (dataSet.isDrawFilledEnabled()) {
+          _cubicFillPath.moveTo(list[0], list[1]);
+        }
+
+        int z = 2;
+        for (int j = startPoint + 1; j <= endPoint; j++) {
+          _cubicPath.cubicTo(list[z], list[z + 1], list[z + 2], list[z + 3],
+              list[z + 4], list[z + 5]);
+          if (dataSet.isDrawFilledEnabled()) {
+            _cubicFillPath.cubicTo(list[z], list[z + 1], list[z + 2], list[z + 3],
+                list[z + 4], list[z + 5]);
+          }
+          z += 6;
+        }
+
+        if (dataSet.isDrawFilledEnabled()) {
+          drawCubicFill(canvas, dataSet, _cubicFillPath, trans, xBounds);
+        }
+
+        if (dataSet.getDashPathEffect() != null) {
+          _cubicPath = dataSet.getDashPathEffect().convert2DashPath(_cubicPath);
+        }
+        canvas.drawPath(_cubicPath, renderPaint);
+    }
+
+
+
+
+
+  /*  int k = 0;
     if (xBounds.range >= 1) {
       double prevDx = 0;
       double prevDy = 0;
@@ -223,13 +367,28 @@ class LineChartRenderer extends LineRadarRenderer {
       list.add(cur.x);
       list.add(cur.y * phaseY);
 
+      print(" start add list startPoint = ${xBounds.min},endPoint = ${xBounds.range + xBounds.min}");
       for (int j = xBounds.min + 1; j <= xBounds.range + xBounds.min; j++) {
+        bool jumpfor = false;
         prevPrev = prev;
         prev = cur;
         cur = nextIndex == j ? next : dataSet.getEntryForIndex(j);
 
+        print("-------------j = $j====================================");
+        print("cur.x = ${cur.x},cur.y = ${cur.y},intensity = $intensity}");
+        print("next.x = ${next.x},next.y = ${next.y},intensity = $intensity}");
+        print("prevPrev.x = ${prevPrev.x},prevPrev.y = ${prevPrev.y},intensity = $intensity}");
+
         nextIndex = j + 1 < dataSet.getEntryCount() ? j + 1 : j;
         next = dataSet.getEntryForIndex(nextIndex);
+
+        print("-------------next Index = ${nextIndex}=======");
+        print("-------------next  = ${next.x}=======");
+        if(next.y.isNaN) {
+          next = cur;
+          jumpfor = true;
+        }
+
 
         prevDx = (cur.x - prevPrev.x) * intensity;
         prevDy = (cur.y - prevPrev.y) * intensity;
@@ -242,6 +401,10 @@ class LineChartRenderer extends LineRadarRenderer {
         list.add((cur.y - curDy) * phaseY);
         list.add(cur.x);
         list.add(cur.y * phaseY);
+        k++;
+        if(jumpfor) {
+          break;
+        }
       }
     }
 
@@ -265,7 +428,7 @@ class LineChartRenderer extends LineRadarRenderer {
     }
 
     int i = 2;
-    for (int j = xBounds.min + 1; j <= xBounds.range + xBounds.min; j++) {
+    for (int j = xBounds.min + 1; j <= k + xBounds.min; j++) {
       _cubicPath.cubicTo(list[i], list[i + 1], list[i + 2], list[i + 3],
           list[i + 4], list[i + 5]);
       if (dataSet.isDrawFilledEnabled()) {
@@ -283,7 +446,7 @@ class LineChartRenderer extends LineRadarRenderer {
     if (dataSet.getDashPathEffect() != null) {
       _cubicPath = dataSet.getDashPathEffect().convert2DashPath(_cubicPath);
     }
-    canvas.drawPath(_cubicPath, renderPaint);
+    canvas.drawPath(_cubicPath, renderPaint);*/
   }
 
   void drawCubicFill(Canvas c, ILineDataSet dataSet, Path spline,
@@ -698,6 +861,7 @@ class LineChartRenderer extends LineRadarRenderer {
         Entry e = dataSet.getEntryForIndex(j);
 
         if (e == null) break;
+        if (e.y.isNaN) continue;
 
         mCirclesBuffer[0] = e.x;
         mCirclesBuffer[1] = e.y * phaseY;
