@@ -12,6 +12,7 @@ import 'package:mp_chart/mp/core/description.dart';
 import 'package:mp_chart/mp/core/entry/entry.dart';
 import 'package:mp_chart/mp/core/enums/legend_form.dart';
 import 'package:mp_chart/mp/core/enums/limit_label_postion.dart';
+import 'package:mp_chart/mp/core/enums/mode.dart';
 import 'package:mp_chart/mp/core/image_loader.dart';
 import 'package:mp_chart/mp/core/limit_line.dart';
 import 'package:mp_chart/mp/core/utils/color_utils.dart';
@@ -28,7 +29,7 @@ class LineChartBasic extends StatefulWidget {
 
 class LineChartBasicState extends LineActionState<LineChartBasic> {
   var random = Random(1);
-  int _count = 48;
+  int _count = 45;
   double _range = 180.0;
 
   @override
@@ -45,9 +46,9 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
         Positioned(
           right: 0,
           left: 0,
-          top: 50,
-          bottom: 500,
-          child: LineChart(controller),
+          top: 200,
+          bottom: 300,
+          child: _initLineChart(),
         ),
       ],
     );
@@ -60,14 +61,18 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
 
   void _initController() {
     var desc = Description()..enabled = false;
+//    LimitLine llXAxis = LimitLine(9, "Index 10");
+//    llXAxis.setLineWidth(4);
+//    llXAxis.enableDashedLine(10, 10, 0);
+//    llXAxis.labelPosition = (LimitLabelPosition.RIGHT_BOTTOM);
+//    llXAxis.textSize = (10);
+//    llXAxis.typeface = Util.EXTRA_BOLD;
 
     controller = LineChartController(
         axisLeftSettingFunction: (axisLeft, controller) {
           axisLeft
-            ..enableGridDashedLine(10, 10, 0)
-            ..enableAxisLineDashedLine(5, 5, 0)
-            ..setAxisMaximum(40)
-            ..setAxisMinimum(0);
+            ..setAxisMaximum(200)
+            ..setAxisMinimum(-50);
         },
         axisRightSettingFunction: (axisRight, controller) {
           axisRight.enabled = (false);
@@ -82,35 +87,22 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
         },
         drawGridBackground: false,
         backgroundColor: ColorUtils.WHITE,
-        dragXEnabled: false,
-        dragYEnabled: false,
-        scaleXEnabled: false,
-        scaleYEnabled: false,
-        pinchZoomEnabled: false,
+        dragXEnabled: true,
+        dragYEnabled: true,
+        scaleXEnabled: true,
+        scaleYEnabled: true,
+        pinchZoomEnabled: true,
         description: desc);
   }
 
   void _initLineData(int count, double range) async {
-    List<Entry> values = [];
+   // var img = await ImageLoader.loadImage('assets/img/star.png');
+    List<Entry> values = List();
 
-
-    var  data = [36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,36.6,
-      37.1,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1];
-
-    for (int i = 0; i < data.length; i++) {
-      values.add(Entry(x: i.toDouble(), y: data[i]));
-    }
-
-    /*for (int i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
       double val = (random.nextDouble() * range) - 30;
       values.add(Entry(x: i.toDouble(), y: val));
-    }*/
+    }
 
     LineDataSet set1;
 
@@ -118,7 +110,8 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
     set1 = LineDataSet(values, "DataSet 1");
 
     set1.setDrawIcons(false);
-
+    set1.setMode(Mode.CUBIC_BEZIER);
+    set1.setCubicIntensity(0.2);
     // draw dashed line
     set1.enableDashedLine(10, 5, 0);
 
@@ -140,17 +133,17 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
     set1.setFormSize(15);
 
     // text size of values
-    set1.setDrawValues(false);
-    //set1.setValueTextSize(9);
+    set1.setValueTextSize(9);
 
     // draw selection line as dashed
     set1.enableDashedHighlightLine(10, 5, 0);
 
     // set the filled area
     set1.setDrawFilled(true);
+//    set1.setFillFormatter(A(lineChart.painter));
 
     // set color of filled area
-    set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
+ //   set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
 
     List<ILineDataSet> dataSets = List();
     dataSets.add(set1); // add the data sets
@@ -161,4 +154,11 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
     setState(() {});
   }
 
+  Widget _initLineChart() {
+    var lineChart = LineChart(controller);
+    controller.animator
+      ..reset()
+      ..animateX1(1500);
+    return lineChart;
+  }
 }

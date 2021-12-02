@@ -8,10 +8,13 @@ import 'package:mp_chart/mp/controller/line_chart_controller.dart';
 import 'package:mp_chart/mp/core/adapter_android_mp.dart';
 import 'package:mp_chart/mp/core/data/line_data.dart';
 import 'package:mp_chart/mp/core/data_interfaces/i_line_data_set.dart';
+import 'package:mp_chart/mp/core/data_provider/line_data_provider.dart';
 import 'package:mp_chart/mp/core/data_set/line_data_set.dart';
 import 'package:mp_chart/mp/core/description.dart';
+import 'package:mp_chart/mp/core/enums/axis_dependency.dart';
 import 'package:mp_chart/mp/core/enums/mode.dart';
 import 'package:mp_chart/mp/core/enums/x_axis_position.dart';
+import 'package:mp_chart/mp/core/fill_formatter/i_fill_formatter.dart';
 import 'package:mp_chart/mp/core/utils/color_utils.dart';
 import 'package:mp_chart/mp/core/entry/entry.dart';
 
@@ -123,8 +126,8 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
       30.6,29.7,28.8,27.9,26.1,double.nan,
       24.6,25.7,26.8,27.9,28.0,29.1,
       30.6,29.7,28.8,27.9,26.0,25.1,
-      24.6,25.7,26.8,27.9,28.0,29.1,
-      30.6,29.7,28.8,27.9,26.0,25.1];
+      24.6,25.7,26.8,15.9,12.0,29.1,
+      30.6,29.7,28.8,27.9,26.0,15.1];
 
     for (int i = 0; i < data.length; i++) {
       values.add(Entry(x: i.toDouble(), y: data[i]));
@@ -159,16 +162,26 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
    // set1.enableDashedHighlightLine(10, 5, 0);
     // set the filled area
     set1.setDrawFilled(true);
+    set1.setFillFormatter(myfill());
 //    set1.setFillColor(color);
    // set1.setFillAlpha(alpha)
     // set color of filled area
-   // set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
+    set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
+
     List<ILineDataSet> dataSets = [];
     dataSets.add(set1); // add the data sets
     // create a data object with the data sets
     controller.data = LineData.fromList(dataSets);
 
     setState(() {});
+  }
+}
+
+class myfill implements IFillFormatter{
+  @override
+  double getFillLinePosition(
+      ILineDataSet dataSet, LineDataProvider dataProvider){
+    return dataProvider.getAxis(AxisDependency.LEFT).filledBottomY;
   }
 }
 

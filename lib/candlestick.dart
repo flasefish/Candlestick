@@ -8,12 +8,15 @@ import 'package:mp_chart/mp/controller/candlestick_chart_controller.dart';
 import 'package:mp_chart/mp/core/axis/axis_base.dart';
 import 'package:mp_chart/mp/core/axis/x_axis.dart';
 import 'package:mp_chart/mp/core/data/candle_data.dart';
+import 'package:mp_chart/mp/core/data_interfaces/i_line_data_set.dart';
+import 'package:mp_chart/mp/core/data_provider/line_data_provider.dart';
 import 'package:mp_chart/mp/core/data_set/candle_data_set.dart';
 import 'package:mp_chart/mp/core/description.dart';
 import 'package:mp_chart/mp/core/entry/candle_entry.dart';
 import 'package:mp_chart/mp/core/entry/entry.dart';
 import 'package:mp_chart/mp/core/enums/axis_dependency.dart';
 import 'package:mp_chart/mp/core/enums/x_axis_position.dart';
+import 'package:mp_chart/mp/core/fill_formatter/i_fill_formatter.dart';
 import 'package:mp_chart/mp/core/highlight/highlight.dart';
 import 'package:mp_chart/mp/core/marker/bar_chart_marker.dart';
 import 'package:mp_chart/mp/core/marker/i_marker.dart';
@@ -68,6 +71,7 @@ class OtherChartCandlestickState
       ],
     );
   }
+
 
   void _initController() {
     var desc = Description()..enabled = false;
@@ -327,3 +331,4 @@ class MyChartMarker implements IMarker {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 2);
   }
 }
+
