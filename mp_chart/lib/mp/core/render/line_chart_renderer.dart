@@ -317,14 +317,19 @@ class LineChartRenderer extends LineRadarRenderer {
 
         int z = 2;
         for (int j = startPoint + 1; j <= endPoint; j++) {
+          print("-------------------z = $z ------------------------");
           _cubicPath.cubicTo(list[z], list[z + 1], list[z + 2], list[z + 3],
               list[z + 4], list[z + 5]);
           if (dataSet.isDrawFilledEnabled()) {
             _cubicFillPath.cubicTo(list[z], list[z + 1], list[z + 2], list[z + 3],
                 list[z + 4], list[z + 5]);
+            print("list[z] = ${list[z]},list[z+1] = ${list[z+1]},list[z+2] = ${list[z+2]},"
+                "list[z+3] = ${list[z+3]},list[z+4] = ${list[z+4]},list[z+5] = ${list[z+5]}");
           }
           z += 6;
         }
+
+
 
         if (dataSet.isDrawFilledEnabled()) {
           drawCubicFill(canvas, dataSet, _cubicFillPath, trans, xBounds);
@@ -454,32 +459,76 @@ class LineChartRenderer extends LineRadarRenderer {
     double fillMin =
         dataSet.getFillFormatter().getFillLinePosition(dataSet, _provider);
 
-    List<double> list = List();
-    list.add(dataSet.getEntryForIndex(bounds.min + bounds.range).x);
-    list.add(fillMin);
-    list.add(dataSet.getEntryForIndex(bounds.min).x);
-    list.add(fillMin);
+    List<int> listLine = [];
+    bool preNoN = false;
+    for(int i = 0; i <= xBounds.range; i ++){
+      Entry tmp = dataSet.getEntryForIndex(i);
+      if(tmp.y.isNaN){
+        if(preNoN == true){
+          listLine.add(i - 1); //增加结束点
+          listLine.add( i - listLine[listLine.length - 2]); //增加这条线点的数量
+        }
+        preNoN = false;
+      }else{
+        if(preNoN == false) {  //第一个需要增加的点
+          listLine.add(i); //增加第一个开始点
+        }
+        preNoN = true;
+      }
+    }
+    //如果最后一个点还没有闭合，闭合最后一个点
+    if(preNoN == true){
+      listLine.add(xBounds.range); //增加结束点
+      listLine.add( xBounds.range - listLine[listLine.length - 2] +1); //增加这条线点的数量
+    }
+    print("lineLine size = ${listLine.length}, listLine = ${listLine}");
+    if(listLine.length %3 != 0) { //线的数量
+      return;
+    }
 
-    trans.pointValuesToPixel(list);
+    for(int i = 0 ; i < (listLine.length~/3) ; i ++) {
+      List<double> list = List();
+      int startPoint = listLine[i * 3 ];
+      int endPoint = listLine[i * 3 + 1];
+      int linecount = listLine[i * 3 + 2 ];
 
-    spline.lineTo(list[0], list[1]);
-    spline.lineTo(list[2], list[3]);
-    spline.close();
+      list.add(dataSet
+          .getEntryForIndex(endPoint)
+          .x);
+      list.add(fillMin);
+      list.add(dataSet
+          .getEntryForIndex(startPoint)
+          .x);
+      list.add(fillMin);
+
+      trans.pointValuesToPixel(list);
+
+
+      spline.lineTo(list[0], list[1]);
+      spline.lineTo(list[2], list[3]);
+      spline.close();
 
 //    final Drawable drawable = dataSet.getFillDrawable();
 //    if (drawable != null) {
 //      drawFilledPath(c, spline, drawable);
 //    } else {
 
-    if (dataSet.isGradientEnabled()) {
-      drawFilledPath3(c, spline, dataSet.getGradientColor1().startColor.value,
-          dataSet.getGradientColor1().endColor.value, dataSet.getFillAlpha());
-    } else {
-      drawFilledPath2(
-          c, spline, dataSet.getFillColor().value, dataSet.getFillAlpha());
+      if (dataSet.isGradientEnabled()) {
+        drawFilledPath3(c, spline, dataSet
+            .getGradientColor1()
+            .startColor
+            .value,
+            dataSet
+                .getGradientColor1()
+                .endColor
+                .value, dataSet.getFillAlpha());
+      } else {
+        drawFilledPath2(
+            c, spline, dataSet
+            .getFillColor()
+            .value, dataSet.getFillAlpha());
+      }
     }
-
-//    }
   }
 
   List<double> mLineBuffer = List(4);

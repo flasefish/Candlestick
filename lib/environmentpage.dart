@@ -117,12 +117,12 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
     List<Entry> values = [];
 
 
-    var  data = [double.nan,double.nan,double.nan,27.9,28.0,double.nan,
-      30.6,double.nan,28.8,27.9,26.0,25.1,
+    var  data = [24.6,25.7,26.8,27.9,28.0,28.6,
+      30.6,29.7,28.8,27.9,26.0,25.1,
       24.6,25.7,26.8,27.9,28.0,29.1,
-      30.6,29.7,double.nan,27.9,26.0,25.1,
+      30.6,29.7,28.8,27.9,26.0,25.1,
       24.6,25.7,26.8,27.9,28.0,29.1,
-      30.6,29.7,28.8,27.9,double.nan,25.1,
+      30.6,29.7,28.8,27.9,26.0,25.1,
       24.6,25.7,26.8,27.9,28.0,29.1,
       30.6,29.7,28.8,27.9,26.0,25.1];
 
@@ -158,7 +158,9 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
     // draw selection line as dashed
    // set1.enableDashedHighlightLine(10, 5, 0);
     // set the filled area
-   // set1.setDrawFilled(true);
+    set1.setDrawFilled(true);
+//    set1.setFillColor(color);
+   // set1.setFillAlpha(alpha)
     // set color of filled area
    // set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
     List<ILineDataSet> dataSets = [];
