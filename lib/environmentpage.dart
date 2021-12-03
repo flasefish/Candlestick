@@ -167,7 +167,8 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
    // set1.setFillAlpha(alpha)
     // set color of filled area
     set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
-
+    set1.setHighLightColor(Color(0xFF007AFF)); //高亮颜色
+    set1.setDrawHorizontalHighlightIndicator(false); //高亮的时候不画水平线
     List<ILineDataSet> dataSets = [];
     dataSets.add(set1); // add the data sets
     // create a data object with the data sets
