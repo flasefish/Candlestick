@@ -1,8 +1,10 @@
+import 'package:candlestick/sleepreport.dart';
 import 'package:flutter/material.dart';
 
 import 'BasicDemo.dart';
 import 'basic.dart';
 import 'candlestick.dart';
+import 'combined.dart';
 import 'environmentpage.dart';
 import 'healthypage.dart';
 
@@ -114,7 +116,15 @@ final List<testListViewModal> demos = [
     demo: LineChartBasic(),
   ),
 
+  testListViewModal(
+    title: '组合',
+    demo: OtherChartCombined(),
+  ),
 
+  testListViewModal(
+    title: '睡眠报告',
+    demo: SleepReportPage(),
+  ),
 
 ];
 class testListViewModal {

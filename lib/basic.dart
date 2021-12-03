@@ -143,7 +143,7 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
 //    set1.setFillFormatter(A(lineChart.painter));
 
     // set color of filled area
- //   set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
+    set1.setGradientColor(ColorUtils.BLUE, ColorUtils.RED);
 
     List<ILineDataSet> dataSets = List();
     dataSets.add(set1); // add the data sets
