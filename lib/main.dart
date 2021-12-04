@@ -2,11 +2,13 @@ import 'package:candlestick/sleepreport.dart';
 import 'package:flutter/material.dart';
 
 import 'BasicDemo.dart';
+import 'basebarchart.dart';
 import 'basic.dart';
 import 'candlestick.dart';
 import 'combined.dart';
 import 'environmentpage.dart';
 import 'healthypage.dart';
+import 'multiplebar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -125,6 +127,16 @@ final List<testListViewModal> demos = [
     title: '睡眠报告',
     demo: SleepReportPage(),
   ),
+  testListViewModal(
+    title: 'bar show',
+    demo: BarChartBasic(),
+  ),
+  testListViewModal(
+    title: 'MultipleBar show',
+    demo: MultipleBarChartBasic(),
+  ),
+
+
 
 ];
 class testListViewModal {

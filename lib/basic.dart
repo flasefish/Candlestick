@@ -46,7 +46,7 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
         Positioned(
           right: 0,
           left: 0,
-          top: 200,
+          top: 500,
           bottom: 300,
           child: _initLineChart(),
         ),
