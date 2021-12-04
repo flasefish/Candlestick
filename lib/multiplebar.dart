@@ -150,11 +150,11 @@ class MultipleBarChartBasicState extends State<MultipleBarChartBasic>
     BarDataSet set1, set2, set3, set4;
 
     set1 = BarDataSet(values1, "Company A");
-    set1.setColor1(Color.fromARGB(255, 104, 241, 175));
+    set1.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
     set1.setDrawValues(false);
     set2 = BarDataSet(values2, "Company B");
     set2.setDrawValues(false);
-    set2.setColor1(Color.fromARGB(255, 164, 228, 251));
+    set2.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
     controller.data =
         BarData([]..add(set1)..add(set2));
     controller.data

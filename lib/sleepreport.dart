@@ -42,7 +42,7 @@ class SleepReportPage extends StatefulWidget {
 class _SleepReportPageState extends State<SleepReportPage> {
   CombinedChartController controller;
 
-  int _count = 12;
+  int _count = 24;
   var random = Random(1);
 
   @override
@@ -68,7 +68,7 @@ class _SleepReportPageState extends State<SleepReportPage> {
               right: 0,
               left: 0,
               top: 50,
-              bottom: 50,
+              bottom: 200,
               child: CombinedChart(controller)),
         ],
       ),
@@ -83,24 +83,27 @@ class _SleepReportPageState extends State<SleepReportPage> {
         axisLeftSettingFunction: (axisLeft, controller) {
           axisLeft
             ..drawGridLines = (false)
+            ..drawAxisLine = (false)
+             ..drawLabels = (false)
+            ..drawAxisLine = (false)
+            ..setAxisMaxValue(100)
             ..setAxisMinimum(0);
         },
         axisRightSettingFunction: (axisRight, controller) {
-          axisRight
-            ..drawGridLines = (false)
-            ..setAxisMinimum(0);
+          axisRight.enabled = (false);
         },
         legendSettingFunction: (legend, controller) {
           legend
-            ..wordWrapEnabled = (true)
-            ..verticalAlignment = (LegendVerticalAlignment.BOTTOM)
-            ..horizontalAlignment = (LegendHorizontalAlignment.CENTER)
-            ..orientation = (LegendOrientation.HORIZONTAL)
-            ..drawInside = (false);
+            ..enabled=(false);
         },
         xAxisSettingFunction: (xAxis, controller) {
           xAxis
-            ..position = (XAxisPosition.BOTH_SIDED)
+            ..position = (XAxisPosition.BOTTOM)
+            ..drawGridLines = (false)
+            ..drawAxisLine = (false)
+            ..drawAxisLine = (false)
+            ..drawScale = (true)
+            ..setLabelCount4(5,true)
             ..setAxisMinimum(0)
             ..setGranularity(1)
             ..setValueFormatter(A())
@@ -110,14 +113,14 @@ class _SleepReportPageState extends State<SleepReportPage> {
         drawGridBackground: false,
         drawBarShadow: false,
         highlightFullBarEnabled: false,
-        dragXEnabled: true,
-        dragYEnabled: true,
-        scaleXEnabled: true,
-        scaleYEnabled: true,
+        dragXEnabled: false,
+        dragYEnabled: false,
+        scaleXEnabled: false,
+        scaleYEnabled: false,
         pinchZoomEnabled: false,
         maxVisibleCount: 60,
         description: desc,
-        drawOrder: List()
+        drawOrder: []
           ..add(DrawOrder.BAR)
           ..add(DrawOrder.CANDLE)
           ..add(DrawOrder.SCATTER));
@@ -130,70 +133,47 @@ class _SleepReportPageState extends State<SleepReportPage> {
       ..setData3(generateScatterData())
       ..setData4(generateCandleData())
       ..setValueTypeface(Util.LIGHT);
+
   }
 
   double getRandom(double range, double start) {
     return (random.nextDouble() * range) + start;
   }
 
-  LineData generateLineData() {
-    LineData d = LineData();
-
-    List<Entry> entries = List();
-
-    for (int index = 0; index < _count; index++)
-      entries.add(Entry(x: index + 0.5, y: getRandom(15, 5)));
-
-    LineDataSet set = LineDataSet(entries, "Line DataSet");
-    set.setColor1(Color.fromARGB(255, 240, 238, 70));
-    set.setLineWidth(2.5);
-    set.setCircleColor(Color.fromARGB(255, 240, 238, 70));
-    set.setCircleRadius(5);
-    set.setFillColor(Color.fromARGB(255, 240, 238, 70));
-    set.setMode(Mode.CUBIC_BEZIER);
-    set.setDrawValues(true);
-    set.setValueTextSize(10);
-    set.setValueTextColor(Color.fromARGB(255, 240, 238, 70));
-
-    set.setAxisDependency(AxisDependency.LEFT);
-    d.addDataSet(set);
-
-    return d;
-  }
-
   BarData generateBarData() {
-    List<BarEntry> entries1 = List();
-    List<BarEntry> entries2 = List();
+    List<BarEntry> entries1 = [];
+    List<BarEntry> entries2 = [];
+
+    var sleepdata = [1,1,0,0,1,1,
+                     1,0,0,1,1,0,
+                     0,0,1,1,1,0,
+                     0,1,1,0,1,0];
 
     for (int index = 0; index < _count; index++) {
-      entries1.add(BarEntry(x: 0, y: getRandom(25, 25)));
-
-      // stacked
-      entries2.add(BarEntry.fromListYVals(
-          x: 0,
-          vals: List<double>()
-            ..add(getRandom(13, 12))
-            ..add(getRandom(13, 12))));
+      if (sleepdata[index] > 0) {
+        entries1.add(BarEntry(x: index.toDouble(), y: 100));
+        entries2.add(BarEntry(x: index.toDouble(), y: 100));
+      } else {
+        entries1.add(BarEntry(x: index.toDouble(), y: 0));
+        entries2.add(BarEntry(x: index.toDouble(), y: 0));
+      }
     }
 
     BarDataSet set1 = BarDataSet(entries1, "Bar 1");
-    set1.setColor1(Color.fromARGB(255, 60, 220, 78));
-    set1.setValueTextColor(Color.fromARGB(255, 60, 220, 78));
-    set1.setValueTextSize(10);
+    set1.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
+    set1.setDrawValues(false);
     set1.setAxisDependency(AxisDependency.LEFT);
+    set1.setHighlightEnabled(false); //高亮颜色
 
     BarDataSet set2 = BarDataSet(entries2, "");
-    set2.setStackLabels(List<String>()..add("Stack 1")..add("Stack 2"));
-    set2.setColors1(List<Color>()
-      ..add(Color.fromARGB(255, 61, 165, 255))
-      ..add(Color.fromARGB(255, 23, 197, 255)));
-    set2.setValueTextColor(Color.fromARGB(255, 61, 165, 255));
-    set2.setValueTextSize(10);
+    set2.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
+    set2.setDrawValues(false);
     set2.setAxisDependency(AxisDependency.LEFT);
+    set2.setHighlightEnabled(false); //高亮颜色
 
-    double groupSpace = 0.06;
-    double barSpace = 0.02; // x2 dataset
-    double barWidth = 0.45; // x2 dataset
+    double groupSpace = 0.00;
+    double barSpace = 0.00; // x2 dataset
+    double barWidth = 0.50; // x2 dataset
     // (0.45 + 0.02) * 2 + 0.06 = 1.00 -> interval per "group"
 
     BarData d = BarData(List()..add(set1)..add(set2));
@@ -211,13 +191,13 @@ class _SleepReportPageState extends State<SleepReportPage> {
     List<Entry> entries = List();
 
     for (double index = 0; index < _count; index += 0.5)
-      entries.add(Entry(x: index + 0.25, y: getRandom(10, 55)));
+      entries.add(Entry(x: index + 0.25, y: 50));
 
     ScatterDataSet set = ScatterDataSet(entries, "Scatter DataSet");
     set.setColors1(ColorUtils.MATERIAL_COLORS);
-    set.setScatterShapeSize(7.5);
     set.setDrawValues(false);
-    set.setValueTextSize(10);
+    set.setVisible(false);
+    set.setHighlightEnabled(false);
     d.addDataSet(set);
 
     return d;
@@ -228,89 +208,110 @@ class _SleepReportPageState extends State<SleepReportPage> {
 
     List<CandleEntry> entries1 = [];
     List<CandleEntry> entries2 = [];
+    var sleepdata = [1,1,0,0,1,1,
+      1,0,0,1,1,0,
+      0,0,1,1,1,0,
+      0,1,1,0,1,0];
+
+    var abnormaldata = [0,0,0,0,1,1,
+                    0,0,1,1,0,0,
+                    1,1,1,1,0,0,
+                    0,0,1,1,0,0];
+    var crydata = [0,0,0,0,1,0,
+                   0,0,0,0,0,0,
+                   1,0,0,0,1,0,
+                   0,0,0,0,0,0];
 
     for (int index = 0; index < _count ;  index ++) {
-      entries1.add(CandleEntry(
-          x: index + 0.5,
-          shadowH: 90,
-          shadowL: 70,
-          open: 85,
-          close: 75));
+      if(abnormaldata[index] > 0 ) {
+        entries1.add(CandleEntry(
+            x: index + 0.5,
+            shadowH: 90,
+            shadowL: 55,
+            open: 90,
+            close: 55));
+      }else{
+        entries1.add(CandleEntry(
+            x: index + 0.5,
+            shadowH: 0,
+            shadowL: 0,
+            open: 0,
+            close: 0));
+      }
+      if(crydata[index] > 0){
+        entries2.add(CandleEntry(
+            x: index + 0.5,
+            shadowH: 45,
+            shadowL: 5,
+            open: 45,
+            close: 5));
+      }else{
+        entries2.add(CandleEntry(
+            x: index + 0.5,
+            shadowH: 0,
+            shadowL: 0,
+            open: 0,
+            close: 0));
+      }
 
-      entries2.add(CandleEntry(
-          x: index + 0.5,
-          shadowH: 120,
-          shadowL: 100,
-          open: 115,
-          close: 105));
+
 
 
     }
     CandleDataSet set = CandleDataSet(entries1, "Candle DataSet1");
-    set.setDecreasingColor(Color.fromARGB(255, 142, 150, 175));
-    set.setShadowColor(ColorUtils.DKGRAY);
+    set.setDecreasingColor(Color.fromARGB(255, 0xf5, 0x64, 0x67));
+    set.setShadowColor(Color.fromARGB(255, 0xf5, 0x64, 0x67));
     set.setBarSpace(0);
-
-    set.setValueTextSize(10);
     set.setDrawValues(false);
     set.setAxisDependency(AxisDependency.LEFT);
+    set.setHighlightEnabled(false); //
 
     CandleDataSet set2 = CandleDataSet(entries2, "Candle DataSet1");
-    set2.setDecreasingColor(Color.fromARGB(255, 142, 150, 175));
-    set2.setShadowColor(ColorUtils.BLUE);
+    set2.setDecreasingColor(Color.fromARGB(255, 0xAF,0x70,0xFF));
+    set2.setShadowColor(Color.fromARGB(255, 0xAF,0x70,0xFF));
     set2.setBarSpace(0);
-
-    set2.setValueTextSize(10);
     set2.setDrawValues(false);
     set2.setAxisDependency(AxisDependency.LEFT);
-
+    set2.setHighlightEnabled(false); //高亮颜色
 
     d.addDataSet(set);
     d.addDataSet(set2);
 
-
     return d;
-  }
-
-  BubbleData generateBubbleData() {
-    BubbleData bd = BubbleData();
-
-    List<BubbleEntry> entries = List();
-
-    for (int index = 0; index < _count; index++) {
-      double y = getRandom(10, 105);
-      double size = getRandom(100, 105);
-      entries.add(BubbleEntry(x: index + 0.5, y: y, size: size));
-    }
-
-    BubbleDataSet set = BubbleDataSet(entries, "Bubble DataSet");
-    set.setColors1(ColorUtils.VORDIPLOM_COLORS);
-    set.setValueTextSize(10);
-    set.setValueTextColor(ColorUtils.WHITE);
-    set.setDrawValues(false);
-    bd.addDataSet(set);
-
-    return bd;
   }
 }
 
-final List<String> months = List()
-  ..add("Jan")
-  ..add("Feb")
-  ..add("Mar")
-  ..add("Apr")
-  ..add("May")
-  ..add("Jun")
-  ..add("Jul")
-  ..add("Aug")
-  ..add("Sep")
-  ..add("Okt")
-  ..add("Nov")
-  ..add("Dec");
+final List<String> hours =[]
+  ..add("8:00")
+  ..add("9:00")
+  ..add("10:00")
+  ..add("11:00")
+  ..add("12:00")
+  ..add("13:00")
+  ..add("14:00")
+  ..add("15:00")
+  ..add("16:00")
+  ..add("17:00")
+  ..add("18:00")
+  ..add("19:00")
+  ..add("20:00")
+  ..add("21:00")
+  ..add("22:00")
+  ..add("23:00")
+  ..add("0:00")
+  ..add("1:00")
+  ..add("2:00")
+  ..add("3:00")
+  ..add("4:00")
+  ..add("5:00")
+  ..add("6:00")
+  ..add("7:00");
+
+
 
 class A extends ValueFormatter {
   @override
   String getFormattedValue1(double value) {
-    return months[value.toInt() % months.length];
+    return hours[value.toInt() % hours.length];
   }
 }
