@@ -164,12 +164,14 @@ class _SleepReportPageState extends State<SleepReportPage> {
     set1.setDrawValues(false);
     set1.setAxisDependency(AxisDependency.LEFT);
     set1.setHighlightEnabled(false); //高亮颜色
+    set1.setFillXGrid(true);
 
     BarDataSet set2 = BarDataSet(entries2, "");
     set2.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
     set2.setDrawValues(false);
     set2.setAxisDependency(AxisDependency.LEFT);
     set2.setHighlightEnabled(false); //高亮颜色
+    set2.setFillXGrid(true);
 
     double groupSpace = 0.00;
     double barSpace = 0.00; // x2 dataset
@@ -265,6 +267,7 @@ class _SleepReportPageState extends State<SleepReportPage> {
     set.setDrawValues(false);
     set.setAxisDependency(AxisDependency.LEFT);
     set.setHighlightEnabled(false); //
+    set.setFillXGridLine(true);
 
     CandleDataSet set2 = CandleDataSet(entries2, "Candle DataSet1");
     set2.setDecreasingColor(Color.fromARGB(255, 0xAF,0x70,0xFF));
@@ -273,6 +276,7 @@ class _SleepReportPageState extends State<SleepReportPage> {
     set2.setDrawValues(false);
     set2.setAxisDependency(AxisDependency.LEFT);
     set2.setHighlightEnabled(false); //高亮颜色
+    set2.setFillXGridLine(true);
 
     d.addDataSet(set);
     d.addDataSet(set2);

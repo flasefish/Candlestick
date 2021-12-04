@@ -26,6 +26,8 @@ class CandleDataSet extends LineScatterCandleRadarDataSet<CandleEntry>
   /// use candle color for the shadow
   bool _shadowColorSameAsCandle = false;
 
+  bool _fillXGrid = false;
+
   /// paint style when open < close
   /// increasing candlesticks are traditionally hollow
   PaintingStyle _increasingPaintStyle = PaintingStyle.stroke;
@@ -230,5 +232,15 @@ class CandleDataSet extends LineScatterCandleRadarDataSet<CandleEntry>
   @override
   DashPathEffect getDashPathEffectHighlight() {
     return null;
+  }
+
+  void setFillXGridLine(bool value){
+    _fillXGrid = value;
+  }
+
+  @override
+  bool getFillXGridLine() {
+    // TODO: implement fillXGridLine
+    return _fillXGrid;
   }
 }

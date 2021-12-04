@@ -26,6 +26,8 @@ class BarDataSet extends BarLineScatterCandleBubbleDataSet<BarEntry>
   /// the overall entry count, including counting each stack-value individually
   int _entryCountStacks = 0;
 
+  bool _fillXGridLine = false;
+
   /// array of labels used to describe the different values of the stacked bars
   List<String> _stackLabels = List()..add("Stack");
 
@@ -187,5 +189,15 @@ class BarDataSet extends BarLineScatterCandleBubbleDataSet<BarEntry>
   @override
   List<String> getStackLabels() {
     return _stackLabels;
+  }
+
+  void setFillXGrid(bool value){
+    _fillXGridLine = value;
+  }
+
+  @override
+  bool getFillXGrid() {
+    // TODO: implement getFillXGrid
+    return _fillXGridLine;
   }
 }

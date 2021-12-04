@@ -152,10 +152,19 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
           renderPaint.style = PaintingStyle.fill;
 
           if(e.getRectangle()) {
-             c.drawRect(
-               Rect.fromLTRB(_bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2],
-                   _bodyBuffers[1]),
-               renderPaint);
+            if(dataSet.getFillXGridLine()){
+              c.drawRect(
+                  Rect.fromLTRB(
+                      _bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2]+0.5,
+                      _bodyBuffers[1]),
+                  renderPaint);
+            }else {
+              c.drawRect(
+                  Rect.fromLTRB(
+                      _bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2],
+                      _bodyBuffers[1]),
+                  renderPaint);
+            }
           }else {
             c.drawRRect(RRect.fromLTRBXY(
                 _bodyBuffers[0], _bodyBuffers[3], _bodyBuffers[2],
@@ -173,10 +182,19 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
           renderPaint.style = PaintingStyle.fill;
 
           if(e.getRectangle()) {
-             c.drawRect(
-              Rect.fromLTRB(_bodyBuffers[0], _bodyBuffers[1], _bodyBuffers[2],
-                  _bodyBuffers[3]),
-              renderPaint);
+            if(dataSet.getFillXGridLine()) {
+              c.drawRect(
+                  Rect.fromLTRB(
+                      _bodyBuffers[0], _bodyBuffers[1], _bodyBuffers[2] + 0.5,
+                      _bodyBuffers[3]),
+                  renderPaint);
+            }else{
+              c.drawRect(
+                  Rect.fromLTRB(
+                      _bodyBuffers[0], _bodyBuffers[1], _bodyBuffers[2],
+                      _bodyBuffers[3]),
+                  renderPaint);
+            }
           }else {
             c.drawRRect(RRect.fromLTRBXY(
                 _bodyBuffers[0], _bodyBuffers[1], _bodyBuffers[2],

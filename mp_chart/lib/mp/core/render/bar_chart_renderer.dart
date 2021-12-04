@@ -115,6 +115,7 @@ class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
       ..strokeWidth = Utils.convertDpToPixel(dataSet.getBarBorderWidth());
 
     final bool drawBorder = dataSet.getBarBorderWidth() > 0.0;
+    final bool fillxGrid = dataSet.getFillXGrid();
 
     double phaseX = animator.getPhaseX();
     double phaseY = animator.getPhaseY();
@@ -216,11 +217,18 @@ class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                   buffer.buffer[j + 1]));
       }
 
-      c.drawRect(
-          Rect.fromLTRB(buffer.buffer[j], buffer.buffer[j + 1],
-              buffer.buffer[j + 2], buffer.buffer[j + 3]),
-          renderPaint);
-
+      print("bar draw j = $j,rect.left = ${buffer.buffer[j]} ,top = ${buffer.buffer[j + 1]}, right = ${buffer.buffer[j+2]},buttom = ${buffer.buffer[j+3]}");
+      if(fillxGrid){
+        c.drawRect(
+            Rect.fromLTRB(buffer.buffer[j], buffer.buffer[j + 1],
+                buffer.buffer[j + 2] + 0.5, buffer.buffer[j + 3]),
+            renderPaint);
+      }else {
+        c.drawRect(
+            Rect.fromLTRB(buffer.buffer[j], buffer.buffer[j + 1],
+                buffer.buffer[j + 2], buffer.buffer[j + 3]),
+            renderPaint);
+      }
       if (drawBorder) {
         c.drawRect(
             Rect.fromLTRB(buffer.buffer[j], buffer.buffer[j + 1],

@@ -43,4 +43,6 @@ mixin IBarDataSet implements IBarLineScatterCandleBubbleDataSet<BarEntry> {
   ///
   /// @return
   List<String> getStackLabels();
+
+  bool getFillXGrid();
 }

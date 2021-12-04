@@ -120,6 +120,7 @@ class MultipleBarChartBasicState extends State<MultipleBarChartBasic>
       maxVisibleCount: 60,
       selectionListener: this,
       drawBarShadow: false,
+
       description: desc);
   }
 
@@ -152,9 +153,11 @@ class MultipleBarChartBasicState extends State<MultipleBarChartBasic>
     set1 = BarDataSet(values1, "Company A");
     set1.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
     set1.setDrawValues(false);
+    set1.setFillXGrid(true);
     set2 = BarDataSet(values2, "Company B");
     set2.setDrawValues(false);
     set2.setColor1(Color.fromARGB(255, 0x80, 0xba, 0xff));
+    set2.setFillXGrid(true);
     controller.data =
         BarData([]..add(set1)..add(set2));
     controller.data
