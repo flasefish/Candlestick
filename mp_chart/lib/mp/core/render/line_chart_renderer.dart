@@ -196,7 +196,7 @@ class LineChartRenderer extends LineRadarRenderer {
     double intensity = dataSet.getCubicIntensity();
 
     List<double> list = List();
-    print("----------------drawCubicBezier call---------------------");
+   // print("----------------drawCubicBezier call---------------------");
 
     //计算有多少条线
     List<int> listLine = [];
@@ -221,7 +221,7 @@ class LineChartRenderer extends LineRadarRenderer {
       listLine.add(xBounds.range); //增加结束点
       listLine.add( xBounds.range - listLine[listLine.length - 2] +1); //增加这条线点的数量
     }
-    print("lineLine size = ${listLine.length}, listLine = ${listLine}");
+   // print("lineLine size = ${listLine.length}, listLine = ${listLine}");
     if(listLine.length %3 != 0) { //线的数量
         return;
     }
@@ -234,7 +234,7 @@ class LineChartRenderer extends LineRadarRenderer {
         int linecount  = listLine[i * 3  + 2 ];
 
         list.clear();
-        print("i = $i ,startpoint = $startPoint,endpoint = ${endPoint},linecount = $linecount");
+        //print("i = $i ,startpoint = $startPoint,endpoint = ${endPoint},linecount = $linecount");
 
         if(listLine[i * 3 + 2 ] >= 1){  //当前线的范围 >= 1
           double prevDx = 0;
@@ -243,7 +243,7 @@ class LineChartRenderer extends LineRadarRenderer {
           double curDy = 0;
 
           final int firstIndex = startPoint + 1;
-          print("firstIndex = $firstIndex");
+          //print("firstIndex = $firstIndex");
 
           Entry prevPrev;
            Entry prev;
@@ -257,7 +257,7 @@ class LineChartRenderer extends LineRadarRenderer {
           Entry next = cur;  //1
           int nextIndex = -1;
 
-          print("prev.x = ${prev.x},cur.x=${cur.x},net=${next.x}");
+          //print("prev.x = ${prev.x},cur.x=${cur.x},net=${next.x}");
 
           if (cur == null) return;
 
@@ -266,28 +266,28 @@ class LineChartRenderer extends LineRadarRenderer {
           list.add(cur.x);
           list.add(cur.y * phaseY);
 
-          print(" start add list startPoint = ${startPoint},endPoint = ${endPoint}");
+         // print(" start add list startPoint = ${startPoint},endPoint = ${endPoint}");
           for (int j = startPoint + 1; j <= endPoint; j++) {
             prevPrev = prev;
             prev = cur;
             cur = nextIndex == j ? next : dataSet.getEntryForIndex(j);
-            print("-------------j = $j====================================");
-            print("cur.x = ${cur.x},cur.y = ${cur.y},intensity = $intensity}");
-            print("next.x = ${next.x},next.y = ${next.y},intensity = $intensity}");
-            print("prevPrev.x = ${prevPrev.x},prevPrev.y = ${prevPrev.y},intensity = $intensity}");
+           // print("-------------j = $j====================================");
+           // print("cur.x = ${cur.x},cur.y = ${cur.y},intensity = $intensity}");
+           // print("next.x = ${next.x},next.y = ${next.y},intensity = $intensity}");
+           // print("prevPrev.x = ${prevPrev.x},prevPrev.y = ${prevPrev.y},intensity = $intensity}");
 
             prevDx = (cur.x - prevPrev.x) * intensity;
             prevDy = (cur.y - prevPrev.y) * intensity;
             curDx = (next.x - prev.x) * intensity;
             curDy = (next.y - prev.y) * intensity;
 
-            print("prevDx = $prevDx,prevDy = $prevDy, curDx = $curDx,curDy = $curDy, intensity = $intensity}");
+            //print("prevDx = $prevDx,prevDy = $prevDy, curDx = $curDx,curDy = $curDy, intensity = $intensity}");
 
             nextIndex = j + 1 < dataSet.getEntryCount() ? j + 1 : j;
             next = dataSet.getEntryForIndex(nextIndex);
 
-            print("-------------next Index = ${nextIndex}=======");
-            print("-------------next  = ${next.x}=======");
+            //print("-------------next Index = ${nextIndex}=======");
+            //print("-------------next  = ${next.x}=======");
 
 
 
@@ -298,7 +298,7 @@ class LineChartRenderer extends LineRadarRenderer {
             list.add((cur.y - curDy) * phaseY);
             list.add(cur.x);
             list.add(cur.y * phaseY);
-            print("list = ${list}");
+           // print("list = ${list}");
           }
         }
 
@@ -306,7 +306,7 @@ class LineChartRenderer extends LineRadarRenderer {
           return;
         }
 
-        print("list.lenth = ${list.length}, list = ${list}");
+       // print("list.lenth = ${list.length}, list = ${list}");
 
         renderPaint
           ..color = dataSet.getColor1()
@@ -325,14 +325,14 @@ class LineChartRenderer extends LineRadarRenderer {
 
         int z = 2;
         for (int j = startPoint + 1; j <= endPoint; j++) {
-          print("-------------------z = $z ------------------------");
+         // print("-------------------z = $z ------------------------");
           _cubicPath.cubicTo(list[z], list[z + 1], list[z + 2], list[z + 3],
               list[z + 4], list[z + 5]);
           if (dataSet.isDrawFilledEnabled()) {
             _cubicFillPath.cubicTo(list[z], list[z + 1], list[z + 2], list[z + 3],
                 list[z + 4], list[z + 5]);
-            print("list[z] = ${list[z]},list[z+1] = ${list[z+1]},list[z+2] = ${list[z+2]},"
-                "list[z+3] = ${list[z+3]},list[z+4] = ${list[z+4]},list[z+5] = ${list[z+5]}");
+            //print("list[z] = ${list[z]},list[z+1] = ${list[z+1]},list[z+2] = ${list[z+2]},"
+            //    "list[z+3] = ${list[z+3]},list[z+4] = ${list[z+4]},list[z+5] = ${list[z+5]}");
           }
           z += 6;
         }

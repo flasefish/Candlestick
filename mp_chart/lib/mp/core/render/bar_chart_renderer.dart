@@ -217,7 +217,7 @@ class BarChartRenderer extends BarLineScatterCandleBubbleRenderer {
                   buffer.buffer[j + 1]));
       }
 
-      print("bar draw j = $j,rect.left = ${buffer.buffer[j]} ,top = ${buffer.buffer[j + 1]}, right = ${buffer.buffer[j+2]},buttom = ${buffer.buffer[j+3]}");
+      //print("bar draw j = $j,rect.left = ${buffer.buffer[j]} ,top = ${buffer.buffer[j + 1]}, right = ${buffer.buffer[j+2]},buttom = ${buffer.buffer[j+3]}");
       if(fillxGrid){
         c.drawRect(
             Rect.fromLTRB(buffer.buffer[j], buffer.buffer[j + 1],
