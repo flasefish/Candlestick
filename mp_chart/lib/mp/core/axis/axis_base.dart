@@ -55,6 +55,8 @@ abstract class AxisBase extends ComponentBase {
 
   bool _centerAxisLabels = false;
 
+  int _drawScaleInterval = 1;
+
   /// the path effect of the axis line that makes dashed lines possible
   DashPathEffect _axisLineDashPathEffect;
 
@@ -568,5 +570,11 @@ abstract class AxisBase extends ComponentBase {
 
   set drawScale(bool value){
     _mIsDrawScale = value;
+  }
+
+  int get drawScaleInterval => _drawScaleInterval;
+
+  set drawScaleInterval(int value){
+    _drawScaleInterval = value;
   }
 }

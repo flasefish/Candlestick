@@ -74,7 +74,7 @@ class _HealthyPageState extends State<HealthyPage> {
             ..setAxisMaximum(42.0)
             ..setAxisMinimum(32.0)
             ..setGranularity(2.0)
-            ..drawGridLines = (true)  //Y轴的线条
+            ..drawGridLines = (false)  //Y轴的线条
             ..enableGridDashedLine(10, 10, 0) //Y轴虚线
             ..mDrawFilled=(true)
             ..setFilledTopY(38.0)
@@ -93,6 +93,7 @@ class _HealthyPageState extends State<HealthyPage> {
             ..drawAxisLine = (false)  //不画X线
             ..drawGridLines = (false) //不画网格线
             ..drawScale = (true)
+            ..drawScaleInterval = (3)
             ..drawLabels = (true)  //画标签 X轴上对应的数值
             ..textSize = 10  //字体大小
             ..setLabelCount1(48) //总共48个点

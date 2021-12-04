@@ -484,7 +484,7 @@ class XAxisRenderer extends AxisRenderer {
       trans.pointValuesToPixel(positions);
 
       for(int i = 0; i < positions.length -2 ; i += 2){
-        if(i % 3 == 0){
+        if(i % (_xAxis.drawScaleInterval) == 0){
           double offset = (positions[2] - positions[0]) / 5;
           drawScale(c, positions[i], offset);
         }
@@ -501,7 +501,7 @@ class XAxisRenderer extends AxisRenderer {
           canvas.save();
           canvas.translate(offset * i, 0);
           if( i % 5 == 0) {
-            canvas.drawLine(Offset(startX, bottmY - 5), Offset(startX,bottmY),axisLinePaint);
+            canvas.drawLine(Offset(startX, bottmY + 5), Offset(startX,bottmY),axisLinePaint);
           }else{
 
           }
