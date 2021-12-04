@@ -99,6 +99,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
             ..drawAxisLine = (false)  //不画X线
             ..drawGridLines = (false) //不画网格线
             ..drawScale = (true)
+            ..drawScaleInterval = (3)
             ..drawLabels = (true)  //画标签 X轴上对应的数值
             ..textSize = 10  //字体大小
             ..setLabelCount1(48) //总共48个点
