@@ -483,7 +483,7 @@ class XAxisRenderer extends AxisRenderer {
       }
       trans.pointValuesToPixel(positions);
 
-      for(int i = 0; i < positions.length -2 ; i += 2){
+      for(int i = 0; i < positions.length - (_xAxis.drawScaleInterval - 1) ; i += 2){
         if(i % (_xAxis.drawScaleInterval) == 0){
           double offset = (positions[2] - positions[0]) / 5;
           drawScale(c, positions[i], offset);
