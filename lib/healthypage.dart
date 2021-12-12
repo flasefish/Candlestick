@@ -40,25 +40,16 @@ class _HealthyPageState extends State<HealthyPage> {
     return Scaffold(
         appBar: AppBar(
             title: Text('123')),
-        body: Stack(
+        body: ListView(
           children: <Widget>[
-            Positioned(
-                right: 0,
-                left: 0,
-                top: 50,
-                bottom: 550,
+            Container(
+              height: 180,
                 child: CandlestickChart(controller)),
-            Positioned(
-                right: 0,
-                left: 0,
-                top: 200,
-                bottom: 380,
+            Container(
+                height: 180,
                 child: CandlestickChart(controller)),
-            Positioned(
-                right: 0,
-                left: 0,
-                top: 400,
-                bottom: 200,
+            Container(
+                height: 180,
                 child: CandlestickChart(controller)),
           ],
         ),
