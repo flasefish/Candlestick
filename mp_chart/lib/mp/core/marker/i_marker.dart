@@ -33,4 +33,11 @@ mixin IMarker {
   /// @param posX
   /// @param posY
   void draw(Canvas canvas, double posX, double posY);
+
+  /// Draws the IMarker on the given position on the screen with the given Canvas object.
+  ///
+  /// @param canvas
+  /// @param posX
+  /// @param posY
+  void drawInRect(Canvas canvas,double posX,double posY,Rect rect);
 }

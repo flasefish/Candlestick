@@ -37,6 +37,7 @@ abstract class Controller<P extends ChartPainter>
   bool highLightPerTapEnabled;
   double extraTopOffset, extraRightOffset, extraBottomOffset, extraLeftOffset;
   bool drawMarkers;
+  bool drawMarkerInRect;
 
   ////// split child property
   Color infoBgColor;
@@ -65,6 +66,7 @@ abstract class Controller<P extends ChartPainter>
       this.extraBottomOffset = 0.0,
       this.extraLeftOffset = 0.0,
       this.drawMarkers = true,
+      this.drawMarkerInRect = false,
       bool resolveGestureHorizontalConflict = false,
       bool resolveGestureVerticalConflict = false,
       double descTextSize = 12,

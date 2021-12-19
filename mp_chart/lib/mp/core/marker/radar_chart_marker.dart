@@ -75,4 +75,10 @@ class RadarChartMarker implements IMarker {
     _entry = e;
     highlight = highlight;
   }
+
+  @override
+  void drawInRect(Canvas canvas, double posX, double posY, Rect rect) {
+    // TODO: implement drawInRect
+  }
+
 }

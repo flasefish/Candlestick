@@ -251,21 +251,23 @@ class MyChartMarker implements IMarker {
   DefaultValueFormatter _formatter;
   Color _textColor;
   Color _backColor;
-  double _fontSize;
   double _fontSize1;
   double _fontSize2;
+  double _fontSize3;
 
 
-  MyChartMarker({ Color textColor, Color backColor, double fontSize,double fontSize1,double fontSize2})
+  MyChartMarker({ Color textColor, Color backColor, double fontSize1,double fontSize2,double fontSize3})
       : _textColor = textColor,
         _backColor = backColor,
-        _fontSize = fontSize {
+        _fontSize1 = fontSize1,
+        _fontSize2 = fontSize2,
+        _fontSize3 = fontSize3{
     _formatter = DefaultValueFormatter(0);
     this._textColor ??= ColorUtils.BLACK;
     this._backColor ??= ColorUtils.GRAY;
-    this._fontSize ??= Utils.convertDpToPixel(12);
-    this._fontSize1 ??= Utils.convertDpToPixel(15);
-    this._fontSize2 ??= Utils.convertDpToPixel(12);
+    this._fontSize1 ??= Utils.convertDpToPixel(12);
+    this._fontSize2 ??= Utils.convertDpToPixel(15);
+    this._fontSize3 ??= Utils.convertDpToPixel(12);
   }
 
 
@@ -286,7 +288,7 @@ class MyChartMarker implements IMarker {
           null,
           "$timeStrin",
           _textColor,
-          _fontSize);
+          _fontSize1);
       print("---------------------------");
 
 
@@ -297,13 +299,13 @@ class MyChartMarker implements IMarker {
           "${_formatter.getFormattedValue1(openvalue)}-${_formatter
               .getFormattedValue1(closevalue)}",
           _textColor,
-          _fontSize1);
+          _fontSize2);
 
       TextPainter painter2 = PainterUtils.create(
           null,
           "°C",
           _textColor,
-          _fontSize2);
+          _fontSize3);
 
       Paint paint = Paint()
         ..color = _backColor
@@ -365,15 +367,27 @@ class MyChartMarker implements IMarker {
   }
 
   Offset calculatePos1(double posX, double posY, double textW, double textH) {
-    return Offset(posX - textW / 2, -textH/2);
+    double newX = posX - textW /2;
+    if(newX < 0){
+      newX = 0;
+    }
+    return Offset(newX, -textH/2);
   }
 
   Offset calculatePos2(double posX, double posY, double textW, double textH) {
-    return Offset(posX - textW / 2, -textH/2);
+    double newX = posX - textW /2;
+    if(newX < 0){
+      newX = 0;
+    }
+    return Offset(newX, -textH/2);
   }
 
   Offset calculatePos3(double posX, double posY, double textW, double textH) {
-    return Offset(posX - textW / 2, -textH/2);
+    double newX = posX - textW /2;
+    if(newX < 0){
+      newX = 0;
+    }
+    return Offset(newX, -textH/2);
   }
 
   @override
@@ -395,5 +409,125 @@ class MyChartMarker implements IMarker {
   String format(double n) {
     return n.toStringAsFixed(n.truncateToDouble() == n ? 0 : 2);
   }
+
+  MPPointF getBoundaryOverflow(double posX,MPPointF curOffset,Rect rectRange,double maxlen) {
+    if(  posX + curOffset.x  - maxlen/2 < 20)  // 左右2边10的边框
+      curOffset.x = 20;
+    if(  posX + curOffset.x + maxlen /2 > rectRange.right){
+   //   curOffset.x =  (rectRange.right - maxlen / 2) - rectRange.right ;
+      curOffset.x =  (rectRange.right - maxlen / 2) - posX ;
+    }
+
+
+    return curOffset;
+  }
+
+
+  @override
+  void drawInRect(Canvas canvas, double posX, double posY, Rect rect) {
+    // TODO: implement drawInRect
+    print("rect = $rect");
+    if(_entry is CandleEntry) {
+      double openvalue = (_entry as CandleEntry).open;
+      double closevalue = (_entry as CandleEntry).close;
+      int index = _entry.x.toInt();
+      String timeStrin = "";
+      if(index % 2 == 0) {
+        timeStrin = (index/2).truncate().toString() + ":00" + "~"  +  (index/2).truncate().toString() + ":30";
+      }else{
+        timeStrin = (index/2).truncate().toString() + ":30" + "~"  +  ((index + 1)/2).truncate().toString() + ":00";
+      }
+      print("---------------------------");
+      print("posx = $posX.posy = $posY");
+      TextPainter painter1 = PainterUtils.create(
+          null,
+          "$timeStrin",
+          _textColor,
+          _fontSize1);
+
+      TextPainter painter2 = PainterUtils.create(
+          null,
+          "${_formatter.getFormattedValue1(openvalue)}-${_formatter
+              .getFormattedValue1(closevalue)}",
+          _textColor,
+          _fontSize2);
+
+      TextPainter painter3 = PainterUtils.create(
+          null,
+          "°C",
+          _textColor,
+          _fontSize3);
+
+      Paint paint = Paint()
+        ..color = _backColor
+        ..strokeWidth = 2
+        ..isAntiAlias = true
+        ..style = PaintingStyle.fill;
+
+      MPPointF offset = getOffsetForDrawingAtPoint(posX, posY);
+      print("offset = ${offset.x} ,${offset.y}");
+
+
+
+      canvas.save();
+      // translate to the correct position and draw
+//    canvas.translate(posX + offset.x, posY + offset.y);
+      painter1.layout();
+      painter2.layout();
+      painter3.layout();
+      print("painter1 = ${painter1.width},${painter1.height}");
+      print("painter2 = ${painter2.width},${painter2.height}");
+      print("painter3 = ${painter3.width},${painter3.height}");
+
+      //根据边界调整
+      offset = getBoundaryOverflow(posX,offset,rect,painter2.width +painter3.width * 1.3);
+      print("new offset = ${offset.x} ,${offset.y}");
+
+
+      Offset pos1 = calculatePos2(
+          posX + offset.x, posY + offset.y, painter2.width, painter2.height + painter3.height * 1.3 ); //1.3包含中间空格
+      print("pos1 = $pos1");
+
+      Offset pos2 = calculatePos1(posX + offset.x, posY + offset.y, painter2.width, painter2.height); //时间字符串，不会是最长的
+      print("pos2 = $pos2");
+
+      Offset pos3 = calculatePos3(pos2.dx + painter2.width * 1.05, posY + offset.y, painter3.width/3, painter3.height * 0.8);
+      print("pos3 = $pos3");
+
+
+      canvas.drawRRect(
+          RRect.fromLTRBR(pos2.dx - 10, pos1.dy - 8, pos1.dx + painter2.width + painter3.width + 8,
+              pos1.dy + painter2.height + painter3.height + 8, Radius.circular(10)),
+          paint);
+      painter1.paint(canvas, pos1);
+      painter2.paint(canvas, pos2);
+      painter3.paint(canvas,pos3);
+      //画下面的三角指向
+
+      Paint _paint = new Paint();
+      _paint.strokeWidth = 2.0;
+      _paint.color = _backColor;
+      _paint.style = PaintingStyle.fill;
+
+      bool isDown = true;
+      Path path = new Path();
+      if (isDown) {
+        path.moveTo(posX - 10, 20.0);
+        path.lineTo(posX + 10, 20.0);
+        path.lineTo(posX, 35);
+      } else {
+        path.moveTo(painter1.width / 2.0, 0.0);
+        path.lineTo(0.0, painter1.height + 1);
+        path.lineTo(painter1.width, painter1.height + 1);
+      }
+
+      canvas.drawPath(path, _paint);
+
+      canvas.restore();
+    }
+  }
+
+
+
 }
 

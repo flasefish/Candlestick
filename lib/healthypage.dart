@@ -102,6 +102,7 @@ class _HealthyPageState extends State<HealthyPage> {
         scaleYEnabled: false,
         pinchZoomEnabled: false,
         drawMarkers:true,
+        drawMarkerInRect:true,
         maxVisibleCount: 60,
         description: desc);
   }

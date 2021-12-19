@@ -55,6 +55,8 @@ abstract class ChartPainter<T extends ChartData<IDataSet<Entry>>>
   /// if set to true, the marker view is drawn when a value is clicked
   final bool _drawMarkers;
 
+  final bool _drawMarkerInRect;
+
   /// paint object used for drawing the description text in the bottom right
   /// corner of the chart
   final TextPainter _descPaint;
@@ -115,6 +117,8 @@ abstract class ChartPainter<T extends ChartData<IDataSet<Entry>>>
 
   bool get isDrawMarkers => _drawMarkers;
 
+  bool get isDrawMarkerInRect => _drawMarkerInRect;
+
   Animator get animator => _animator;
 
   Size get size => _size;
@@ -135,6 +139,7 @@ abstract class ChartPainter<T extends ChartData<IDataSet<Entry>>>
       IMarker marker,
       Description desc,
       bool drawMarkers,
+      bool drawMarkerInRect,
       Color infoBgColor,
       TextPainter infoPainter,
       TextPainter descPainter,
@@ -155,6 +160,7 @@ abstract class ChartPainter<T extends ChartData<IDataSet<Entry>>>
         _marker = marker,
         _description = desc,
         _drawMarkers = drawMarkers,
+        _drawMarkerInRect = drawMarkerInRect,
         _infoBackgroundColor = infoBgColor,
         _infoPaint = infoPainter,
         _descPaint = descPainter,
@@ -426,7 +432,10 @@ abstract class ChartPainter<T extends ChartData<IDataSet<Entry>>>
       _marker.refreshContent(e, highlight);
 
       // draw the marker
-      _marker.draw(canvas, pos[0], pos[1]);
+      if(_drawMarkerInRect)
+        _marker.drawInRect(canvas, pos[0], pos[1],_viewPortHandler.contentRect);
+      else
+        _marker.draw(canvas, pos[0], pos[1]);
     }
   }
 
