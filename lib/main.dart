@@ -1,3 +1,4 @@
+import 'package:candlestick/popuppage.dart';
 import 'package:candlestick/sleepreport.dart';
 import 'package:flutter/material.dart';
 
@@ -129,8 +130,8 @@ final List<testListViewModal> demos = [
     demo: SleepReportPage(),
   ),
   testListViewModal(
-    title: 'bar show',
-    demo: BarChartBasic(),
+    title: 'popup_menu',
+    demo:PopupMenuPage(),
   ),
   testListViewModal(
     title: 'MultipleBar show',
@@ -140,7 +141,10 @@ final List<testListViewModal> demos = [
     title: '健康页面',
     demo:BabyHealthyPage(),
   ),
-
+  testListViewModal(
+    title: 'bar show',
+    demo: BarChartBasic(),
+  ),
 
 
 ];
