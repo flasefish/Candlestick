@@ -123,7 +123,7 @@ class OtherChartCandlestickState
   }
 
   @override
-  IMarker initMarker() => BarChartMarker();
+  IMarker initMarker() => MyChartMarker();
 
   void _initCandleData(int count, double range) async {
 //    chart.resetTracking();
@@ -252,16 +252,22 @@ class MyChartMarker implements IMarker {
   Color _textColor;
   Color _backColor;
   double _fontSize;
+  double _fontSize1;
+  double _fontSize2;
 
-  MyChartMarker({Color textColor, Color backColor, double fontSize})
+
+  MyChartMarker({ Color textColor, Color backColor, double fontSize,double fontSize1,double fontSize2})
       : _textColor = textColor,
         _backColor = backColor,
         _fontSize = fontSize {
     _formatter = DefaultValueFormatter(0);
-    this._textColor ??= ColorUtils.PURPLE;
+    this._textColor ??= ColorUtils.BLACK;
     this._backColor ??= ColorUtils.GRAY;
     this._fontSize ??= Utils.convertDpToPixel(12);
+    this._fontSize1 ??= Utils.convertDpToPixel(15);
+    this._fontSize2 ??= Utils.convertDpToPixel(12);
   }
+
 
   @override
   void draw(Canvas canvas, double posX, double posY) {
@@ -278,10 +284,27 @@ class MyChartMarker implements IMarker {
 
       TextPainter painter = PainterUtils.create(
           null,
-          "$timeStrin\n${_formatter.getFormattedValue1(openvalue)}°-${_formatter
-              .getFormattedValue1(closevalue)}°",
+          "$timeStrin",
           _textColor,
           _fontSize);
+      print("---------------------------");
+
+
+
+      print("posx = $posX.posy = $posY");
+      TextPainter painter1 = PainterUtils.create(
+          null,
+          "${_formatter.getFormattedValue1(openvalue)}-${_formatter
+              .getFormattedValue1(closevalue)}",
+          _textColor,
+          _fontSize1);
+
+      TextPainter painter2 = PainterUtils.create(
+          null,
+          "°C",
+          _textColor,
+          _fontSize2);
+
       Paint paint = Paint()
         ..color = _backColor
         ..strokeWidth = 2
@@ -289,25 +312,67 @@ class MyChartMarker implements IMarker {
         ..style = PaintingStyle.fill;
 
       MPPointF offset = getOffsetForDrawingAtPoint(posX, posY);
-
+      print("offset = ${offset.x} ,${offset.y}");
 
       canvas.save();
       // translate to the correct position and draw
 //    canvas.translate(posX + offset.x, posY + offset.y);
       painter.layout();
-      Offset pos = calculatePos(
-          posX + offset.x, posY + offset.y, painter.width, painter.height);
+      painter1.layout();
+      painter2.layout();
+      Offset pos1 = calculatePos1(posX + offset.x, posY + offset.y, painter1.width, painter1.height); //最长字符串
+      print("pos1 = $pos1");
+
+      Offset pos = calculatePos2(
+          posX + offset.x, posY + offset.y, painter1.width, painter.height + painter1.height * 1.3); //1.3包含中间空格
+      print("pos = $pos");
+
+      print("painter1 = ${painter1.width},${painter1.height}");
+      Offset pos2 = calculatePos3(pos1.dx + painter1.width * 1.05, posY + offset.y, painter2.width/3, painter2.height * 0.8);
+      print("pos2 = $pos2");
+
 
       canvas.drawRRect(
-          RRect.fromLTRBR(pos.dx - 5, pos.dy - 5, pos.dx + painter.width + 5,
-              pos.dy + painter.height + 5, Radius.circular(5)),
+          RRect.fromLTRBR(pos1.dx - 10, pos.dy - 8, pos.dx + painter1.width + painter2.width + 8,
+              pos.dy + painter.height + painter1.height + 8, Radius.circular(10)),
           paint);
       painter.paint(canvas, pos);
+      painter1.paint(canvas, pos1);
+      painter2.paint(canvas,pos2);
+      //画下面的三角指向
+
+      Paint _paint = new Paint();
+      _paint.strokeWidth = 2.0;
+      _paint.color = _backColor;
+      _paint.style = PaintingStyle.fill;
+
+      bool isDown = true;
+      Path path = new Path();
+      if (isDown) {
+        path.moveTo(posX - 10, 20.0);
+        path.lineTo(posX + 10, 20.0);
+        path.lineTo(posX, 35);
+      } else {
+        path.moveTo(painter1.width / 2.0, 0.0);
+        path.lineTo(0.0, painter1.height + 1);
+        path.lineTo(painter1.width, painter1.height + 1);
+      }
+
+      canvas.drawPath(path, _paint);
+
       canvas.restore();
     }
   }
 
-  Offset calculatePos(double posX, double posY, double textW, double textH) {
+  Offset calculatePos1(double posX, double posY, double textW, double textH) {
+    return Offset(posX - textW / 2, -textH/2);
+  }
+
+  Offset calculatePos2(double posX, double posY, double textW, double textH) {
+    return Offset(posX - textW / 2, -textH/2);
+  }
+
+  Offset calculatePos3(double posX, double posY, double textW, double textH) {
     return Offset(posX - textW / 2, -textH/2);
   }
 

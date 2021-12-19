@@ -320,7 +320,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
   }
 
   @override
-  IMarker initMarker() => BarChartMarker();
+  IMarker initMarker() => MyChartMarker();
 
   void _initCandleData(int count) async {
 //    chart.resetTracking();
