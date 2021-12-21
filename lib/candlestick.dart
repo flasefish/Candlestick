@@ -264,7 +264,7 @@ class MyChartMarker implements IMarker {
         _fontSize3 = fontSize3{
     _formatter = DefaultValueFormatter(0);
     this._textColor ??= ColorUtils.BLACK;
-    this._backColor ??= ColorUtils.GRAY;
+    this._backColor ??= ColorUtils.WHITE;
     this._fontSize1 ??= Utils.convertDpToPixel(12);
     this._fontSize2 ??= Utils.convertDpToPixel(15);
     this._fontSize3 ??= Utils.convertDpToPixel(12);
@@ -450,7 +450,8 @@ class MyChartMarker implements IMarker {
           "${_formatter.getFormattedValue1(openvalue)}-${_formatter
               .getFormattedValue1(closevalue)}",
           _textColor,
-          _fontSize2);
+          _fontSize2,
+      fontWeight: FontWeight.bold);
 
       TextPainter painter3 = PainterUtils.create(
           null,
@@ -522,6 +523,52 @@ class MyChartMarker implements IMarker {
       }
 
       canvas.drawPath(path, _paint);
+
+      //绘制阴影
+      path.reset();
+      //left      pos2.dx - 10
+      //top       pos1.dy - 8
+      //right     pos1.dx + painter2.width + painter3.width + 8
+      //buttom    pos1.dy + painter2.height + painter3.height + 8
+    //  path.moveTo(pos2.dx - 10 - 2 , pos1.dy - 8 - 5); //5个点的阴影
+    //  path.lineTo(pos1.dx + painter2.width + painter3.width + 8 + 2 , pos1.dy - 8  -5  );
+    //  path.lineTo(pos1.dx + painter2.width + painter3.width + 8 + 2, pos1.dy + painter2.height + painter3.height + 8 +2 + 15 );
+     // path.lineTo(pos2.dx - 10 -2 , pos1.dy + painter2.height + painter3.height + 8 +2 + 15 );
+     // canvas.drawShadow(path,ColorUtils.RED,2,false);
+
+
+      double left = pos2.dx  - 10 -1;
+      double leftArc = left + 8;
+      double top = pos1.dy - 8 -2;
+      double topArc = top + 10;
+
+      print('left = $left,leftArc = $leftArc');
+      print('top = $top,leftArc = $topArc');
+
+      double right = pos1.dx + painter2.width + painter3.width + 8 +1;
+      double rightArc = right - 6;
+      double bottom = pos1.dy + painter2.height + painter3.height + 8 ;
+      double bottomArc = bottom - 6;
+
+      path.moveTo(left  , topArc);
+     // path.lineTo(leftArc , top);
+      path.arcToPoint(Offset(leftArc,top),radius: Radius.circular(10),largeArc: false, clockwise: true);
+      path.lineTo(rightArc, top);
+     // path.lineTo(right , topArc);
+      path.arcToPoint(Offset(right,topArc),radius: Radius.circular(10),largeArc: false, clockwise: true);
+      path.lineTo(right, bottomArc);
+     // path.lineTo(rightArc, bottom);
+      path.arcToPoint(Offset(rightArc,bottom),radius: Radius.circular(10),largeArc: false, clockwise: true);
+
+      path.lineTo(posX + 9, bottom);
+      path.lineTo(posX, 35);
+      path.lineTo(posX - 9, bottom);
+
+      path.lineTo(leftArc, bottom);
+      //path.lineTo(left,bottomArc);
+      path.arcToPoint(Offset(left,bottomArc),radius: Radius.circular(10),largeArc: false, clockwise: true);
+
+      canvas.drawShadow(path,ColorUtils.DKGRAY,1,false);
 
       canvas.restore();
     }

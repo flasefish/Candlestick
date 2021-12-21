@@ -315,6 +315,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
         scaleYEnabled: false,
         pinchZoomEnabled: false,
         drawMarkers:true,
+        drawMarkerInRect:true,
         maxVisibleCount: 60,
         description: desc);
   }
