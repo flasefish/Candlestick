@@ -68,6 +68,14 @@ flutter:
      - images/temperature.png
      - images/temperature_info.png
      - images/copy.png
+     - images/setting_activeIcon.png
+     - images/setting_assetIcon.png
+     - images/setting_editIcon.png
+     - images/setting_environmentIcon.png
+     - images/setting_headBg.png
+     - images/setting_healthIcon.png
+     - images/setting_redBgIcon.png
+     - images/setting_sleepIcon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

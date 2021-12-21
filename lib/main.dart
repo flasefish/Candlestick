@@ -11,6 +11,7 @@ import 'combined.dart';
 import 'environmentpage.dart';
 import 'healthypage.dart';
 import 'multiplebar.dart';
+import 'settingpage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -140,6 +141,10 @@ final List<testListViewModal> demos = [
   testListViewModal(
     title: '健康页面',
     demo:BabyHealthyPage(),
+  ),
+  testListViewModal(
+    title: '设置',
+    demo:SettingPage(),
   ),
   testListViewModal(
     title: 'bar show',
