@@ -19,7 +19,7 @@ class BtbItemView extends StatelessWidget {
         decoration: BoxDecoration(
             boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
+            color: Colors.grey,
             border: Border.all(color: Colors.white, width: 0)),
         child: Ink(
           child: Column(children: <Widget>[
