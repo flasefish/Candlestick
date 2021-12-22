@@ -83,6 +83,7 @@ class SettingPage extends StatelessWidget {
                 border: Border.all(color: Colors.white, width: 0)),
             child: ListView(
               // scrollDirection:Axis.horizontal,
+              padding: EdgeInsets.only(top: 0,right: 0,left: 0),
               physics: const NeverScrollableScrollPhysics(),
               children: const <Widget>[
                 SelectTextItem(
