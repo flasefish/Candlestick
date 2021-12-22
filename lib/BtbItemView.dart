@@ -17,7 +17,7 @@ class BtbItemView extends StatelessWidget {
     return Container(
         margin: EdgeInsets.only(top: 0, left: 15, right: 15, bottom: 5),
         decoration: BoxDecoration(
-            boxShadow: [BoxShadow(color: Colors.white, blurRadius: 15.0)],
+            boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
             borderRadius: BorderRadius.circular(10),
             color: Colors.white,
             border: Border.all(color: Colors.white, width: 0)),

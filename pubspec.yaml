@@ -76,6 +76,8 @@ flutter:
      - images/setting_healthIcon.png
      - images/setting_redBgIcon.png
      - images/setting_sleepIcon.png
+     - images/bridayIcon.png
+     - images/setting_closeIcon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
