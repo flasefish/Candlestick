@@ -12,9 +12,9 @@ class SettingPage extends StatelessWidget {
     //  appBar: AppBar(
    //     title: const Text('设置'),
    //   ),
-
       body: Container(
         // color: Colors.blue,
+        margin: EdgeInsets.only(top:  MediaQuery.of(context).padding.top, left: 0, right: 0, bottom: 0),
         child: SingleChildScrollView(
           padding: EdgeInsets.all(0.0),
           child: Center(

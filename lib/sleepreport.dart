@@ -31,6 +31,7 @@ import 'package:mp_chart/mp/core/enums/x_axis_position.dart';
 import 'package:mp_chart/mp/core/utils/color_utils.dart';
 import 'package:mp_chart/mp/core/value_formatter/value_formatter.dart';
 import 'package:mp_chart/mp/painter/combined_chart_painter.dart';
+import 'SleepTopItem.dart';
 
 class SleepReportPage extends StatefulWidget {
   const SleepReportPage({Key key}) : super(key: key);
@@ -60,23 +61,63 @@ class _SleepReportPageState extends State<SleepReportPage> {
   Widget build(BuildContext context) {
     TextStyle textStyle = TextStyle(fontSize: 20, color: Colors.red);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-          title: Text('123')),
-      body: Stack(
-        children: <Widget>[
-          Positioned(
-              right: 0,
-              left: 0,
-              top: 50,
-              bottom: 200,
-              child: CombinedChart(controller)),
+        title: Text("11月01日 睡眠报告"),
+        titleTextStyle: TextStyle(
+          color: Colors.black,//设置字体颜色
+          fontSize: 16,//设置字体大小
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          color: Colors.black,
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context); // 关闭当前页面
+          },
+        ),
+        actions: <Widget>[
+          IconButton(
+            padding: EdgeInsets.only(right:20),
+            icon: new Image.asset("images/sleep_calanderIcon.png"),
+            onPressed: () {},
+          ),
         ],
+        elevation: 0,//隐藏底部阴影分割线
+        backgroundColor: Colors.white,
+      ),
+      body: Container(
+        margin: EdgeInsets.only(top:  0, left: 0, right: 0, bottom: 0),
+        child: SingleChildScrollView(
+          padding: EdgeInsets.all(0.0),
+          child: Center(
+            child:Column(children: <Widget>[
+              SleepTopItem(
+                  topTitle: "总时长",
+                  bottomInfo: "睡眠",
+                  rightInfo: "11小时20分钟",
+              ),
+              SleepTopItem(
+                  topTitle: "次数",
+                  bottomInfo: "醒了",
+                  rightInfo: "6次"
+              ),
+              // Stack(
+              //   children: <Widget>[
+              //     Positioned(
+              //         right: 0,
+              //         left: 0,
+              //         top: 300,
+              //         bottom: 0,
+              //         child: CombinedChart(controller)),
+              //   ],
+              // ),
+            ]),
+          )
+        ),
       ),
     );
-
   }
-
-
   void _initController() {
     var desc = Description()..enabled = false;
     controller = CombinedChartController(

@@ -12,13 +12,17 @@ class btnContentView extends StatelessWidget {
                 Container(
                   height: 40,
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(top: 0,right: 20),
-                  alignment: Alignment.centerRight,
-                  child: Image.asset(
-                    'images/setting_closeIcon.png',
-                    width: 24,
-                    height: 24,
-                    fit: BoxFit.fitHeight,
+                  padding: EdgeInsets.only(top: 0,left: 20),
+                  alignment: Alignment.centerLeft,
+                  child: IconButton(
+                    // 'images/setting_closeIcon.png',
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      size: 20,
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context); // 关闭当前页面
+                    },
                   ),
                 ),
                 Container(
