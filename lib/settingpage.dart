@@ -86,7 +86,7 @@ class SettingPage extends StatelessWidget {
                   // scrollDirection:Axis.horizontal,
                   padding: EdgeInsets.only(top: 0,right: 0,left: 0),
                   physics: const NeverScrollableScrollPhysics(),
-                  children: const <Widget>[
+                  children:  <Widget>[
                     SelectTextItem(
                       title: '设备设置',
                     ),
@@ -110,6 +110,9 @@ class SettingPage extends StatelessWidget {
                         fontSize: 12,
                         color: Color(0xFF333333),
                       ),
+                      onTap: (){
+                        Navigator.pop(context); // 关闭当前页面
+                      },
                     ),
                   ],
                 ),

@@ -45,12 +45,30 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
 
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        title: Text("健康页面"),
+        titleTextStyle: TextStyle(
+          color: Colors.black,//设置字体颜色
+          fontSize: 16,//设置字体大小
+        ),
         centerTitle: true,
-        title: Text('健康数据'),
-          actions: <Widget>[
-              IconButton(icon:Icon(Icons.save), tooltip: '日期', onPressed: (){},),
-            ]
+        leading: IconButton(
+          color: Colors.black,
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context); // 关闭当前页面
+          },
+        ),
+        actions: <Widget>[
+          IconButton(
+            padding: EdgeInsets.only(right:20),
+            icon: Icon(Icons.save),
+            onPressed: () {},
+          ),
+        ],
+        elevation: 0,//隐藏底部阴影分割线
+        backgroundColor: Colors.white,
       ),
       body:SingleChildScrollView(
         child:ScrollConfiguration(
