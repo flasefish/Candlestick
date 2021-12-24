@@ -76,98 +76,113 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
-                          width: MediaQuery.of(context).size.width/3.5,
-                          height: 35,
-                          padding: const EdgeInsets.only(
-                              top: 5.0, left: 70, right: 0, bottom: 0),
-                          child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              color: const Color.fromARGB(255, 0x31, 0x72, 0xf0),
-                              height: 30.0,
-                              child: const Text(
-                                '日',
-                                style: TextStyle(fontSize: 16.0, color: Colors.black87),
-                              ),
-                              textColor: Colors.white,
-                              onPressed: () {;
-                              })),
-                      Container(
-                          width: MediaQuery.of(context).size.width/3.5,
-                          height: 35,
-                          padding: const EdgeInsets.only(
-                              top: 5.0, left: 32, right: 32, bottom: 0),
-                          child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              focusColor: const Color.fromARGB(255, 0, 188, 211),
-                              height: 30.0,
-                              child: const Text(
-                                '周',
-                                style: TextStyle(fontSize: 16.0, color: Colors.black87),
-                              ),
-                              textColor: Colors.white,
-                              onPressed: () {;
-                              })),
-                      Container(
-                          width: MediaQuery.of(context).size.width/3.5,
-                          height: 35,
-                          padding: const EdgeInsets.only(
-                              top: 5.0, left: 0, right: 70, bottom: 0),
-                          child: MaterialButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(50.0),
-                              ),
-                              color: const Color.fromARGB(255, 255, 255, 255),
-                              focusColor: const Color.fromARGB(255, 0, 188, 211),
-                              height: 30.0,
-                              child: const Text(
-                                '月',
-                                style: TextStyle(fontSize: 16.0, color: Colors.black87),
-                              ),
-                              textColor: Colors.white,
-                              onPressed: () {;
-                              })),
-                    ],
-                  ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      width: MediaQuery.of(context).size.width/5,
-                      padding: const EdgeInsets.only(top: 10, left: 70),
-                      child: const Text(
-                        '<',
-                        style: TextStyle(color: Color(0xFF6C7077), fontSize: 20),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width/2,
-                      padding: const EdgeInsets.only(top: 10, left: 0),
-                      child: const Text(
-                        '1212',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Color(0xFF6C7077), fontSize: 20),
-                      ),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width/5,
-                      padding: const EdgeInsets.only(top: 10, left: 0),
-                      child: const Text(
-                        '>',
-                        style: TextStyle(color: Color(0xFF6C7077), fontSize: 20),
-                      ),
-                    ),
-                  ],
-                ),
+              Stack(
+                 children: <Widget>[
+                   Container(
+                     margin: EdgeInsets.only(top:  5, left: 5, right: 5, bottom: 5),
+                     padding: const EdgeInsets.only(top: 0.0, left: 0, right: 0, bottom: 0),
+                     width: MediaQuery.of(context).size.width,
+                     height: 90,
+                     decoration: BoxDecoration(
+                         boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
+                         borderRadius: BorderRadius.circular(10),
+                         color: Colors.white,
+                         border: Border.all(color: Colors.white, width: 0)
+                     ),
+                   ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: <Widget>[
+                       Container(
+                           width: MediaQuery.of(context).size.width/3.5,
+                           height: 40,
+                           padding: const EdgeInsets.only(
+                               top: 15.0, left: 70, right: 0, bottom: 0),
+                           child: MaterialButton(
+                               shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(50.0),
+                               ),
+                               color: const Color.fromARGB(255, 0x31, 0x72, 0xf0),
+                               height: 30.0,
+                               child: const Text(
+                                 '日',
+                                 style: TextStyle(fontSize: 16.0, color: Colors.black87),
+                               ),
+                               textColor: Colors.white,
+                               onPressed: () {;
+                               })),
+                       Container(
+                           width: MediaQuery.of(context).size.width/3.5,
+                           height: 40,
+                           padding: const EdgeInsets.only(
+                               top: 15.0, left: 32, right: 32, bottom: 0),
+                           child: MaterialButton(
+                               shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(50.0),
+                               ),
+                               color: const Color.fromARGB(255, 255, 255, 255),
+                               focusColor: const Color.fromARGB(255, 0, 188, 211),
+                               height: 30.0,
+                               child: const Text(
+                                 '周',
+                                 style: TextStyle(fontSize: 16.0, color: Colors.black87),
+                               ),
+                               textColor: Colors.white,
+                               onPressed: () {;
+                               })),
+                       Container(
+                           width: MediaQuery.of(context).size.width/3.5,
+                           height: 40,
+                           padding: const EdgeInsets.only(
+                               top: 15.0, left: 0, right: 70, bottom: 0),
+                           child: MaterialButton(
+                               shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(50.0),
+                               ),
+                               color: const Color.fromARGB(255, 255, 255, 255),
+                               focusColor: const Color.fromARGB(255, 0, 188, 211),
+                               height: 30.0,
+                               child: const Text(
+                                 '月',
+                                 style: TextStyle(fontSize: 16.0, color: Colors.black87),
+                               ),
+                               textColor: Colors.white,
+                               onPressed: () {;
+                               })),
+                     ],
+                   ),
+                   Row(
+                     mainAxisAlignment: MainAxisAlignment.center,
+                     children: <Widget>[
+                       Container(
+                         width: MediaQuery.of(context).size.width/5,
+                         padding: const EdgeInsets.only(top: 55, left: 70),
+                         child: const Text(
+                           '<',
+                           style: TextStyle(color: Color(0xFF6C7077), fontSize: 20),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width/2,
+                         padding: const EdgeInsets.only(top: 55, left: 0),
+                         child: const Text(
+                           '1212',
+                           textAlign: TextAlign.center,
+                           style: TextStyle(color: Color(0xFF6C7077), fontSize: 20),
+                         ),
+                       ),
+                       Container(
+                         width: MediaQuery.of(context).size.width/5,
+                         padding: const EdgeInsets.only(top: 55, left: 0),
+                         child: const Text(
+                           '>',
+                           style: TextStyle(color: Color(0xFF6C7077), fontSize: 20),
+                         ),
+                       ),
+                     ],
+                   ),
+                ]
+               ),
                 _buildReportHead(context,controller),
               ],
             ),
