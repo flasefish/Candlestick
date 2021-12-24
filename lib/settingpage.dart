@@ -68,6 +68,9 @@ class SettingPage extends StatelessWidget {
                       child: BtbItemView(
                         title: '宝宝动态',
                         imageName: 'images/setting_activeIcon.png',
+                        onTap: (){
+                          Navigator.pop(context); // 关闭当前页面
+                        },
                       ),
                     ),
                   ],

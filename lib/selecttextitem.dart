@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SelectTextItem extends StatelessWidget {
-   SelectTextItem({
+  const SelectTextItem({
     Key key,
     @required this.title,
     this.onTap,
@@ -14,7 +14,7 @@ class SelectTextItem extends StatelessWidget {
     this.imageName,
   }): super(key: key);
 
-  GestureTapCallback onTap;
+  final GestureTapCallback onTap;
   final String title;
   final String content;
   final TextAlign textAlign;
