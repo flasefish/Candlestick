@@ -68,6 +68,25 @@ class _PopupMenuPageState extends State<PopupMenuPage> {
   @override
   Widget build(BuildContext context) {
     PopupMenu.context = context;
+
+    int nowyear = DateTime.now().year; //今年
+    int nowmonth = DateTime.now().month; //这个月是几月
+    int nowday = DateTime.now().day; //今天
+    int weekday = DateTime.now().weekday; //今天是本周的第几天
+    String weekstart =
+    new DateTime(nowyear, nowmonth, nowday - weekday + 1).toString(); //本周一的时间
+    String weekend =
+    new DateTime(nowyear, nowmonth, nowday - weekday + 7).toString(); //本周日的时间
+
+    print("weekstart = $weekstart,weekend = $weekend");
+
+    String lastweekstart =
+    new DateTime(nowyear, nowmonth, nowday - weekday -6).toString(); //本周一的时间
+    String lastweekend =
+    new DateTime(nowyear, nowmonth, nowday - weekday ).toString(); //本周日的时间
+    print("lastweekstart = $lastweekstart,lastweekend = $lastweekend");
+
+
     return Scaffold(
       appBar: AppBar(title: Text('popop menuc'),),
       body: Container(
