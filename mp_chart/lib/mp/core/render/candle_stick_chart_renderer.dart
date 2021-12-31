@@ -370,7 +370,11 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
       high.setDraw(pix.x, pix.y);
 
       // draw the lines
-      drawHighlightLines(c, pix.x, pix.y, set);
+      if(e.entryHighLightColor == null ? false :e.entryHighLightColor) {
+        drawEntryHighlightLines(c, pix.x, pix.y, set,e.entryHighLightColorValue);
+      }else{
+        drawHighlightLines(c, pix.x, pix.y, set);
+      }
     }
   }
 }

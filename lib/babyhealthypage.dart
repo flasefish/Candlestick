@@ -37,7 +37,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
   @override
   void initState() {
     _initController();
-    _initCandleData(48);
+    _initCandleData(7);
     super.initState();
   }
   @override
@@ -224,7 +224,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
 
                   Container(
                     margin: const EdgeInsets.only(
-                        left: 150, top: 10, bottom: 0, right: 3),
+                        left: 100, top: 10, bottom: 0, right: 3),
                     child: Image.asset('images/temperature_info.png'),
                   ),
                 ],
@@ -254,7 +254,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
 
                   Container(
                     margin: const EdgeInsets.only(
-                        left: 150, top: 10, bottom: 0, right: 3),
+                        left: 100, top: 10, bottom: 0, right: 3),
                     child: Image.asset('images/temperature_info.png'),
                   ),
                 ],
@@ -284,7 +284,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
 
                   Container(
                     margin: const EdgeInsets.only(
-                        left: 150, top: 10, bottom: 0, right: 3),
+                        left: 100, top: 10, bottom: 0, right: 3),
                     child: Image.asset('images/temperature_info.png'),
                   ),
                 ],
@@ -329,11 +329,11 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
           xAxis
             ..drawAxisLine = (false)  //不画X线
             ..drawGridLines = (false) //不画网格线
-            ..drawScale = (true)
-            ..drawScaleInterval = (3)
+            ..drawScale = (false)
+            ..drawScaleInterval = (1)
             ..drawLabels = (true)  //画标签 X轴上对应的数值
             ..textSize = 10  //字体大小
-            ..setLabelCount1(48) //总共48个点
+            ..setLabelCount3(7) //总共48个点
             ..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
             ..setValueFormatter(A(":00"))
             ..position = (XAxisPosition.BOTTOM);
@@ -384,13 +384,18 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
       bool hide = false;
       if(i == 1 || i == 3 || i == 9 )
         hide = true;
+      Color entryHightColor;
+      if(even)
+        entryHightColor = Color(0xFFFF3B30);
+      else
+        entryHightColor = Color(0xFF007AFF);
       values.add(new CandleEntry(
           x:i.toDouble(),
           shadowH:even ? datamax[i] : datamax[i],
           shadowL:even ? datamin[i] : datamin[i],
           open:   even ? datamax[i] :datamin[i],
           close:  even ? datamin[i] : datamax[i],
-          hide:hide,rectangle: false));
+          hide:hide,rectangle: false,data:"10/1",entryHighLightColor: true,entryHighLightColorValue:entryHightColor));
     }
 
     CandleDataSet set1 = CandleDataSet(values, "Data Set");
@@ -398,7 +403,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
     set1.setDrawIcons(false);   //不绘制图标
     set1.setDrawValues(false);  //不显示文字
     set1.setAxisDependency(AxisDependency.LEFT); //
-    set1.setBarSpace(0.27);      //设置柱的间隔0.3
+    set1.setBarSpace(0.7);      //设置柱的间隔0.3
     set1.setDecreasingColor(Color(0xFFFF3B30));  //open > close的颜色
     set1.setDecreasingPaintStyle(PaintingStyle.fill);  //阴影部分
     set1.setIncreasingColor(Color(0xFF007AFF));  //open <= close颜色

@@ -56,4 +56,42 @@ abstract class LineScatterCandleRadarRenderer
       c.drawPath(_highlightLinePath, highlightPaint);
     }
   }
+
+  void drawEntryHighlightLines(
+      Canvas c, double x, double y, ILineScatterCandleRadarDataSet set,Color colorValue) {
+    // set color and stroke-width
+    highlightPaint
+      ..color = colorValue
+      ..strokeWidth = set.getHighlightLineWidth();
+
+    // draw vertical highlight lines
+    if (set.isVerticalHighlightIndicatorEnabled()) {
+      // create vertical path
+      _highlightLinePath.reset();
+      _highlightLinePath.moveTo(x, viewPortHandler.contentTop());
+      _highlightLinePath.lineTo(x, viewPortHandler.contentBottom());
+
+      if (set.getDashPathEffectHighlight() != null) {
+        _highlightLinePath = set
+            .getDashPathEffectHighlight()
+            .convert2DashPath(_highlightLinePath);
+      }
+      c.drawPath(_highlightLinePath, highlightPaint);
+    }
+
+    // draw horizontal highlight lines
+    if (set.isHorizontalHighlightIndicatorEnabled()) {
+      // create horizontal path
+      _highlightLinePath.reset();
+      _highlightLinePath.moveTo(viewPortHandler.contentLeft(), y);
+      _highlightLinePath.lineTo(viewPortHandler.contentRight(), y);
+
+      if (set.getDashPathEffectHighlight() != null) {
+        _highlightLinePath = set
+            .getDashPathEffectHighlight()
+            .convert2DashPath(_highlightLinePath);
+      }
+      c.drawPath(_highlightLinePath, highlightPaint);
+    }
+  }
 }

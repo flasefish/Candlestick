@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:mp_chart/mp/core/entry/entry.dart';
 import 'dart:ui' as ui;
 
@@ -18,6 +20,10 @@ class CandleEntry extends Entry {
 
   bool _rectangle = true;
 
+  bool _entryHighLightColor = false;
+
+  Color _entryHighLightColorValue = Color.fromARGB(255, 255, 187, 115);
+
   CandleEntry(
       {double x,
       double shadowH,
@@ -27,6 +33,8 @@ class CandleEntry extends Entry {
       ui.Image icon,
       bool hide,
       bool rectangle,
+      bool entryHighLightColor,
+      Color entryHighLightColorValue,
       Object data})
       : super(x: x, y: (shadowH + shadowL) / 2, icon: icon, data: data) {
     this._shadowHigh = shadowH;
@@ -35,6 +43,8 @@ class CandleEntry extends Entry {
     this._close = close;
     this._hide = hide;
     this._rectangle = rectangle;
+    this._entryHighLightColor = entryHighLightColor;
+    this._entryHighLightColorValue = entryHighLightColorValue;
   }
 
   /// Returns the overall range (difference) between shadow-high and
@@ -69,6 +79,8 @@ class CandleEntry extends Entry {
         close: _close,
         rectangle: _rectangle,
         hide: _hide,
+        entryHighLightColor: _entryHighLightColor,
+        entryHighLightColorValue:_entryHighLightColorValue,
         data: mData);
     return c;
   }
@@ -105,5 +117,14 @@ class CandleEntry extends Entry {
     _shadowHigh = value;
   }
 
+  bool get entryHighLightColor =>_entryHighLightColor;
+  set entryHighLightColor(bool value){
+    _entryHighLightColor = value;
+  }
+
+  Color get entryHighLightColorValue =>_entryHighLightColorValue;
+  set entryHighLightColorValue(Color value){
+    _entryHighLightColorValue = value;
+  }
 
 }
