@@ -209,6 +209,9 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
             renderPaint.color = dataSet.getColor2(j);
           } else {
             renderPaint.color = dataSet.getNeutralColor();
+            if(e.userEntryColor != null &&e.userEntryColor){
+              renderPaint.color = e.entryColorValue;
+            }
           }
 
           c.drawLine(Offset(_bodyBuffers[0], _bodyBuffers[1]),

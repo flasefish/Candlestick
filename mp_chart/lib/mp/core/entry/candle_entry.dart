@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:mp_chart/mp/core/entry/entry.dart';
 import 'dart:ui' as ui;
@@ -22,7 +21,10 @@ class CandleEntry extends Entry {
 
   bool _entryHighLightColor = false;
 
-  Color _entryHighLightColorValue = Color.fromARGB(255, 255, 187, 115);
+  bool _userEntryColor = false;
+
+  ui.Color _entryHighLightColorValue = ui.Color.fromARGB(255, 255, 187, 115);
+  ui.Color _entryColorValue = ui.Color.fromARGB(255, 255, 187, 115);
 
   CandleEntry(
       {double x,
@@ -34,7 +36,9 @@ class CandleEntry extends Entry {
       bool hide,
       bool rectangle,
       bool entryHighLightColor,
-      Color entryHighLightColorValue,
+        ui.Color entryHighLightColorValue,
+        bool userEntryColor,
+        ui.Color entryColor,
       Object data})
       : super(x: x, y: (shadowH + shadowL) / 2, icon: icon, data: data) {
     this._shadowHigh = shadowH;
@@ -45,6 +49,8 @@ class CandleEntry extends Entry {
     this._rectangle = rectangle;
     this._entryHighLightColor = entryHighLightColor;
     this._entryHighLightColorValue = entryHighLightColorValue;
+    this._userEntryColor = userEntryColor;
+    this._entryColorValue = entryColor;
   }
 
   /// Returns the overall range (difference) between shadow-high and
@@ -81,6 +87,7 @@ class CandleEntry extends Entry {
         hide: _hide,
         entryHighLightColor: _entryHighLightColor,
         entryHighLightColorValue:_entryHighLightColorValue,
+        entryColor: _entryColorValue,
         data: mData);
     return c;
   }
@@ -122,9 +129,19 @@ class CandleEntry extends Entry {
     _entryHighLightColor = value;
   }
 
-  Color get entryHighLightColorValue =>_entryHighLightColorValue;
-  set entryHighLightColorValue(Color value){
+  ui.Color get entryHighLightColorValue =>_entryHighLightColorValue;
+  set entryHighLightColorValue(ui.Color value){
     _entryHighLightColorValue = value;
+  }
+
+  bool get userEntryColor =>_userEntryColor;
+  set userEntryColor(bool value){
+    _userEntryColor = value;
+  }
+
+  ui.Color get entryColorValue =>_entryColorValue;
+  set entryColorValue(ui.Color value){
+    _entryColorValue = value;
   }
 
 }
