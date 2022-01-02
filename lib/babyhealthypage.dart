@@ -1,6 +1,7 @@
 
 
 
+import 'package:candlestick/calendar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:mp_chart/mp/chart/candlestick_chart.dart';
 import 'package:mp_chart/mp/controller/candlestick_chart_controller.dart';
@@ -42,7 +43,64 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
   }
   @override
   Widget build(BuildContext context) {
-
+    void _showcontent() {
+      showDialog<Null>
+        (barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return ClipRRect(
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+            child: AlertDialog(
+              backgroundColor: Colors.transparent,
+              actions: <Widget>[
+                ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                  child: Container(
+                    color: Colors.white,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(height: 10),
+                          Container(
+                            height: 288,
+                            width: 312,
+                            child: CalendarPage2(),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: <Widget>[
+                              RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                ),
+                                onPressed: (){},
+                                child: Text("Skip"),
+                              ),
+                              RaisedButton(
+                                color: Colors.red,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(18.0),
+                                ),
+                                onPressed: (){},
+                                child: Text("Confirm"),
+                              )
+                            ],
+                          ),
+                          SizedBox(height: 5,)
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      );
+    }
     // TODO: implement build
     return Scaffold(
       backgroundColor: Colors.white,
@@ -64,7 +122,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
           IconButton(
             padding: EdgeInsets.only(right:20),
             icon: Icon(Icons.save),
-            onPressed: () {},
+            onPressed: ( ) { _showcontent();},
           ),
         ],
         elevation: 0,//隐藏底部阴影分割线
@@ -329,13 +387,13 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
           xAxis
             ..drawAxisLine = (false)  //不画X线
             ..drawGridLines = (false) //不画网格线
-            ..drawScale = (false)
+            ..drawScale = (true)     //画刻度线
             ..drawScaleInterval = (1)
             ..drawLabels = (true)  //画标签 X轴上对应的数值
             ..textSize = 10  //字体大小
             ..setLabelCount3(7) //总共48个点
             ..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
-            ..setValueFormatter(A(":00"))
+            ..setValueFormatter(B(":00"))
             ..position = (XAxisPosition.BOTTOM);
 
         },
