@@ -32,6 +32,7 @@ import 'package:mp_chart/mp/core/utils/color_utils.dart';
 import 'package:mp_chart/mp/core/value_formatter/value_formatter.dart';
 import 'package:mp_chart/mp/painter/combined_chart_painter.dart';
 import 'SleepTopItem.dart';
+import 'SleepBottomItem.dart';
 
 class SleepReportPage extends StatefulWidget {
   const SleepReportPage({Key key}) : super(key: key);
@@ -87,7 +88,7 @@ class _SleepReportPageState extends State<SleepReportPage> {
         backgroundColor: Colors.white,
       ),
       body: Container(
-        margin: EdgeInsets.only(top:  0, left: 0, right: 0, bottom: 0),
+        margin: EdgeInsets.only(top:  0, left: 0, right: 0, bottom: 34),
         child: SingleChildScrollView(
           padding: EdgeInsets.all(0.0),
           child: Center(
@@ -96,22 +97,254 @@ class _SleepReportPageState extends State<SleepReportPage> {
                   topTitle: "总时长",
                   bottomInfo: "睡眠",
                   rightInfo: "11小时20分钟",
+                  imageName: 'images/sleep_sleepIcon.png',
               ),
               SleepTopItem(
                   topTitle: "次数",
                   bottomInfo: "醒了",
-                  rightInfo: "6次"
+                  rightInfo: "6次",
+                  imageName: 'images/sleep_weakIcon.png',
               ),
-              // Stack(
-              //   children: <Widget>[
-              //     Positioned(
-              //         right: 0,
-              //         left: 0,
-              //         top: 300,
-              //         bottom: 0,
-              //         child: CombinedChart(controller)),
-              //   ],
-              // ),
+              Container(
+                margin: EdgeInsets.only(top:  20, left: 0, right: 0, bottom: 0),
+                height: 200,
+                child:
+                CombinedChart(controller),
+              ),
+              Container(
+                margin: EdgeInsets.only(top:  20, left: 20, right: 20, bottom: 0),
+                height: 100,
+                decoration: BoxDecoration(
+                    boxShadow: [BoxShadow(color: const Color(0xFFF5e9eb), blurRadius: 15.0)],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xFFF5e9eb),
+                    border: Border.all(color: Color(0xFFF5e9eb), width: 0)),
+                child:Column(children: <Widget>[
+                  Row(children: <Widget>[
+                    Container(
+                        margin: EdgeInsets.only(top:  20, left: 12, right: 0, bottom: 0),
+                        width: 6,
+                        height: 6,
+                        //padding: EdgeInsets.only(left: 10,top: 0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(3),
+                        color: Color(0xFFF56467),
+                        border: Border.all(color: Color(0xFFF56467), width: 0)),
+                    ),
+                    Container(
+                      // color: Colors.red,
+                      padding: EdgeInsets.only(left: 10, top: 20),
+                      child: Text(
+                        '发热',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                    Container(
+                      // color: Colors.red,
+                      padding: EdgeInsets.only(left: 2, top: 20),
+                      child: Text(
+                        '(最高38.5℃)',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/2,
+                      padding: EdgeInsets.only(right: 0, top: 20),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '累计4小时20分钟',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                  ]),
+                  Row(children: <Widget>[
+                    Container(
+                        margin: EdgeInsets.only(top:  25, left: 12, right: 0, bottom: 0),
+                        width: 6,
+                        height: 6,
+                        //padding: EdgeInsets.only(left: 10,top: 0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            color: Color(0xFFF56467),
+                            border: Border.all(color: Color(0xFFF56467), width: 0))
+                    ),
+                    Container(
+                      // color: Colors.red,
+                      width: MediaQuery.of(context).size.width/2-20-40,
+                      padding: EdgeInsets.only(left: 10, top: 20),
+                      child: Text(
+                        '心率异常',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/2-20,
+                      padding: EdgeInsets.only(right: 0, top: 20),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '累计20分钟',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                  ]),
+                ]),
+              ),
+              Container(
+                // color: Colors.red,
+                padding: EdgeInsets.only(left: 20, top: 30),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  '健康总结',
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14
+                  ),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 10,right: 0,left: 0),
+                height: 100,
+                child: Row(children: <Widget>[
+                  Container(
+                    // color: Colors.red,
+                    width: MediaQuery.of(context).size.width/3,
+                    height: 100,
+                    padding: EdgeInsets.only(top: 0,right: 0,left: 0),
+                    alignment: Alignment.center,
+                    child: SleepBottomItem(
+                      topTitle: '平均体温',
+                      imageName: 'images/sleep_temperatureIcon.png',
+                      bottomLeftValue: '38.5',
+                      bottomRightUnit: '°c',
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/3,
+                    height: 90,
+                    padding: EdgeInsets.only(top: 0,right: 0,left: 0),
+                    alignment: Alignment.center,
+                    child: SleepBottomItem(
+                      topTitle: '平均呼吸',
+                      imageName: 'images/sleep_humidityIcon.png',
+                      bottomLeftValue: '44',
+                      bottomRightUnit: '次/分',
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/3,
+                    height: 90,
+                    padding: EdgeInsets.only(top: 0,right: 0,left: 0),
+                    alignment: Alignment.center,
+                    child: SleepBottomItem(
+                      topTitle: '平均心率',
+                      imageName: 'images/sleep_heatIcon.png',
+                      bottomLeftValue: '128',
+                      bottomRightUnit: '次/分',
+                    ),
+                  ),
+                ]),
+              ),
+              Row(children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(left: 20, top: 20),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '睡眠环境',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 14
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top:  20, left: 10, right: 0, bottom: 0),
+                  padding: EdgeInsets.only(left: 5, top: 0,right: 5),
+                  alignment: Alignment.center,
+                  height: 25,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Color(0xffe0ebdc),
+                      border: Border.all(color: Color(0xffe0ebdc), width: 0)),
+                  child: Text(
+                    '舒适',
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        color: Color(0xFF71B75A),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 12
+                    ),
+                  ),
+                ),
+              ]),
+              Container(
+                padding: EdgeInsets.only(top: 10,right: 0,left: 0),
+                height: 100,
+                child: Row(children: <Widget>[
+                  Container(
+                    // color: Colors.red,
+                    width: MediaQuery.of(context).size.width/3,
+                    height: 100,
+                    padding: EdgeInsets.only(top: 0,right: 0,left: 0),
+                    alignment: Alignment.center,
+                    child: SleepBottomItem(
+                      topTitle: '平均室温',
+                      imageName: 'images/sleep_roomTemperatureIcon.png',
+                      bottomLeftValue: '26',
+                      bottomRightUnit: '°c',
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/3,
+                    height: 90,
+                    padding: EdgeInsets.only(top: 0,right: 0,left: 0),
+                    alignment: Alignment.center,
+                    child: SleepBottomItem(
+                      topTitle: '平均噪音',
+                      imageName: 'images/sleep_noiseIcon.png',
+                      bottomLeftValue: '21',
+                      bottomRightUnit: '分贝',
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width/3,
+                    height: 90,
+                    padding: EdgeInsets.only(top: 0,right: 0,left: 0),
+                    alignment: Alignment.center,
+                    child: SleepBottomItem(
+                      topTitle: '平均湿度',
+                      imageName: 'images/sleep_breathIcon.png',
+                      bottomLeftValue: '60',
+                      bottomRightUnit: '%',
+                    ),
+                  ),
+                ]),
+              ),
             ]),
           )
         ),

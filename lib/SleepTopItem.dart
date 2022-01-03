@@ -35,7 +35,7 @@ class SleepTopItem extends StatelessWidget {
                   padding: EdgeInsets.only(left: 20,top: 10),
                   alignment: Alignment.centerLeft,
                   child: Image.asset(
-                    'images/sleep_sleepIcon.png',
+                    this.imageName,
                     width: 35,
                     height: 35,
                     fit: BoxFit.fitHeight,

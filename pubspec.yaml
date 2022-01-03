@@ -81,6 +81,12 @@ flutter:
      - images/sleep_calanderIcon.png
      - images/sleep_sleepIcon.png
      - images/sleep_weakIcon.png
+     - images/sleep_breathIcon.png
+     - images/sleep_heatIcon.png
+     - images/sleep_humidityIcon.png
+     - images/sleep_noiseIcon.png
+     - images/sleep_roomTemperatureIcon.png
+     - images/sleep_temperatureIcon.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
