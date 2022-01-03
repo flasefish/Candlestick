@@ -6,9 +6,9 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
 
-class CalendarPage2 extends StatefulWidget {
+class CalendarPage extends StatefulWidget {
   @override
-  _CalendarPage2State createState() => new _CalendarPage2State();
+  _CalendarPageState createState() => new _CalendarPageState();
 }
 
 List<DateTime> presentDates = [
@@ -38,86 +38,30 @@ List<DateTime> absentDates = [
   DateTime(2019, 2, 18),
 ];
 
-class _CalendarPage2State extends State<CalendarPage2> {
-  DateTime _currentDate2 = DateTime.now();
-  static Widget _presentIcon(String day) => Container(
-    decoration: BoxDecoration(
-      color: Colors.green,
-      borderRadius: BorderRadius.all(
-        Radius.circular(1000),
-      ),
-    ),
-    child: Center(
-      child: Text(
-        day,
-        style: TextStyle(
-          color: Colors.black,
-        ),
-      ),
-    ),
-  );
-  static Widget _absentIcon(String day) => Container(
-    decoration: BoxDecoration(
-      color: Colors.red,
-      borderRadius: BorderRadius.all(
-        Radius.circular(1000),
-      ),
-    ),
-    child: Center(
-      child: Text(
-        day,
-        style: TextStyle(
-          color: Colors.black,
-        ),
-      ),
-    ),
-  );
+class _CalendarPageState extends State<CalendarPage> {
 
-  EventList<Event> _markedDateMap = new EventList<Event>(
-    events: {},
-  );
-
-  CalendarCarousel _calendarCarouselNoHeader;
+   CalendarCarousel _calendarCarouselNoHeader;
 
   var len = 9;
-  double cHeight;
+   double cHeight;
 
   @override
   Widget build(BuildContext context) {
     cHeight = MediaQuery.of(context).size.height;
-    for (int i = 0; i < len; i++) {
-      _markedDateMap.add(
-        presentDates[i],
-        new Event(
-          date: presentDates[i],
-          title: 'Event 5',
-          icon: _presentIcon(
-            presentDates[i].day.toString(),
-          ),
-        ),
-      );}
-
-    for (int i = 0; i < len; i++) {
-      _markedDateMap.add(
-        absentDates[i],
-        new Event(
-          date: absentDates[i],
-          title: 'Event 5',
-          icon: _absentIcon(
-            absentDates[i].day.toString(),
-          ),
-        ),
-      );
-    }
-
 
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
+      onDayPressed: (date, events) {
+        print(date);
+        List<String> selDate = date.toString().split(" ");
+        Navigator.pop(context,selDate[0]);
+        //widget.tapBack();
+      },
       height: cHeight * 0.54,
-      weekendTextStyle: TextStyle(
-        color: Colors.red,
-      ),
-      todayButtonColor: Colors.blue[200],
-      markedDatesMap: _markedDateMap,
+      weekendTextStyle: const TextStyle(color: Colors.black,), //周末的字体颜色
+      todayButtonColor: const Color.fromRGBO(231, 245, 255, 1),  //today的选中颜色
+      todayTextStyle:const  TextStyle(color: Colors.black,), //today字体颜色
+      selectedDayTextStyle:const TextStyle(color: Colors.black, ), //选中字体的颜色
+
       markedDateShowIcon: true,
       markedDateIconMaxShown: 1,
       markedDateMoreShowTotal:
@@ -127,7 +71,7 @@ class _CalendarPage2State extends State<CalendarPage2> {
       },
     );
 
-    return new Scaffold(
+    return Scaffold(
 
       body: SingleChildScrollView(
         child: Column(
@@ -141,12 +85,12 @@ class _CalendarPage2State extends State<CalendarPage2> {
   }
 
   Widget markerRepresent(Color color, String data) {
-    return new ListTile(
-      leading: new CircleAvatar(
+    return ListTile(
+      leading:  CircleAvatar(
         backgroundColor: color,
         radius: cHeight * 0.022,
       ),
-      title: new Text(
+      title:  Text(
         data,
       ),
     );
