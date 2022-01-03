@@ -209,6 +209,9 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
             renderPaint.color = dataSet.getColor2(j);
           } else {
             renderPaint.color = dataSet.getNeutralColor();
+            if(e.userEntryColor != null &&e.userEntryColor){
+              renderPaint.color = e.entryColorValue;
+            }
           }
 
           c.drawLine(Offset(_bodyBuffers[0], _bodyBuffers[1]),
@@ -370,7 +373,11 @@ class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
       high.setDraw(pix.x, pix.y);
 
       // draw the lines
-      drawHighlightLines(c, pix.x, pix.y, set);
+      if(e.entryHighLightColor == null ? false :e.entryHighLightColor) {
+        drawEntryHighlightLines(c, pix.x, pix.y, set,e.entryHighLightColorValue);
+      }else{
+        drawHighlightLines(c, pix.x, pix.y, set);
+      }
     }
   }
 }
