@@ -67,7 +67,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                           Container(
                             height: 288,
                             width: 312,
-                            child: CalendarPage2(),
+                            child: CalendarPage(),
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -77,15 +77,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                                   borderRadius: new BorderRadius.circular(18.0),
                                 ),
                                 onPressed: (){},
-                                child: Text("Skip"),
-                              ),
-                              RaisedButton(
-                                color: Colors.red,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(18.0),
-                                ),
-                                onPressed: (){},
-                                child: Text("Confirm"),
+                                child: Text("今天"),
                               )
                             ],
                           ),
@@ -137,7 +129,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
               Stack(
                  children: <Widget>[
                    Container(
-                     margin: EdgeInsets.only(top:  5, left: 5, right: 5, bottom: 5),
+                     margin: EdgeInsets.only(top:  0, left: 0, right: 0, bottom: 0),
                      padding: const EdgeInsets.only(top: 0.0, left: 0, right: 0, bottom: 0),
                      width: MediaQuery.of(context).size.width,
                      height: 90,
@@ -393,7 +385,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
             ..textSize = 10  //字体大小
             ..setLabelCount3(7) //总共48个点
             ..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
-            // ..setValueFormatter(B(":00"))
+            ..setValueFormatter(A(":00"))
             ..position = (XAxisPosition.BOTTOM);
 
         },
