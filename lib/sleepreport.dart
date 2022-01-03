@@ -107,6 +107,112 @@ class _SleepReportPageState extends State<SleepReportPage> {
               ),
               Container(
                 margin: EdgeInsets.only(top:  20, left: 0, right: 0, bottom: 0),
+                height: 30,
+                child:
+                Row(children: <Widget>[
+                  Container(
+                    // color: Colors.red,
+                    padding: EdgeInsets.only(left: 24, top: 0),
+                    child: Text(
+                      '睡眠分析',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top:  0, left: 30, right: 0, bottom: 0),
+                    color: Color(0xFFBBDAFF),
+                    width: 20,
+                    height: 15,
+                    // padding: EdgeInsets.only(left: 60, top: 0),
+                  ),
+                  Container(
+                    // color: Colors.red,
+                    padding: EdgeInsets.only(left: 4, top: 0),
+                    child: Text(
+                      '醒着',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Color(0xFFC1C1C1),
+                          fontSize: 10
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top:  0, left: 10, right: 0, bottom: 0),
+                    color: Color(0xFF80BAFF),
+                    width: 20,
+                    height: 15,
+                    // padding: EdgeInsets.only(left: 60, top: 0),
+                  ),
+                  Container(
+                    // color: Colors.red,
+                    padding: EdgeInsets.only(left: 4, top: 0),
+                    child: Text(
+                      '睡着',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Color(0xFFC1C1C1),
+                          fontSize: 10
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top:  0, left: 10, right: 0, bottom: 0),
+                    color: Color(0xFFAF70FF),
+                    width: 20,
+                    height: 15,
+                    // padding: EdgeInsets.only(left: 60, top: 0),
+                  ),
+                  Container(
+                    // color: Colors.red,
+                    padding: EdgeInsets.only(left: 4, top: 0),
+                    child: Text(
+                      '啼哭',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Color(0xFFC1C1C1),
+                          fontSize: 10
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top:  0, left: 10, right: 0, bottom: 0),
+                    color: Color(0xFFF56467),
+                    width: 20,
+                    height: 15,
+                    // padding: EdgeInsets.only(left: 60, top: 0),
+                  ),
+                  Container(
+                    // color: Colors.red,
+                    padding: EdgeInsets.only(left: 4, top: 0),
+                    child: Text(
+                      '异常',
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: Color(0xFFC1C1C1),
+                          fontSize: 10
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(left: 20,top: 0),
+                    alignment: Alignment.centerLeft,
+                    child: Image.asset(
+                      'images/sleep_wenhaoTipIcon.png',
+                      width: 14,
+                      height: 14,
+                      fit: BoxFit.fitHeight,
+                    ),
+                  ),
+                ]),
+              ),
+              Container(
+                margin: EdgeInsets.only(top:  0, left: 0, right: 0, bottom: 0),
                 height: 200,
                 child:
                 CombinedChart(controller),

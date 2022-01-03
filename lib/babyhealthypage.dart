@@ -393,7 +393,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
             ..textSize = 10  //字体大小
             ..setLabelCount3(7) //总共48个点
             ..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
-            ..setValueFormatter(B(":00"))
+            // ..setValueFormatter(B(":00"))
             ..position = (XAxisPosition.BOTTOM);
 
         },
