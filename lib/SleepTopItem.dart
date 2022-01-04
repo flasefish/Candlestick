@@ -81,13 +81,26 @@ class SleepTopItem extends StatelessWidget {
                   // color: Colors.red,
                   padding: EdgeInsets.only(right: 30, top: 25),
                   alignment: Alignment.centerRight,
-                  child: Text(
-                      this.rightInfo,
-                      overflow: TextOverflow.ellipsis,
-                      style: this.contentStyle ?? new TextStyle(
-                        fontSize: 20.0,
-                        color: Color(0xFF333333),
-                      )
+                  child: RichText(
+                    text: TextSpan(
+                      text: '11',
+                      style: TextStyle(fontSize: 52, color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: '小时',
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+                        ),
+                        TextSpan(
+                          text: '20',
+                          style: TextStyle(fontSize: 52, color: Colors.black),
+                        ),
+                        TextSpan(
+                          text: '分',
+                          style: TextStyle(fontSize: 12, color: Colors.black),
+
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
