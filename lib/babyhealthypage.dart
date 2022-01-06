@@ -44,8 +44,8 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
   @override
   Widget build(BuildContext context) {
     void _showcontent() {
-      showDialog<Null>
-        (barrierDismissible: false,
+      showDialog
+        (barrierDismissible: true,
         context: context,
         builder: (BuildContext context) {
           return ClipRRect(
@@ -68,18 +68,6 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                             height: 288,
                             width: 312,
                             child: CalendarPage(),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(18.0),
-                                ),
-                                onPressed: (){},
-                                child: Text("今天"),
-                              )
-                            ],
                           ),
                           SizedBox(height: 5,)
                         ],
@@ -112,6 +100,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
         ),
         actions: <Widget>[
           IconButton(
+            color: Colors.black,
             padding: EdgeInsets.only(right:20),
             icon: Icon(Icons.save),
             onPressed: ( ) { _showcontent();},
