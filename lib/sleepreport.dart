@@ -44,7 +44,7 @@ class SleepReportPage extends StatefulWidget {
 class _SleepReportPageState extends State<SleepReportPage> {
   CombinedChartController controller;
 
-  int _count = 24;
+  int _count = 288;
   var random = Random(1);
 
   @override
@@ -315,6 +315,45 @@ class _SleepReportPageState extends State<SleepReportPage> {
                       ),
                     ),
                   ]),
+                  Row(children: <Widget>[
+                    Container(
+                        margin: EdgeInsets.only(top:  25, left: 12, right: 0, bottom: 0),
+                        width: 6,
+                        height: 6,
+                        //padding: EdgeInsets.only(left: 10,top: 0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3),
+                            color: Color(0xFFF56467),
+                            border: Border.all(color: Color(0xFFF56467), width: 0))
+                    ),
+                    Container(
+                      // color: Colors.red,
+                      width: MediaQuery.of(context).size.width/2-20-40,
+                      padding: EdgeInsets.only(left: 10, top: 20),
+                      child: Text(
+                        '心率异常',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width/2-20,
+                      padding: EdgeInsets.only(right: 0, top: 20),
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '累计20分钟',
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                            color: Color(0xFF666666),
+                            fontSize: 14
+                        ),
+                      ),
+                    ),
+                  ]),
                 ]),
               ),
               Container(
@@ -479,9 +518,8 @@ class _SleepReportPageState extends State<SleepReportPage> {
         xAxisSettingFunction: (xAxis, controller) {
           xAxis
             ..position = (XAxisPosition.BOTTOM)
-            ..drawGridLines = (false)
-            ..drawAxisLine = (false)
-            ..drawAxisLine = (false)
+            ..drawGridLines = (true)
+            ..drawAxisLine = (true)
             ..drawScale = (true)
             ..setLabelCount4(5,true)
             ..setAxisMinimum(0)
@@ -511,8 +549,8 @@ class _SleepReportPageState extends State<SleepReportPage> {
     controller.data
       ..setData2(generateBarData())
       ..setData3(generateScatterData())
-      ..setData4(generateCandleData())
-      ..setValueTypeface(Util.LIGHT);
+      ..setData4(generateCandleData());
+     // ..setValueTypeface(Util.LIGHT);
 
   }
 
@@ -524,10 +562,14 @@ class _SleepReportPageState extends State<SleepReportPage> {
     List<BarEntry> entries1 = [];
     List<BarEntry> entries2 = [];
 
-    var sleepdata = [1,1,0,0,1,1,
-                     1,0,0,1,1,0,
-                     0,0,1,1,1,0,
-                     0,1,1,0,1,0];
+    var sleepdata = [1,0,0,0,1,1, 1,0,0,0,1,1, 1,0,0,0,1,1, 1,0,0,0,1,1, 1,0,0,0,1,1, 1,0,0,0,1,1,
+                     1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0,
+      1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0,
+      1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0,
+      1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0,
+      1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0,
+      1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0,
+      1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0, 1,0,0,1,1,0];
 
     for (int index = 0; index < _count; index++) {
       if (sleepdata[index] > 0) {
@@ -590,19 +632,25 @@ class _SleepReportPageState extends State<SleepReportPage> {
 
     List<CandleEntry> entries1 = [];
     List<CandleEntry> entries2 = [];
-    var sleepdata = [1,1,0,0,1,1,
-      1,0,0,1,1,0,
-      0,0,1,1,1,0,
-      0,1,1,0,1,0];
 
-    var abnormaldata = [0,0,0,0,1,1,
-                    0,0,1,1,0,0,
-                    1,1,1,1,0,0,
-                    0,0,1,1,0,0];
-    var crydata = [0,0,0,0,1,0,
-                   0,0,0,0,0,0,
-                   1,0,0,0,1,0,
-                   0,0,0,0,0,0];
+
+    var abnormaldata = [1,1,0,0,1,1, 1,0,0,0,1,1, 1,1,0,0,1,1, 1,0,0,0,1,1, 1,1,0,0,1,1, 1,0,0,0,1,1,
+      0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0,
+      1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0,
+      0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0,
+      1,1,0,0,1,1, 1,0,0,0,1,1, 1,1,0,0,1,1, 1,0,0,0,1,1, 1,1,0,0,1,1, 1,0,0,0,1,1,
+      0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0,
+      1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0, 1,1,1,1,0,0,
+      0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0, 0,0,1,1,0,0];
+    var crydata = [1,0,0,0,1,0, 1,0,0,0,1,0,1,0,0,0,1,0, 1,0,0,0,1,0,1,0,0,0,1,0, 1,0,0,0,1,0,
+                   0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,
+                   1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0,
+                   0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0,
+                    1,0,0,0,1,0, 1,0,0,0,1,0,1,0,0,0,1,0, 1,0,0,0,1,0,1,0,0,0,1,0, 1,0,0,0,1,0,
+                    0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,0,0,0,0, 0,0,0,0,0,0,
+                    1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0, 1,0,0,0,1,0,
+                    0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0, 0,0,0,0,0,0
+                ];
 
     for (int index = 0; index < _count ;  index ++) {
       if(abnormaldata[index] > 0 ) {
@@ -635,10 +683,6 @@ class _SleepReportPageState extends State<SleepReportPage> {
             open: 0,
             close: 0));
       }
-
-
-
-
     }
     CandleDataSet set = CandleDataSet(entries1, "Candle DataSet1");
     set.setDecreasingColor(Color.fromARGB(255, 0xf5, 0x64, 0x67));
@@ -647,7 +691,7 @@ class _SleepReportPageState extends State<SleepReportPage> {
     set.setDrawValues(false);
     set.setAxisDependency(AxisDependency.LEFT);
     set.setHighlightEnabled(false); //
-    set.setFillXGridLine(true);
+   // set.setFillXGridLine(true);
 
     CandleDataSet set2 = CandleDataSet(entries2, "Candle DataSet1");
     set2.setDecreasingColor(Color.fromARGB(255, 0xAF,0x70,0xFF));
@@ -661,35 +705,301 @@ class _SleepReportPageState extends State<SleepReportPage> {
     d.addDataSet(set);
     d.addDataSet(set2);
 
+
+
     return d;
   }
 }
 
 final List<String> hours =[]
   ..add("8:00")
-  ..add("9:00")
-  ..add("10:00")
+  ..add("8:05")
+  ..add("8:10")
+  ..add("8:15")
+  ..add("8:20")
+  ..add("8:25")
+  ..add("8:30")
+  ..add("8:35")
+  ..add("8:40")
+  ..add("8:45")
+  ..add("8:50")
+  ..add("8:55")
   ..add("11:00")
+  ..add("11:05")
+  ..add("11:10")
+  ..add("11:15")
+  ..add("11:20")
+  ..add("11:25")
+  ..add("11:30")
+  ..add("11:35")
+  ..add("11:40")
+  ..add("11:45")
+  ..add("11:50")
+  ..add("11:55")
+  ..add("10:00")
+  ..add("10:05")
+  ..add("10:10")
+  ..add("10:15")
+  ..add("10:20")
+  ..add("10:25")
+  ..add("10:30")
+  ..add("10:35")
+  ..add("10:40")
+  ..add("10:45")
+  ..add("10:50")
+  ..add("10:55")
+  ..add("11:00")
+  ..add("11:05")
+  ..add("11:10")
+  ..add("11:15")
+  ..add("11:20")
+  ..add("11:25")
+  ..add("11:30")
+  ..add("11:35")
+  ..add("11:40")
+  ..add("11:45")
+  ..add("11:50")
+  ..add("11:55")
   ..add("12:00")
+  ..add("12:05")
+  ..add("12:10")
+  ..add("12:15")
+  ..add("12:20")
+  ..add("12:25")
+  ..add("12:30")
+  ..add("12:35")
+  ..add("12:40")
+  ..add("12:45")
+  ..add("12:50")
+  ..add("12:55")
   ..add("13:00")
+  ..add("13:05")
+  ..add("13:10")
+  ..add("13:15")
+  ..add("13:20")
+  ..add("13:25")
+  ..add("13:30")
+  ..add("13:35")
+  ..add("13:40")
+  ..add("13:45")
+  ..add("13:50")
+  ..add("13:55")
   ..add("14:00")
+  ..add("14:05")
+  ..add("14:10")
+  ..add("14:15")
+  ..add("14:20")
+  ..add("14:25")
+  ..add("14:30")
+  ..add("14:35")
+  ..add("14:40")
+  ..add("14:45")
+  ..add("14:50")
+  ..add("14:55")
   ..add("15:00")
+  ..add("15:05")
+  ..add("15:10")
+  ..add("15:15")
+  ..add("15:20")
+  ..add("15:25")
+  ..add("15:30")
+  ..add("15:35")
+  ..add("15:40")
+  ..add("15:45")
+  ..add("15:50")
+  ..add("15:55")
   ..add("16:00")
+  ..add("16:05")
+  ..add("16:10")
+  ..add("16:15")
+  ..add("16:20")
+  ..add("16:25")
+  ..add("16:30")
+  ..add("16:35")
+  ..add("16:40")
+  ..add("16:45")
+  ..add("16:50")
+  ..add("16:55")
   ..add("17:00")
+  ..add("17:05")
+  ..add("17:10")
+  ..add("17:15")
+  ..add("17:20")
+  ..add("17:25")
+  ..add("17:30")
+  ..add("17:35")
+  ..add("17:40")
+  ..add("17:45")
+  ..add("17:50")
+  ..add("17:55")
   ..add("18:00")
+  ..add("18:05")
+  ..add("18:10")
+  ..add("18:15")
+  ..add("18:20")
+  ..add("18:25")
+  ..add("18:30")
+  ..add("18:35")
+  ..add("18:40")
+  ..add("18:45")
+  ..add("18:50")
+  ..add("18:55")
   ..add("19:00")
+  ..add("19:05")
+  ..add("19:10")
+  ..add("19:15")
+  ..add("19:20")
+  ..add("19:25")
+  ..add("19:30")
+  ..add("19:35")
+  ..add("19:40")
+  ..add("19:45")
+  ..add("19:50")
+  ..add("19:55")
   ..add("20:00")
+  ..add("20:05")
+  ..add("20:10")
+  ..add("20:15")
+  ..add("20:20")
+  ..add("20:25")
+  ..add("20:30")
+  ..add("20:35")
+  ..add("20:40")
+  ..add("20:45")
+  ..add("20:50")
+  ..add("20:55")
   ..add("21:00")
+  ..add("21:05")
+  ..add("21:10")
+  ..add("21:15")
+  ..add("21:20")
+  ..add("21:25")
+  ..add("21:30")
+  ..add("21:35")
+  ..add("21:40")
+  ..add("21:45")
+  ..add("21:50")
+  ..add("21:55")
   ..add("22:00")
+  ..add("22:05")
+  ..add("22:10")
+  ..add("22:15")
+  ..add("22:20")
+  ..add("22:25")
+  ..add("22:30")
+  ..add("22:35")
+  ..add("22:40")
+  ..add("22:45")
+  ..add("22:50")
+  ..add("22:55")
   ..add("23:00")
+  ..add("23:05")
+  ..add("23:10")
+  ..add("23:15")
+  ..add("23:20")
+  ..add("23:25")
+  ..add("23:30")
+  ..add("23:35")
+  ..add("23:40")
+  ..add("23:45")
+  ..add("23:50")
+  ..add("23:55")
   ..add("0:00")
+  ..add("0:05")
+  ..add("0:10")
+  ..add("0:15")
+  ..add("0:20")
+  ..add("0:25")
+  ..add("0:30")
+  ..add("0:35")
+  ..add("0:40")
+  ..add("0:45")
+  ..add("0:50")
+  ..add("0:55")
   ..add("1:00")
+  ..add("1:05")
+  ..add("1:10")
+  ..add("1:15")
+  ..add("1:20")
+  ..add("1:25")
+  ..add("1:30")
+  ..add("1:35")
+  ..add("1:40")
+  ..add("1:45")
+  ..add("1:50")
+  ..add("1:55")
   ..add("2:00")
+  ..add("2:05")
+  ..add("2:10")
+  ..add("2:15")
+  ..add("2:20")
+  ..add("2:25")
+  ..add("2:30")
+  ..add("2:35")
+  ..add("2:40")
+  ..add("2:45")
+  ..add("2:50")
+  ..add("2:55")
   ..add("3:00")
+  ..add("3:05")
+  ..add("3:10")
+  ..add("3:15")
+  ..add("3:20")
+  ..add("3:25")
+  ..add("3:30")
+  ..add("3:35")
+  ..add("3:40")
+  ..add("3:45")
+  ..add("3:50")
+  ..add("3:55")
   ..add("4:00")
+  ..add("4:05")
+  ..add("4:10")
+  ..add("4:15")
+  ..add("4:20")
+  ..add("4:25")
+  ..add("4:30")
+  ..add("4:35")
+  ..add("4:40")
+  ..add("4:45")
+  ..add("4:50")
+  ..add("4:55")
   ..add("5:00")
+  ..add("5:05")
+  ..add("5:10")
+  ..add("5:15")
+  ..add("5:20")
+  ..add("5:25")
+  ..add("5:30")
+  ..add("5:35")
+  ..add("5:40")
+  ..add("5:45")
+  ..add("5:50")
+  ..add("5:55")
   ..add("6:00")
-  ..add("7:00");
+  ..add("6:05")
+  ..add("6:10")
+  ..add("6:15")
+  ..add("6:20")
+  ..add("6:25")
+  ..add("6:30")
+  ..add("6:35")
+  ..add("6:40")
+  ..add("6:45")
+  ..add("6:50")
+  ..add("6:55")
+  ..add("7:00")
+  ..add("7:05")
+  ..add("7:10")
+  ..add("7:15")
+  ..add("7:20")
+  ..add("7:25")
+  ..add("7:30")
+  ..add("7:35")
+  ..add("7:40")
+  ..add("7:45")
+  ..add("7:50")
+  ..add("7:55");
 
 
 

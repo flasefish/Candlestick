@@ -72,12 +72,37 @@ class _CalendarPageState extends State<CalendarPage> {
     );
 
     return Scaffold(
-
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            _calendarCarouselNoHeader,
+            Container(
+              padding: EdgeInsets.only( left: 15,right: 18 , top: 0.0),
+              height: 250,
+              decoration: BoxDecoration(color:Color(0xFFFFFFFF)),
+              child: _calendarCarouselNoHeader,
+            ),
+            GestureDetector(
+              child:
+              Container(
+                color: Colors.white,
+                width: double.maxFinite,
+                alignment: Alignment.center,
+                padding: EdgeInsets.only( left: 30,right: 30 , top: 15.0),
+                child: Text(
+                  "今天",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Color(0xFF007AFF), fontSize: 14,fontWeight: FontWeight.bold,backgroundColor: Colors.white), // give any color here
+                  //  style: TextStyle(
+                  ///     color: Color(0xFF007AFF), fontSize: 28.0.sp,fontWeight: FontWeight.bold,background:Paint()..color = Color(0xFFFFFFFF)),
+                ),
+              ),
+              onTap: () {
+                setState(() {
+
+                });
+              },
+            ),
           ],
         ),
       ),
