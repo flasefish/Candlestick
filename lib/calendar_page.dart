@@ -72,6 +72,7 @@ class _CalendarPageState extends State<CalendarPage> {
     );
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
