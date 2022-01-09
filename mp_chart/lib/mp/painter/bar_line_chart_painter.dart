@@ -555,7 +555,7 @@ abstract class BarLineChartBasePainter<
 
       viewPortHandler.restrainViewPort(
           max(minOffset, offsetLeft),
-          max(minOffset, offsetTop),
+          max(0, offsetTop),
           max(minOffset, offsetRight),
           max(minOffset, offsetBottom));
     }
