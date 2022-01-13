@@ -59,7 +59,7 @@ class OtherChartCandlestickState
         Positioned(
             right: 0,
             left: 0,
-            top: 50,
+            top: 0,
             bottom: 550,
             child: CandlestickChart(controller)),
         Positioned(
@@ -417,8 +417,6 @@ class MyChartMarker implements IMarker {
    //   curOffset.x =  (rectRange.right - maxlen / 2) - rectRange.right ;
       curOffset.x =  (rectRange.right - maxlen / 2) - posX ;
     }
-
-
     return curOffset;
   }
 

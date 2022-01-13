@@ -1,7 +1,11 @@
 import 'package:candlestick/calendar_page.dart';
+import 'dart:io';
+
 import 'package:candlestick/popuppage.dart';
+import 'package:candlestick/seekbar_page.dart';
 import 'package:candlestick/sleepreport.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'BasicDemo.dart';
 import 'babyhealthypage.dart';
@@ -16,6 +20,16 @@ import 'settingpage.dart';
 
 void main() {
   runApp(const MyApp());
+  if (Platform.isAndroid) {
+    //设置Android头部的导航栏透明
+    SystemUiOverlayStyle systemUiOverlayStyle = SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent, //全局设置透明
+        statusBarIconBrightness: Brightness.light
+      //light:黑色图标 dark：白色图标
+      //在此处设置statusBarIconBrightness为全局设置
+    );
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -36,7 +50,9 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.blue,
+       // appBarTheme: AppBarTheme(
+       // color: Color(0xFF151026)),
+       // primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'charts'),
     routes: <String, WidgetBuilder>{
@@ -72,6 +88,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        brightness: Brightness.light, //设置为白色字体
         title: Text('选项'),
       ),
       body: ListView.builder(
@@ -135,7 +153,8 @@ final List<testListViewModal> demos = [
   ),
   testListViewModal(
     title: 'popup_menu',
-    demo:PopupMenuPage(),
+    //demo:PopupMenuPage(),
+    demo: SeekBarPage(),
   ),
   testListViewModal(
     title: 'MultipleBar show',
