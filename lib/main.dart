@@ -5,6 +5,8 @@ import 'dart:io';
 import 'package:candlestick/popuppage.dart';
 import 'package:candlestick/seekbar_page.dart';
 import 'package:candlestick/sleepreport.dart';
+import 'package:candlestick/sliver_box.dart';
+import 'package:candlestick/sliver_expanded_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -178,7 +180,17 @@ final List<testListViewModal> demos = [
   testListViewModal(
     title: 'Sliver - 自定义效果',
     demo: CustomSliverHeaderDemo(),
-  )
+  ),
+
+  testListViewModal(
+    title: 'SliverAppBar',
+    demo: ExpandedAppBarPage(),
+  ),
+
+  testListViewModal(
+    title: 'SliverBox',
+    demo: SliverBoxPage(),
+  ),
 
 
 ];

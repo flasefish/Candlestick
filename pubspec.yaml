@@ -92,6 +92,13 @@ flutter:
      - images/sleep_roomTemperatureIcon.png
      - images/sleep_temperatureIcon.png
      - images/sleep_wenhaoTipIcon.png
+     - images/food01.jpeg
+     - images/food02.jpeg
+     - images/food03.jpeg
+     - images/food04.jpeg
+     - images/food05.jpeg
+     - images/food06.jpeg
+     - images/shop.jpeg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
