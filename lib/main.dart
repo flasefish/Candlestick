@@ -1,4 +1,5 @@
 import 'package:candlestick/calendar_page.dart';
+import 'package:candlestick/custom_sliver_header_usage.dart';
 import 'dart:io';
 
 import 'package:candlestick/popuppage.dart';
@@ -173,6 +174,11 @@ final List<testListViewModal> demos = [
     title: 'bar show',
     demo: BarChartBasic(),
   ),
+
+  testListViewModal(
+    title: 'Sliver - 自定义效果',
+    demo: CustomSliverHeaderDemo(),
+  )
 
 
 ];
