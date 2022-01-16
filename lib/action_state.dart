@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mp_chart/mp/controller/bar_chart_controller.dart';
+
 import 'package:mp_chart/mp/controller/bubble_chart_controller.dart';
 import 'package:mp_chart/mp/controller/candlestick_chart_controller.dart';
 import 'package:mp_chart/mp/controller/combined_chart_controller.dart';

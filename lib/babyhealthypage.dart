@@ -123,8 +123,8 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                      width: MediaQuery.of(context).size.width,
                      height: 90,
                      decoration: BoxDecoration(
-                         boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
-                         borderRadius: BorderRadius.circular(10),
+                        boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
+                        borderRadius: BorderRadius.circular(10),
                          color: Colors.white,
                          border: Border.all(color: Colors.white, width: 0)
                      ),
@@ -137,7 +137,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                            height: 40,
                            padding: const EdgeInsets.only(
                                top: 15.0, left: 70, right: 0, bottom: 0),
-                           child: MaterialButton(
+                           child: FlatButton(
                                shape: RoundedRectangleBorder(
                                  borderRadius: BorderRadius.circular(50.0),
                                ),
@@ -159,8 +159,9 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                                shape: RoundedRectangleBorder(
                                  borderRadius: BorderRadius.circular(50.0),
                                ),
-                               color: const Color.fromARGB(255, 255, 255, 255),
-                               focusColor: const Color.fromARGB(255, 0, 188, 211),
+                               color: const Color.fromRGBO(49, 114, 240, 0.1),
+                               elevation: 0,
+                             //  focusColor: const Color.fromARGB(255, 0, 188, 211),
                                height: 30.0,
                                child: const Text(
                                  '周',
@@ -178,6 +179,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                                shape: RoundedRectangleBorder(
                                  borderRadius: BorderRadius.circular(50.0),
                                ),
+                               elevation: 0,
                                color: const Color.fromARGB(255, 255, 255, 255),
                                focusColor: const Color.fromARGB(255, 0, 188, 211),
                                height: 30.0,

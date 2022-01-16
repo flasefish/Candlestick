@@ -1,5 +1,6 @@
 import 'package:candlestick/calendar_page.dart';
 import 'package:candlestick/custom_sliver_header_usage.dart';
+import 'package:candlestick/main_animation.dart';
 import 'dart:io';
 
 import 'package:candlestick/popuppage.dart';
@@ -159,6 +160,13 @@ final List<testListViewModal> demos = [
     //demo:PopupMenuPage(),
     demo: SeekBarPage(),
   ),
+
+  testListViewModal(
+    title: 'Animation',
+    //demo:PopupMenuPage(),
+    demo: mainAnimation(),
+  ),
+
   testListViewModal(
     title: 'MultipleBar show',
     demo: MultipleBarChartBasic(),
