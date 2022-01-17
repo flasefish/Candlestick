@@ -21,6 +21,7 @@ class XAxisRendererRadarChart extends XAxisRenderer {
   void renderAxisLabels(Canvas c) {
     if (!xAxis.enabled || !xAxis.drawLabels) return;
 
+    print("renderAxisLabels");
     final double labelRotationAngleDegrees = xAxis.labelRotationAngle;
     final MPPointF drawLabelAnchor = MPPointF.getInstance1(0.5, 0.25);
 

@@ -49,12 +49,13 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
       body: Stack(
         children: <Widget>[
           Positioned(
-              right: 0,
-              left: 0,
+              right: 60,
+              left: 60,
               top: 50,
-              bottom: 550,
-              child: LineChart(controller)),
-          Positioned(
+            //  bottom: 800,
+              height: 40,
+              child: _initLineChart()),
+       /*   Positioned(
               right: 0,
               left: 0,
               top: 200,
@@ -65,7 +66,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
               left: 0,
               top: 400,
               bottom: 200,
-              child: LineChart(controller)),
+              child: LineChart(controller)),*/
         ],
       ),
     );
@@ -77,16 +78,16 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
 
     controller = LineChartController(
         axisLeftSettingFunction: (axisLeft, controller) {
-          axisLeft
-            ..setLabelCount2(6, false)
-            ..setAxisMaximum(40.0)
-            ..setAxisMinimum(0.0)
-            ..setGranularity(8.0)
-            ..drawGridLines = (false)  //Y轴的线条
-            ..mDrawFilled=(true)
-            ..setFilledTopY(26.0)
-            ..setFilledBottomY(20.0)
-            ..drawAxisLine = (false);
+          axisLeft.enabled = (false);
+         //   ..setLabelCount2(6, false)
+         //   ..setAxisMaximum(40.0)
+         //   ..setAxisMinimum(0.0)
+         //   ..setGranularity(8.0)
+         //   ..drawGridLines = (false)  //Y轴的线条
+          //  ..mDrawFilled=(true)
+          //  ..setFilledTopY(26.0)
+          //  ..setFilledBottomY(20.0)
+           // ..drawAxisLine = (false);
         },
         axisRightSettingFunction: (axisRight, controller) {
           axisRight.enabled = (false);
@@ -95,17 +96,17 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
           legend.enabled = (false);
         },
         xAxisSettingFunction: (xAxis, controller) {
-          xAxis
-            ..drawAxisLine = (false)  //不画X线
-            ..drawGridLines = (false) //不画网格线
-            ..drawScale = (true)
-            ..drawScaleInterval = (3)
-            ..drawLabels = (true)  //画标签 X轴上对应的数值
-            ..textSize = 10  //字体大小
-            ..setLabelCount1(48) //总共48个点
-            ..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
-            ..setValueFormatter(A(":00"))
-            ..position = (XAxisPosition.BOTTOM);
+            xAxis.enabled = (false);
+            // ..drawAxisLine = (false)  //不画X线
+            //..drawGridLines = (false) //不画网格线
+            //..drawScale = (true)
+            //..drawScaleInterval = (3)
+            //..drawLabels = (true)  //画标签 X轴上对应的数值
+            //..textSize = 10  //字体大小
+            //..setLabelCount1(48) //总共48个点
+            //..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
+            //..setValueFormatter(A(":00"))
+            //..position = (XAxisPosition.BOTTOM);
         },
         drawGridBackground: false,
         backgroundColor: ColorUtils.WHITE,
@@ -177,6 +178,15 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
 
     setState(() {});
   }
+
+  Widget _initLineChart() {
+    var lineChart = LineChart(controller);
+    controller.animator
+      ..reset()
+      ..animateX1(1500);
+    return lineChart;
+  }
+
 }
 
 class myfill implements IFillFormatter{

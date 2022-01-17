@@ -72,6 +72,7 @@ packages:
     description:
       name: matcher
       url: "https://pub.flutter-io.cn"
+<<<<<<< HEAD:flutter_calendar_carousel/pubspec.lock
     source: hosted
     version: "0.12.11"
   material_color_utilities:
@@ -79,6 +80,8 @@ packages:
     description:
       name: material_color_utilities
       url: "https://pub.flutter-io.cn"
+=======
+>>>>>>> 6c5cb494d533be5791f33c221731697d17b6577e:3rd/flutter_calendar_carousel/pubspec.lock
     source: hosted
     version: "0.1.2"
   meta:

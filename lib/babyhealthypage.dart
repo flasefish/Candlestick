@@ -123,8 +123,8 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                      width: MediaQuery.of(context).size.width,
                      height: 90,
                      decoration: BoxDecoration(
-                         boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
-                         borderRadius: BorderRadius.circular(10),
+                        boxShadow: [BoxShadow(color: const Color(0xffe4e4e4), blurRadius: 15.0)],
+                        borderRadius: BorderRadius.circular(10),
                          color: Colors.white,
                          border: Border.all(color: Colors.white, width: 0)
                      ),
@@ -137,7 +137,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                            height: 40,
                            padding: const EdgeInsets.only(
                                top: 15.0, left: 70, right: 0, bottom: 0),
-                           child: MaterialButton(
+                           child: FlatButton(
                                shape: RoundedRectangleBorder(
                                  borderRadius: BorderRadius.circular(50.0),
                                ),
@@ -159,8 +159,9 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                                shape: RoundedRectangleBorder(
                                  borderRadius: BorderRadius.circular(50.0),
                                ),
-                               color: const Color.fromARGB(255, 255, 255, 255),
-                               focusColor: const Color.fromARGB(255, 0, 188, 211),
+                               color: const Color.fromRGBO(49, 114, 240, 0.1),
+                               elevation: 0,
+                             //  focusColor: const Color.fromARGB(255, 0, 188, 211),
                                height: 30.0,
                                child: const Text(
                                  '周',
@@ -178,6 +179,7 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
                                shape: RoundedRectangleBorder(
                                  borderRadius: BorderRadius.circular(50.0),
                                ),
+                               elevation: 0,
                                color: const Color.fromARGB(255, 255, 255, 255),
                                focusColor: const Color.fromARGB(255, 0, 188, 211),
                                height: 30.0,
@@ -346,10 +348,10 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
     controller = CandlestickChartController(
         axisLeftSettingFunction: (axisLeft, controller) {   //左边Y轴
           axisLeft
-            ..setLabelCount2(6, false)
-            ..setAxisMaximum(42.0)
-            ..setAxisMinimum(32.0)
-            ..setGranularity(2.0)
+            ..setLabelCount2(6, true)
+            ..setAxisMaximum(170.0)
+            ..setAxisMinimum(70.0)
+            ..setGranularity(20.0)
             ..drawGridLines = (false)  //Y轴的线条
             ..enableGridDashedLine(10, 10, 0) //Y轴虚线
             ..mDrawFilled=(true)
@@ -398,23 +400,23 @@ class _BabyHealthyPageState extends State<BabyHealthyPage> {
   void _initCandleData(int count) async {
 //    chart.resetTracking();
 
-    var  datamax = [36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,36.6,
-      37.1,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1,
-      36.6,36.7,36.8,36.9,37.0,37.1];
+    var  datamax = [76.6,76.7,76.8,76.9,77.0,77.1,
+      76.6,76.7,76.8,76.9,77.0,77.1,
+      76.6,76.7,76.8,76.9,77.0,76.6,
+      77.1,76.7,76.8,76.9,77.0,77.1,
+      76.6,76.7,76.8,76.9,77.0,77.1,
+      76.6,76.7,76.8,76.9,77.0,77.1,
+      76.6,76.7,76.8,76.9,77.0,77.1,
+      76.6,76.7,76.8,76.9,77.0,77.1];
 
-    var datamin= [35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1,
-      35.6,34.7,33.8,32.9,33.0,34.1];//图表的数据点
+    var datamin= [75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1,
+      75.6,74.7,77.8,72.9,77.0,74.1];//图表的数据点
 
     List<CandleEntry> values = [];
 

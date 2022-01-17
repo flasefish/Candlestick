@@ -59,7 +59,7 @@ class OtherChartCandlestickState
         Positioned(
             right: 0,
             left: 0,
-            top: 50,
+            top: 0,
             bottom: 550,
             child: CandlestickChart(controller)),
         Positioned(
@@ -105,7 +105,7 @@ class OtherChartCandlestickState
             ..textSize = 10  //字体大小
             ..setLabelCount1(48) //总共48个点
             ..setGranularity(1.toDouble())//设置缩放时轴的最小间隔。轴不允许往下走//*限制。这可以用于在缩放时避免标签重复。
-            ..setValueFormatter(A(":00"))
+            ..setValueFormatter(B(":00"))
             ..position = (XAxisPosition.BOTTOM);
 
         },
@@ -159,7 +159,7 @@ class OtherChartCandlestickState
           shadowL:even ? datamin[i] : datamin[i],
           open:   even ? datamax[i] :datamin[i],
           close:  even ? datamin[i] : datamax[i],
-          hide:hide,rectangle: false));
+          hide:hide,rectangle: false,entryHighLightColor: true));
     /*  double multi = (range + 1);
       double val = (random.nextDouble() * 40) + multi;
 
@@ -233,6 +233,32 @@ class A extends ValueFormatter {
       }else{
         return "";
       }
+    } else if (value > 0) {
+      return _format.format(value) + _suffix;
+    } else {
+      return _format.format(value);
+    }
+  }
+}
+
+class B extends ValueFormatter {
+  NumberFormat _format;
+  String _suffix;
+
+  B(String suffix) {
+    _format = NumberFormat("###,###,###,##0");
+    this._suffix = suffix;
+  }
+  @override
+  String getFormattedValue1(double value) {
+    return _format.format(value) + _suffix;
+  }
+
+  @override
+  String getAxisLabel(double value, AxisBase axis) {
+    if (axis is XAxis) {
+      int x = (value/2).toInt();
+        return _format.format(x) + _suffix;
     } else if (value > 0) {
       return _format.format(value) + _suffix;
     } else {
@@ -417,8 +443,6 @@ class MyChartMarker implements IMarker {
    //   curOffset.x =  (rectRange.right - maxlen / 2) - rectRange.right ;
       curOffset.x =  (rectRange.right - maxlen / 2) - posX ;
     }
-
-
     return curOffset;
   }
 
@@ -438,6 +462,7 @@ class MyChartMarker implements IMarker {
         timeStrin = (index/2).truncate().toString() + ":30" + "~"  +  ((index + 1)/2).truncate().toString() + ":00";
       }
       print("---------------------------");
+      print("datat = ${_entry.mData}");
       print("posx = $posX.posy = $posY");
       TextPainter painter1 = PainterUtils.create(
           null,

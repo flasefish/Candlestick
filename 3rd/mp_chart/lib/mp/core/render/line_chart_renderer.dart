@@ -222,6 +222,9 @@ class LineChartRenderer extends LineRadarRenderer {
       listLine.add( xBounds.range - listLine[listLine.length - 2] +1); //增加这条线点的数量
     }
    // print("lineLine size = ${listLine.length}, listLine = ${listLine}");
+    if(listLine.length == 0) //没有需要画得线
+      return;
+
     if(listLine.length %3 != 0) { //线的数量
         return;
     }

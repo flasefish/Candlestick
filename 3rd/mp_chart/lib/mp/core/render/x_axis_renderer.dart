@@ -102,6 +102,7 @@ class XAxisRenderer extends AxisRenderer {
             fontFamily: _xAxis.typeface?.fontFamily,
             fontWeight: _xAxis.typeface?.fontWeight));
 
+    print("renderAxisLabels");
     MPPointF pointF = MPPointF.getInstance1(0, 0);
     if (_xAxis.position == XAxisPosition.TOP) {
       pointF.x = 0.5;
@@ -205,6 +206,8 @@ class XAxisRenderer extends AxisRenderer {
         String label = _xAxis
             .getValueFormatter()
             .getAxisLabel(_xAxis.entries[i ~/ 2], _xAxis);
+
+        print("lable = $label");
 
         if (_xAxis.avoidFirstLastClipping) {
           // avoid clipping of the last
@@ -496,13 +499,19 @@ class XAxisRenderer extends AxisRenderer {
       double topY = viewPortHandler.contentTop();
       double bottmY = viewPortHandler.contentBottom();
       canvas.save();
-      if(_xAxis.position == XAxisPosition.BOTTOM){
-        for(int i =0; i < 5; i++){
-          canvas.save();
-          canvas.translate(offset * i, 0);
-          if( i % 5 == 0) {
-            canvas.drawLine(Offset(startX, bottmY + 5), Offset(startX,bottmY),axisLinePaint);
-          }else{
+      Paint ScalePaint = Paint()
+        ..color = Color.fromARGB(193, 193, 193, 1)
+        ..strokeWidth = 1
+        ..style = PaintingStyle.stroke;
+      if (_xAxis.position == XAxisPosition.BOTTOM) {
+          for (int i = 0; i < 5; i++) {
+            canvas.save();
+            canvas.translate(offset * i, 0);
+            if (i % 5 == 0) {
+              canvas.drawLine(
+                  Offset(startX, bottmY + 5), Offset(startX, bottmY),
+                  ScalePaint);
+            } else {
 
           }
           canvas.restore();

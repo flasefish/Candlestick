@@ -21,13 +21,19 @@ import 'action_state.dart';
 
 
 class LineChartBasic extends StatefulWidget {
+ // @override
+ // State<StatefulWidget> createState() {
+ //   return LineChartBasicState();
+ // }
+
+  const LineChartBasic({Key key}) : super(key: key);
+
   @override
-  State<StatefulWidget> createState() {
-    return LineChartBasicState();
-  }
+  State<LineChartBasic> createState() => LineChartBasicState();
 }
 
-class LineChartBasicState extends LineActionState<LineChartBasic> {
+class LineChartBasicState extends State<LineChartBasic> {
+  LineChartController controller;
   var random = Random(1);
   int _count = 45;
   double _range = 180.0;
@@ -46,8 +52,9 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
         Positioned(
           right: 0,
           left: 0,
-          top: 500,
-          bottom: 300,
+          top: 0,
+          bottom: 100,
+          //height: 44,
           child: _initLineChart(),
         ),
       ],
@@ -160,5 +167,24 @@ class LineChartBasicState extends LineActionState<LineChartBasic> {
       ..reset()
       ..animateX1(1500);
     return lineChart;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Scaffold(
+      appBar: AppBar(
+          title: Text('123')),
+      body: Stack(
+        children: <Widget>[
+          Positioned(
+              right: 0,
+              left: 0,
+              top: 50,
+              bottom: 550,
+              child: LineChart(controller)),
+        ],
+      ),
+    );
   }
 }

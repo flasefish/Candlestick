@@ -15,6 +15,7 @@ dependencies:
   image_gallery_saver: ^1.6.9
   optimized_gesture_detector: ^0.0.6
   vector_math: ^2.1.0
+  #flutter_calendar_carousel: ^1.5.3
   flutter:
     sdk: flutter
 
