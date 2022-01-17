@@ -94,7 +94,7 @@ class _babyAnimationState extends State<BabyAnimation>{
           ),
           AnimatedAlign(
             duration: duration,
-            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -10),
+            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -2.2),
             child: bodyTempMax(),
           ),
         ],
@@ -154,14 +154,14 @@ class _babyAnimationState extends State<BabyAnimation>{
       height: 80,
      ),
         Positioned(
-          top: 15,
+          top: 30,
           right: 18,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text('36.8', style: TextStyle(
                 color: Colors.black,
-                fontSize: 25,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),),
             ],
