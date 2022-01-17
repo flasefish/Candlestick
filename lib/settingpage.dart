@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'selecttextitem.dart';
 import 'btnContentView.dart';
 import 'BtbItemView.dart';
+import 'SelectSwitchItem.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key key}) : super(key: key);
@@ -89,22 +90,26 @@ class SettingPage extends StatelessWidget {
                   children:  <Widget>[
                     SelectTextItem(
                       title: '设备设置',
+                      isShowRightItem: 1,
                     ),
                     SelectTextItem(
                       title: '账号设置',
                       textAlign: TextAlign.end,
+                      isShowRightItem: 1,
                       contentStyle: TextStyle(
                         fontSize: 15,
                         color: Color(0xFF333333),
                       ),
                     ),
-                    SelectTextItem(
-                      title: '帮助与反馈',
+                    SelectSwitchItem(
+                      // title: '帮助与反馈',
+                      // isShowRightItem: 2,
+                      // Get
                     ),
                     SelectTextItem(
                       title: '软件版本',
                       content: 'v1.1.2',
-                      isShowArrow: false,
+                      isShowRightItem: 0,
                       textAlign: TextAlign.end,
                       contentStyle: TextStyle(
                         fontSize: 12,

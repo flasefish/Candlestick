@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SelectTextItem extends StatelessWidget {
-  const SelectTextItem({
+   SelectTextItem({
     Key key,
     @required this.title,
     this.onTap,
@@ -10,7 +10,7 @@ class SelectTextItem extends StatelessWidget {
     this.titleStyle,
     this.contentStyle,
     this.height,
-    this.isShowArrow: true,
+    this.isShowRightItem: 0,
     this.imageName,
   }): super(key: key);
 
@@ -21,11 +21,11 @@ class SelectTextItem extends StatelessWidget {
   final TextStyle titleStyle;
   final TextStyle contentStyle;
   final double height;
-  final bool isShowArrow;//是否显示右侧箭头
+  final int isShowRightItem;//显示右侧控件(0不显示，1显示箭头，2显示开关)
   final String imageName;//左侧图片名字 不传则不显示图片
+  bool  isSwitchCheck;
   @override
   Widget build(BuildContext context) {
-    
     return GestureDetector(
       onTap: this.onTap,
       child: Container(
@@ -38,7 +38,7 @@ class SelectTextItem extends StatelessWidget {
             bottom: Divider.createBorderSide(context, color: Color(0xFFFFFFFF),width: 0)
           )
         ),
-        child: 
+        child:
         Row(
           children: <Widget>[
             this.imageName == null ? Container() :
@@ -68,15 +68,15 @@ class SelectTextItem extends StatelessWidget {
                 ),
               ),
             ),
-            //这里为了方便用了系统icon 可以设置一张arrow 的图片
-            // Image.asset(
-            //   '',
-            //   width: 16,
-            //   height: 16,
-            // )
-            this.isShowArrow ? Icon(
+            this.isShowRightItem==1 ? Icon(
               Icons.arrow_forward_ios,
               size: 16,
+            ) : Container(),
+            this.isShowRightItem==2?Switch(
+              value: this.isSwitchCheck,
+              onChanged: (value) {
+              },
+              materialTapTargetSize: MaterialTapTargetSize.padded,
             ) : Container(),
           ],
         ),
