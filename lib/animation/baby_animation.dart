@@ -19,7 +19,8 @@ class BabyAnimation extends StatefulWidget{
 
 class _babyAnimationState extends State<BabyAnimation>{
   LineChartController controller;
-  int curState = 0;
+  int currentIndex = 0;
+  Duration duration = Duration(milliseconds: 1000);
 
   int _count = 45;
   double _range = 180.0;
@@ -39,9 +40,69 @@ class _babyAnimationState extends State<BabyAnimation>{
       color: Colors.white,
       // border: Border.all(color: BMColor.whiteFFFFFF, width: 4.w),
     );
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Titled Bottom Bar"),
+      ),
+      body:Container(
+        height: 100,
+        width: 300,
+        child: Stack(
+            children: <Widget>[
+              Positioned(
+                top: 10,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                       _buildItemWidget( ),
+                        RaisedButton(
+                          child: Text('动画1'),
+                          onPressed: () {
+                            setState(() {
+                              currentIndex = currentIndex == 0 ? 1 : 0;
+                            });
+                          },
+                        ),
+                  ],
+                ),
+              ),
+            ]),
+      ),
+    );
+  }
 
+  void _select(int index) {
+    currentIndex = currentIndex == 0 ? 1 : 0;
+    //currentIndex = index;
+    // widget.onTap(widget.currentIndex);
 
-    return Stack(children: [
+    setState(() {});
+  }
+
+  Widget _buildItemWidget( ) {
+    return Container(
+      height: 100,
+      width: 100,
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          AnimatedOpacity(
+            opacity: currentIndex == 0 ? 1.0 : 0.0,
+            duration: duration,
+            curve: Curves.ease ,
+            child:  bodyTempBox(),
+          ),
+          AnimatedAlign(
+            duration: duration,
+            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -10),
+            child: bodyTempMax(),
+          ),
+        ],
+      ),
+    );
+  }
+
+/*    return Stack(children: [
           Positioned(
                 top: 64,
                 right: 20,
@@ -71,9 +132,10 @@ class _babyAnimationState extends State<BabyAnimation>{
               ),
           ),
     ),],
-    );
-  }
+    );*/
 
+
+  /*
   Widget _buildItemWidget(){
       if(curState == 0) {
         return bodyTempBox();
@@ -82,7 +144,7 @@ class _babyAnimationState extends State<BabyAnimation>{
       }
 
       return bodyTempBox();
-  }
+  }*/
 
   Widget bodyTempMax(){
     return Stack(
