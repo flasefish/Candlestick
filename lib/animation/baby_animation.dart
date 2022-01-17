@@ -41,7 +41,7 @@ class _babyAnimationState extends State<BabyAnimation>{
 
 
     return Stack(children: [
-      Positioned(
+          Positioned(
                 top: 64,
                 right: 20,
                 child: SizedBox(
@@ -55,6 +55,12 @@ class _babyAnimationState extends State<BabyAnimation>{
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           bodyTempBox(),
+                          RaisedButton(
+                            child: Text('动画'),
+                            onPressed: () {
+
+                            },
+                          ),
                      //     breathBox(),
                       //    heartBox(),
                         ],
