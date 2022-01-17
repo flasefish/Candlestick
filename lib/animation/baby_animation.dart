@@ -19,6 +19,7 @@ class BabyAnimation extends StatefulWidget{
 
 class _babyAnimationState extends State<BabyAnimation>{
   LineChartController controller;
+  int curState = 0;
 
   int _count = 45;
   double _range = 180.0;
@@ -54,11 +55,13 @@ class _babyAnimationState extends State<BabyAnimation>{
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          bodyTempBox(),
+                          _buildItemWidget(),
                           RaisedButton(
                             child: Text('动画'),
                             onPressed: () {
-
+                                setState(() {
+                                  curState = curState == 0 ? 1 : 0;
+                                });
                             },
                           ),
                      //     breathBox(),
@@ -69,6 +72,40 @@ class _babyAnimationState extends State<BabyAnimation>{
           ),
     ),],
     );
+  }
+
+  Widget _buildItemWidget(){
+      if(curState == 0) {
+        return bodyTempBox();
+      }else if(curState == 1){
+        return bodyTempMax();
+      }
+
+      return bodyTempBox();
+  }
+
+  Widget bodyTempMax(){
+    return Stack(
+      children: [
+      SizedBox(
+      width: double.infinity,
+      height: 80,
+     ),
+        Positioned(
+          top: 15,
+          right: 18,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('36.8', style: TextStyle(
+                color: Colors.black,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),),
+            ],
+          ),
+        ),
+    ],);
   }
 
   Widget bodyTempBox() {
