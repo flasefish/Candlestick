@@ -1,4 +1,5 @@
 import 'package:candlestick/animation/animation_text.dart';
+import 'package:candlestick/animation/baby_animation.dart';
 import 'package:candlestick/animation/titled_navigation_bar.dart';
 import 'package:candlestick/candlestick.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,12 @@ final List<AnimationListViewModal> demosAnimation = [
   AnimationListViewModal(
     title: '动画3',
     demo: MyTitledNavigationBar(),
+  ),
+
+  AnimationListViewModal(
+    title: 'babyAnimation',
+    demo: BabyAnimation(),
+
   ),
 
 ];
