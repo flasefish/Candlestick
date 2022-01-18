@@ -71,14 +71,6 @@ class _babyAnimationState extends State<BabyAnimation>{
     );
   }
 
-  void _select(int index) {
-    currentIndex = currentIndex == 0 ? 1 : 0;
-    //currentIndex = index;
-    // widget.onTap(widget.currentIndex);
-
-    setState(() {});
-  }
-
   Widget _buildItemWidget( ) {
     return Container(
       height: 100,
@@ -86,6 +78,25 @@ class _babyAnimationState extends State<BabyAnimation>{
       child: Stack(
         alignment: AlignmentDirectional.center,
         children: <Widget>[
+          Positioned(
+            top: 30,
+            left: 14,
+            child: Image.asset('images/body_temp.png', width: 36, height: 36, fit: BoxFit.fill),
+          ),
+          Positioned(
+            top: 30,
+            right: 18,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text('体温', style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w400,
+                ),),
+              ],
+            ),
+          ),
           AnimatedOpacity(
             opacity: currentIndex == 0 ? 1.0 : 0.0,
             duration: duration,
@@ -101,50 +112,6 @@ class _babyAnimationState extends State<BabyAnimation>{
       ),
     );
   }
-
-/*    return Stack(children: [
-          Positioned(
-                top: 64,
-                right: 20,
-                child: SizedBox(
-                  width: 136,
-                  height: 240,
-                    child:Container(
-                      width: 136,
-                      height: 240,
-                      decoration: boxDeco,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          _buildItemWidget(),
-                          RaisedButton(
-                            child: Text('动画'),
-                            onPressed: () {
-                                setState(() {
-                                  curState = curState == 0 ? 1 : 0;
-                                });
-                            },
-                          ),
-                     //     breathBox(),
-                      //    heartBox(),
-                        ],
-                      ),
-              ),
-          ),
-    ),],
-    );*/
-
-
-  /*
-  Widget _buildItemWidget(){
-      if(curState == 0) {
-        return bodyTempBox();
-      }else if(curState == 1){
-        return bodyTempMax();
-      }
-
-      return bodyTempBox();
-  }*/
 
   Widget bodyTempMax(){
     return Stack(
@@ -178,27 +145,14 @@ class _babyAnimationState extends State<BabyAnimation>{
           height: 80,
         ),
         Positioned(
-          top: 15,
-          left: 14,
-          child: Image.asset('images/body_temp.png', width: 36, height: 36, fit: BoxFit.fill),
-        ),
-        Positioned(
-          top: 15,
+          top: 35,
           right: 18,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text('体温', style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),),
+          child:
               Text('36.8', style: TextStyle(
                 color: Colors.black,
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
-              ),),
-            ],
+              ),
           ),
         ),
         Positioned(
