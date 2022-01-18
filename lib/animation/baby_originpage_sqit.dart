@@ -62,7 +62,7 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
       children: [
         SizedBox(
           width: double.infinity,
-          height: 80,
+          height: 100,
         ),
         Positioned(
           top: 15,
@@ -80,22 +80,32 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),),
-              //  Visibility(visible: !isVisibleCheckingIcon, child: Text(bodyTempValue, style: valueStyle)),
-              // Visibility(visible: isVisibleCheckingIcon, child: Image.asset(checkingIcon, width: 60.w, height: 30.w, fit: BoxFit.fill))
           ),
-      //  buildAnmin(),
-     Positioned(
-          top: 30,
-          right: 18,
-          height: 20,
-          child:
-              Text('36.8', style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),),
-        ),
-         Positioned(
+       buildAnmin(),
+
+      ],
+    );
+  }
+
+  Widget buildAnmin() {
+    return      Stack(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 100,
+          ),
+          Positioned(
+            top: 30,
+            right: 18,
+            height: 20,
+            child:
+            Text('36.8', style: TextStyle(
+              color: Colors.black,
+              fontSize: 12,
+              fontWeight: FontWeight.w400,
+            ),),
+          ),
+          Positioned(
             top: 55,
             left: 0,
             right: 0,
@@ -103,35 +113,7 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
             //bottom: 500.w,
             child:_initLineChart(),
           )
-      ],
-    );
-  }
-
-  Widget buildAnmin() {
-    return     Container(
-                  // color:Colors.red,
-                    child:Positioned(
-                    top: 25,
-                    right: 18,
-                    child:
-                        Text('36.8', style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),),
-                    ),
-
-
-              );
-        /*  Positioned(
-                    top: 55,
-                    left: 0,
-                    right: 18,
-                    height: 50,
-                    //bottom: 500.w,
-                    child:_initLineChart(),
-                  ),*/
-
+        ]);
 
   }
 
