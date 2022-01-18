@@ -71,7 +71,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
 
   double width = 0;
   Color? activeColor;
-  Duration duration = Duration(milliseconds: 270);
+  Duration duration = Duration(milliseconds: 1000);
 
   double _getIndicatorPosition(int index) {
     var isLtr = Directionality.of(context) == TextDirection.ltr;
@@ -112,7 +112,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
               }).toList(),
             ),
           ),
-          Positioned(
+        /*  Positioned(
             top: 0,
             width: width,
             child: AnimatedAlign(
@@ -126,7 +126,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
                 height: widget.indicatorHeight,
               ),
             ),
-          ),
+          ),*/
         ],
       ),
     );
@@ -140,6 +140,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
   }
 
   Widget _buildIcon(TitledNavigationBarItem item) {
+    print("_buildIcon item = ${item.title}");
     return IconTheme(
       data: IconThemeData(
         color: reverse ? widget.inactiveColor : activeColor,
@@ -149,6 +150,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
   }
 
   Widget _buildText(TitledNavigationBarItem item) {
+    print("_buildText item = ${item.title}");
     return DefaultTextStyle.merge(
       child: item.title,
       style: TextStyle(color: reverse ? activeColor : widget.inactiveColor),
@@ -156,6 +158,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar> {
   }
 
   Widget _buildItemWidget(TitledNavigationBarItem item, bool isSelected) {
+    print("_buildItemWidget item = ${item.title}");
     return Container(
       color: item.backgroundColor,
       height: widget.height,
