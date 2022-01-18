@@ -74,10 +74,7 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
           top: 10,
           right: 18,
           height: 20,
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+          child:
               Text('体温', style: TextStyle(
                 color: Colors.black,
                 fontSize: 12,
@@ -85,56 +82,45 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
               ),),
               //  Visibility(visible: !isVisibleCheckingIcon, child: Text(bodyTempValue, style: valueStyle)),
               // Visibility(visible: isVisibleCheckingIcon, child: Image.asset(checkingIcon, width: 60.w, height: 30.w, fit: BoxFit.fill))
-            ],
           ),
-        ),
-        buildAnmin(),
-    /* Positioned(
+      //  buildAnmin(),
+     Positioned(
           top: 30,
           right: 18,
           height: 20,
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+          child:
               Text('36.8', style: TextStyle(
                 color: Colors.black,
                 fontSize: 12,
                 fontWeight: FontWeight.w400,
               ),),
-              //  Visibility(visible: !isVisibleCheckingIcon, child: Text(bodyTempValue, style: valueStyle)),
-              // Visibility(visible: isVisibleCheckingIcon, child: Image.asset(checkingIcon, width: 60.w, height: 30.w, fit: BoxFit.fill))
-            ],
-          ),
         ),
          Positioned(
             top: 55,
             left: 0,
-            right: 18,
+            right: 0,
             height: 50,
             //bottom: 500.w,
             child:_initLineChart(),
-          )*/
+          )
       ],
     );
   }
 
   Widget buildAnmin() {
     return     Container(
+                  // color:Colors.red,
                     child:Positioned(
                     top: 25,
                     right: 18,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
+                    child:
                         Text('36.8', style: TextStyle(
                           color: Colors.black,
-                          fontSize: 11,
+                          fontSize: 14,
                           fontWeight: FontWeight.bold,
                         ),),
-                      ],
                     ),
-                  ),
+
 
               );
         /*  Positioned(
