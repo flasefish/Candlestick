@@ -16,7 +16,7 @@ class _MyTitledNavigationBarState extends State<MyTitledNavigationBar>{
       TitledNavigationBarItem(title: Text('Orders'),icon: Icon(Icons.shopping_cart)),
       TitledNavigationBarItem(title: Text('Profile'),icon: Icon(Icons.person_outline)),
     ] ;
-
+    buildAnmin
     bool navBarMode = false;
 
     @override
