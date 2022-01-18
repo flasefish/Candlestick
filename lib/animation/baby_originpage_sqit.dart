@@ -37,7 +37,6 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
     BoxDecoration boxDeco = BoxDecoration(
       borderRadius: BorderRadius.circular(30),
       color: Colors.white,
-      // border: Border.all(color: BMColor.whiteFFFFFF, width: 4.w),
     );
     return Scaffold(
       appBar: AppBar(
@@ -112,7 +111,7 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
           ),
           AnimatedAlign(
             duration: duration,
-            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -2.2),
+            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -10.2),
             child: bodyTempMax(),
           ),
         ],
@@ -128,14 +127,14 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
           height: 60,
         ),
         Positioned(
-          top: 0,
+          top: 30,
           right: 18,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text('36.8', style: TextStyle(
-                color: Colors.black,
-                fontSize: 16,
+                color:  Colors.black,
+                fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),),
             ],
@@ -152,12 +151,12 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
           height: 80,
         ),
         Positioned(
-          top: 35,
+          top: 25,
           right: 18,
           child:
           Text('36.8', style: TextStyle(
             color: Colors.black,
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.bold,
           ),
           ),
@@ -165,7 +164,7 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
         Positioned(
           top: 55,
           left: 0,
-          right: 18,
+          right: 0,
           height: 50,
           //bottom: 500.w,
           child:_initLineChart(),
