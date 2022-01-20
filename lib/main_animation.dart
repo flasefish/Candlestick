@@ -25,8 +25,28 @@ class mainAnimation extends StatefulWidget {
   State<mainAnimation> createState() => _mainAnimationState();
 }
 
-class _mainAnimationState extends State<mainAnimation> {
+class _mainAnimationState extends State<mainAnimation> with WidgetsBindingObserver {
 
+  @override
+  void initState() {
+    WidgetsBinding.instance?.addObserver(this);
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      //do your stuff
+    }
+  }
 
 
   @override
@@ -48,12 +68,21 @@ class _mainAnimationState extends State<mainAnimation> {
                 borderRadius: BorderRadius.circular(4),
               ),
               onPressed: () {
+               /* Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => demosAnimation[index].demo,
+                  ),
+                );*/
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => demosAnimation[index].demo,
                   ),
-                );
+                ).then((value) {
+                 //_refreshFirstPage();
+                  print("123");
+                });
               },
               child: Text(demosAnimation[index].title),
             ),
