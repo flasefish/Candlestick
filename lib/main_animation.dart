@@ -1,6 +1,8 @@
 import 'package:candlestick/animation/animation_text.dart';
 import 'package:candlestick/animation/baby_animation.dart';
 import 'package:candlestick/animation/baby_originpage_sqit.dart';
+import 'package:candlestick/animation/dashboard_screen.dart';
+import 'package:candlestick/animation/font.dart';
 import 'package:candlestick/animation/titled_navigation_bar.dart';
 import 'package:candlestick/candlestick.dart';
 import 'package:flutter/material.dart';
@@ -120,6 +122,16 @@ final List<AnimationListViewModal> demosAnimation = [
     demo: BabyOriginPageSqit(),
 
   ),
+
+  AnimationListViewModal(
+    title: '字体动画',
+    demo: FontAnimation(),
+
+  ),
+  AnimationListViewModal(
+    title: 'demo',
+    demo: DashboardScreen(),
+  )
 
 ];
 class AnimationListViewModal {

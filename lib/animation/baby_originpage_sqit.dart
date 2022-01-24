@@ -111,7 +111,7 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
           ),
           AnimatedAlign(
             duration: duration,
-            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -10.2),
+            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -2.2),
             child: bodyTempMax(),
           ),
         ],
