@@ -38,7 +38,7 @@ class _DashboardScreenState extends State<DashboardScreen>
 
     _loadingController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 12500),
+      duration: const Duration(milliseconds: 1250),
     );
 
     _headerScaleAnimation =
@@ -65,76 +65,6 @@ class _DashboardScreenState extends State<DashboardScreen>
   @override
   void didPushAfterTransition() => _loadingController.forward();
 
-  AppBar _buildAppBar(ThemeData theme) {
-    /* final titleStyle = theme.textTheme.headline3!
-        .copyWith(
-      color:theme.textTheme.headline3!.color,
-      fontSize: 48.0,
-      fontWeight: FontWeight.w300,
-    );*/
-    //  .merge(loginTheme.titleStyle);
-
-    final menuBtn = IconButton(
-      color: theme.colorScheme.secondary,
-      icon: const Icon(FontAwesomeIcons.bars),
-      onPressed: () {},
-    );
-    final signOutBtn = IconButton(
-      icon: const Icon(FontAwesomeIcons.signOutAlt),
-      color: theme.colorScheme.secondary,
-      onPressed: () => _goToLogin(context),
-    );
-    final title = Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Hero(
-              tag: Constants.logoTag,
-              child: Image.asset(
-                'images/ecorp.png',
-                filterQuality: FilterQuality.high,
-                height: 30,
-              ),
-            ),
-          ),
-          /*  HeroText(
-            Constants.appName,
-            tag: Constants.titleTag,
-            viewState: ViewState.shrunk,
-            style: LoginThemeHelper.loginTextStyle,
-          ),*/
-          const SizedBox(width: 20),
-        ],
-      ),
-    );
-
-    return AppBar(
-      leading: FadeIn(
-        controller: _loadingController,
-        offset: .3,
-        curve: headerAniInterval,
-        fadeDirection: FadeDirection.startToEnd,
-        child: menuBtn,
-      ),
-      actions: <Widget>[
-        FadeIn(
-          controller: _loadingController,
-          offset: .3,
-          curve: headerAniInterval,
-          fadeDirection: FadeDirection.endToStart,
-          child: signOutBtn,
-        ),
-      ],
-      title: title,
-      backgroundColor: theme.primaryColor.withOpacity(.1),
-      elevation: 0,
-      // toolbarTextStyle: TextStle(),
-      // textTheme: theme.accentTextTheme,
-      // iconTheme: theme.accentIconTheme,
-    );
-  }
 
   Widget _buildHeader(ThemeData theme) {
     final primaryColor =
@@ -152,38 +82,18 @@ class _DashboardScreenState extends State<DashboardScreen>
         controller: _loadingController,
         curve: headerAniInterval,
         fadeDirection: FadeDirection.bottomToTop,
-        offset: .5,
+        offset: 1,
         child:
         AnimatedNumericText(
-                  initialValue: 3467.87,
-                  targetValue: 3467.87,
+                  initialValue: 36.8,
+                  targetValue: 36.8,
                   curve: const Interval(0, .5, curve: Curves.easeOut),
                   controller: _loadingController,
                   style: theme.textTheme.headline3.copyWith(
                     foreground: Paint()..shader = linearGradient,
                   ),
                 ),
-
-
-
-
-
       ),
-    );
-  }
-
-  Widget _buildButton(
-      {Widget icon, String label, @required Interval interval}) {
-    return RoundButton(
-      icon: icon,
-      label: label,
-      loadingController: _loadingController,
-      interval: Interval(
-        interval.begin,
-        interval.end,
-        curve: const ElasticOutCurve(0.42),
-      ),
-      onPressed: () {},
     );
   }
 
@@ -216,7 +126,6 @@ class _DashboardScreenState extends State<DashboardScreen>
       onWillPop: () => _goToLogin(context),
       child: SafeArea(
         child: Scaffold(
-          appBar: _buildAppBar(theme),
           body: Container(
             width: double.infinity,
             height: double.infinity,
@@ -239,14 +148,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             tileMode: TileMode.clamp,
-                            colors: <Color>[
-                              Colors.deepPurpleAccent.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              Colors.deepPurple.shade100,
-                              // Colors.red,
-                              // Colors.yellow,
-                            ],
                           ).createShader(bounds);
                         },
                        // child: _buildDashboardGrid(),

@@ -129,16 +129,11 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
         Positioned(
           top: 30,
           right: 18,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text('36.8', style: TextStyle(
+           child:   Text('36.8', style: TextStyle(
                 color:  Colors.black,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),),
-            ],
-          ),
         ),
       ],);
   }

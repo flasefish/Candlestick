@@ -1,10 +1,11 @@
+import 'package:candlestick/animation/animated_switcher_chounter.dart';
 import 'package:candlestick/animation/animation_text.dart';
 import 'package:candlestick/animation/baby_animation.dart';
 import 'package:candlestick/animation/baby_originpage_sqit.dart';
 import 'package:candlestick/animation/dashboard_screen.dart';
 import 'package:candlestick/animation/font.dart';
 import 'package:candlestick/animation/titled_navigation_bar.dart';
-import 'package:candlestick/candlestick.dart';
+import 'package:candlestick/animation/widgets/scale_animation_route.dart';
 import 'package:flutter/material.dart';
 
 import 'animation/animated_opacity_page.dart';
@@ -131,9 +132,20 @@ final List<AnimationListViewModal> demosAnimation = [
   AnimationListViewModal(
     title: 'demo',
     demo: DashboardScreen(),
-  )
+  ),
+  AnimationListViewModal(
+    title: 'ScaleAnimationRoute',
+    demo: ScaleAnimationRoute(),
+  ),
+  AnimationListViewModal(
+    title: 'AnimatedSwitcherCounterRoute',
+    demo: AnimatedSwitcherCounterRoute(),
+  ),
+
+
 
 ];
+
 class AnimationListViewModal {
   final String title;
   final Widget demo;
