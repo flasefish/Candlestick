@@ -18,6 +18,8 @@ class BabyOriginPageSqit extends StatefulWidget{
 
 class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
   LineChartController controller;
+  int currentIndex = 0;
+  Duration duration = Duration(milliseconds: 1000);
 
   int _count = 45;
   double _range = 180.0;
@@ -35,7 +37,6 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
     BoxDecoration boxDeco = BoxDecoration(
       borderRadius: BorderRadius.circular(30),
       color: Colors.white,
-      // border: Border.all(color: BMColor.whiteFFFFFF, width: 4.w),
     );
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +49,15 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            bodyTempBox(),
+            _buildItemWidget(),
+            RaisedButton(
+              child: Text('动画1'),
+              onPressed: () {
+                setState(() {
+                  currentIndex = currentIndex == 0 ? 1 : 0;
+                });
+              },
+            ),
             //  breathBox(),
             // heartBox(),
           ],
@@ -57,65 +66,108 @@ class _babyOriginPageSqitState extends State<BabyOriginPageSqit> {
     );
   }
 
-  Widget bodyTempBox() {
+  /*Widget bodyTempBox() {
     return Stack(
       children: [
         SizedBox(
           width: double.infinity,
           height: 100,
         ),
-        Positioned(
-          top: 15,
-          left: 24,
-          child: Image.asset(
-              'images/body_temp.png', width: 36, height: 38, fit: BoxFit.fill),
-        ),
-        Positioned(
-          top: 10,
-          right: 18,
-          height: 20,
-          child:
-              Text('体温', style: TextStyle(
-                color: Colors.black,
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-              ),),
-          ),
-       buildAnmin(),
 
+        _buildItemWidget(),
       ],
     );
-  }
+  }*/
 
-  Widget buildAnmin() {
-    return      Stack(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            height: 100,
+  Widget _buildItemWidget( ) {
+    return Container(
+      height: 80,
+     // width: 100,
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          Positioned(
+            top: 15,
+            left: 24,
+            child: Image.asset(
+                'images/body_temp.png', width: 36, height: 38, fit: BoxFit.fill),
           ),
           Positioned(
-            top: 30,
+            top: 10,
             right: 18,
             height: 20,
             child:
-            Text('36.8', style: TextStyle(
+            Text('体温', style: TextStyle(
               color: Colors.black,
               fontSize: 12,
               fontWeight: FontWeight.w400,
             ),),
           ),
-          Positioned(
-            top: 55,
-            left: 0,
-            right: 0,
-            height: 50,
-            //bottom: 500.w,
-            child:_initLineChart(),
-          )
-        ]);
-
+          AnimatedOpacity(
+            opacity: currentIndex == 0 ? 1.0 : 0.0,
+            duration: duration,
+            curve: Curves.ease ,
+            child:  bodyTempBox(),
+          ),
+          AnimatedAlign(
+            duration: duration,
+            alignment: currentIndex  ==  1 ? Alignment.center : Alignment(0, -2.2),
+            child: bodyTempMax(),
+          ),
+        ],
+      ),
+    );
   }
+
+  Widget bodyTempMax(){
+    return Stack(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 60,
+        ),
+        Positioned(
+          top: 30,
+          right: 18,
+           child:   Text('36.8', style: TextStyle(
+                color:  Colors.black,
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+              ),),
+        ),
+      ],);
+  }
+
+  Widget bodyTempBox() {
+    return Stack(
+      children: [
+        SizedBox(
+          width: double.infinity,
+          height: 80,
+        ),
+        Positioned(
+          top: 25,
+          right: 18,
+          child:
+          Text('36.8', style: TextStyle(
+            color: Colors.black,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+        ),
+        Positioned(
+          top: 55,
+          left: 0,
+          right: 0,
+          height: 50,
+          //bottom: 500.w,
+          child:_initLineChart(),
+        )
+      ],
+    );
+  }
+
 
   void _initController() {
     var desc = Description()..enabled = false;

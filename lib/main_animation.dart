@@ -1,8 +1,11 @@
+import 'package:candlestick/animation/animated_switcher_chounter.dart';
 import 'package:candlestick/animation/animation_text.dart';
 import 'package:candlestick/animation/baby_animation.dart';
 import 'package:candlestick/animation/baby_originpage_sqit.dart';
+import 'package:candlestick/animation/dashboard_screen.dart';
+import 'package:candlestick/animation/font.dart';
 import 'package:candlestick/animation/titled_navigation_bar.dart';
-import 'package:candlestick/candlestick.dart';
+import 'package:candlestick/animation/widgets/scale_animation_route.dart';
 import 'package:flutter/material.dart';
 
 import 'animation/animated_opacity_page.dart';
@@ -25,8 +28,28 @@ class mainAnimation extends StatefulWidget {
   State<mainAnimation> createState() => _mainAnimationState();
 }
 
-class _mainAnimationState extends State<mainAnimation> {
+class _mainAnimationState extends State<mainAnimation> with WidgetsBindingObserver {
 
+  @override
+  void initState() {
+    WidgetsBinding.instance?.addObserver(this);
+    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance?.removeObserver(this);
+    super.dispose();
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      //do your stuff
+    }
+  }
 
 
   @override
@@ -48,12 +71,21 @@ class _mainAnimationState extends State<mainAnimation> {
                 borderRadius: BorderRadius.circular(4),
               ),
               onPressed: () {
+               /* Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => demosAnimation[index].demo,
+                  ),
+                );*/
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => demosAnimation[index].demo,
                   ),
-                );
+                ).then((value) {
+                 //_refreshFirstPage();
+                  print("123");
+                });
               },
               child: Text(demosAnimation[index].title),
             ),
@@ -92,7 +124,28 @@ final List<AnimationListViewModal> demosAnimation = [
 
   ),
 
+  AnimationListViewModal(
+    title: '字体动画',
+    demo: FontAnimation(),
+
+  ),
+  AnimationListViewModal(
+    title: 'demo',
+    demo: DashboardScreen(),
+  ),
+  AnimationListViewModal(
+    title: 'ScaleAnimationRoute',
+    demo: ScaleAnimationRoute(),
+  ),
+  AnimationListViewModal(
+    title: 'AnimatedSwitcherCounterRoute',
+    demo: AnimatedSwitcherCounterRoute(),
+  ),
+
+
+
 ];
+
 class AnimationListViewModal {
   final String title;
   final Widget demo;

@@ -146,7 +146,7 @@ class _AnimationTextWidgetState extends State<AnimationTextWidget> {
   }
 
   void buildAnimatedAlign() {
-    _x == 0 ? _x = -1 : _x = 0;
+    _x == 0 ? _x = 1 : _x = 0;
     _y == 0 ? _y = -1 : _y = 0;
 
     setState(() {});
